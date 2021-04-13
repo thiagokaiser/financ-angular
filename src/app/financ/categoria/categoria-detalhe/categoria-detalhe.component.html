@@ -1,0 +1,36 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Categoria
+        <small>Detalhe</small>
+    </h1>      
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="box box-primary">            
+        <div class="box-body">                               
+            <div class="btn-group btn-group-sm" role="group">
+                <button class="btn btn-default" (click)="onNew()"><i class="fa fa-file-o" aria-hidden="true"></i> Novo</button>    
+                <button class="btn btn-default" (click)="onEdit(categoria.id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button>
+                <button class="btn btn-default" (click)="onDelete(categoria)"><i class="fa fa-trash-o" aria-hidden="true"></i> Remover</button>
+                <button class="btn btn-default" (click)="onCancel()"><i class="fa fa-undo" aria-hidden="true"></i> Voltar</button>
+            </div>
+            <p></p>
+
+            <table class="table" style="max-width:500px;">
+                <tbody>                    
+                    <tr>
+                        <th>Descricao</th>
+                        <td>{{ categoria.descricao }}</td>                        
+                    </tr>                    
+                    <tr>
+                        <th>Cor</th>
+                        <td>{{ categoria.cor }}</td>
+                    </tr>
+                </tbody>
+            </table>            
+        </div>
+    </div>    
+    <router-outlet></router-outlet>
+</section>

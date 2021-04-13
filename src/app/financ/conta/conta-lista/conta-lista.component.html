@@ -1,0 +1,66 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Contas
+    <small>Lista</small>
+  </h1>      
+</section>
+<!-- Main content -->
+<section class="content">
+  <!-- Small boxes (Stat box) -->
+  <div class="box box-primary">            
+    <div class="box-body">      
+      <div class="row" style="max-width: 400px;">
+        <div class="col-sm-6">
+          <div class="btn-group btn-group-sm" role="group">
+            <button type="button" class="btn btn-default" [routerLink]="['novo']"><i class="fa fa-file-o" aria-hidden="true"></i> Novo</button>{{' '}}
+            <button type="button" class="btn btn-default" (click)="onRefresh()"><i class="fa fa-refresh" aria-hidden="true"></i> Atualizar</button>        
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="input-group input-group-sm">
+            <input type="text" class="form-control" placeholder="Search for..." [(ngModel)]="searchtext" >
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" (click)="onSearch(searchtext)"><i class="fa fa-search"></i></button>
+            </span>
+          </div><!-- /input-group -->
+        </div>
+      </div>      
+      <p></p>
+      <table class="table table-hover table-pointer"  style="max-width:800px;" 
+             matSort (matSortChange)="sortData($event)" 
+             matSortDisableClear="true"
+             matSortActive="id" matSortDirection="asc">            
+        <thead>
+          <tr>
+            <th mat-sort-header="id">#</th>
+            <th mat-sort-header="descricao">Nome</th>                                    
+          </tr>
+        </thead>
+        <tbody *ngIf="contas$ | async as contas">
+          <tr *ngFor="let conta of contas.content | paginate: config" (click)="onDetalhe(conta.id)">
+            <td>{{ conta.id }}</td>
+            <td>{{ conta.descricao }}</td>                        
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="col-md-6">
+          <pagination-controls 
+            [id]="config.id"
+            (pageChange)="onPageChange($event)">
+          </pagination-controls>  
+        </div>
+        <div class="col-md-6">
+          Pag.Size:
+          <select class="" [ngModel]="config.itemsPerPage" (ngModelChange)="onPageSize($event)">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="100">100</option>
+          </select>
+        </div>    
+      </div>            
+    </div>
+  </div>
+</section>

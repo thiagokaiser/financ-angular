@@ -1,0 +1,28 @@
+.preview {
+    margin: 20px 0 10px 0;            
+}
+.preview--rounded {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+}
+.imagem_perfil{
+    text-align: center;                            
+}
+.glyphicon{
+    font-size: 22px;
+}
+.texto_user {
+    margin-top: 30px;
+}
+.texto_user p {
+    margin-top:10px;
+    font-size:16px;
+
+}
+td{              
+    font-size: 16px;   
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-top:5px;
+}      
