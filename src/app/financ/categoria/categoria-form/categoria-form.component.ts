@@ -38,10 +38,8 @@ export class CategoriaFormComponent implements OnInit {
   }
 
   onSubmit() {    
-    this.submitted = true;
-    console.log(this.form.value);    
-    if (this.form.valid) {
-      console.log('submit');
+    this.submitted = true;    
+    if (this.form.valid) {      
       let msgSuccess = 'Criado com sucesso';      
       this.idRegistro = this.form.value.id;
       if (this.idRegistro){
@@ -57,8 +55,7 @@ export class CategoriaFormComponent implements OnInit {
             this.router.navigate(['/financ/categoria']);
           }                              
         },
-        error => {
-          console.log(error.error.errors);
+        error => {          
           this.erros = error.error.errors;
           throw error          
         }

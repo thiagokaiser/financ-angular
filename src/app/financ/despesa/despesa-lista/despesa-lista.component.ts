@@ -1,21 +1,21 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Conta, ListConta } from '../conta';
+import { Despesa, ListDespesa } from '../despesa';
 import { Observable, Subject, EMPTY } from 'rxjs';
-import { ContaService } from '../conta.service';
+import { DespesaService } from '../despesa.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSort, Sort } from '@angular/material/sort';
 import { PaginationInstance } from 'ngx-pagination';
 import { tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-conta-lista',
-  templateUrl: './conta-lista.component.html'
+  selector: 'app-despesa-lista',
+  templateUrl: './despesa-lista.component.html'
 })
-export class ContaListaComponent implements OnInit { 
+export class DespesaListaComponent implements OnInit { 
   
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
-  contas$: Observable<ListConta>;  
+  despesas$: Observable<ListDespesa>;  
   searchtext: string = "";  
   orderby: string = "id";
   direction: string = "asc";
@@ -28,7 +28,7 @@ export class ContaListaComponent implements OnInit {
   };
 
   constructor(
-    private service: ContaService,
+    private service: DespesaService,
     private router: Router,
     private route: ActivatedRoute    
   ) { }
@@ -65,7 +65,7 @@ export class ContaListaComponent implements OnInit {
   onRefresh(){    
     let params = {linesPerPage : this.config.itemsPerPage, page: this.config.currentPage - 1, orderBy: this.orderby, direction : this.direction.toUpperCase(), search: this.searchtext};
     
-    this.contas$ = this.service.listPage(params).pipe(
+    this.despesas$ = this.service.listPage(params).pipe(
       tap(x => {
         this.config.totalItems = x['totalElements']        
       })

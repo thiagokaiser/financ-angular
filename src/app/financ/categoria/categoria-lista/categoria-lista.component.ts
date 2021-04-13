@@ -67,8 +67,7 @@ export class CategoriaListaComponent implements OnInit {
     
     this.categorias$ = this.service.listPage(params).pipe(
       tap(x => {
-        this.config.totalItems = x['totalElements'],
-        console.log(x['totalElements'])
+        this.config.totalItems = x['totalElements']        
       })
     )    
     

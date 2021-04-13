@@ -10,6 +10,9 @@ import { CategoriaListaComponent } from './categoria/categoria-lista/categoria-l
 import { ContaDetalheComponent } from './conta/conta-detalhe/conta-detalhe.component';
 import { ContaFormComponent } from './conta/conta-form/conta-form.component';
 import { ContaListaComponent } from './conta/conta-lista/conta-lista.component';
+import { DespesaDetalheComponent } from './despesa/despesa-detalhe/despesa-detalhe.component';
+import { DespesaFormComponent } from './despesa/despesa-form/despesa-form.component';
+import { DespesaListaComponent } from './despesa/despesa-lista/despesa-lista.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatSortModule } from '@angular/material/sort';
 
@@ -17,7 +20,8 @@ import { MatSortModule } from '@angular/material/sort';
   declarations: [
     HomeComponent,
     CategoriaDetalheComponent,CategoriaFormComponent, CategoriaListaComponent,
-    ContaDetalheComponent,ContaFormComponent, ContaListaComponent
+    ContaDetalheComponent, ContaFormComponent, ContaListaComponent,
+    DespesaDetalheComponent, DespesaFormComponent, DespesaListaComponent
   ],
   imports: [
     CommonModule,

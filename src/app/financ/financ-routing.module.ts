@@ -9,6 +9,10 @@ import { ContaDetalheComponent } from './conta/conta-detalhe/conta-detalhe.compo
 import { ContaFormComponent } from './conta/conta-form/conta-form.component';
 import { ContaListaComponent } from './conta/conta-lista/conta-lista.component';
 import { ContaResolverGuard } from './conta/guards/conta-resolver.guard';
+import { DespesaDetalheComponent } from './despesa/despesa-detalhe/despesa-detalhe.component';
+import { DespesaFormComponent } from './despesa/despesa-form/despesa-form.component';
+import { DespesaListaComponent } from './despesa/despesa-lista/despesa-lista.component';
+import { DespesaResolverGuard } from './despesa/guards/despesa-resolver.guard';
 
 const routes: Routes = [
   {
@@ -22,6 +26,10 @@ const routes: Routes = [
   { path: 'conta/detalhe/:id', component: ContaDetalheComponent, resolve: {conta: ContaResolverGuard}},
   { path: 'conta/editar/:id', component: ContaFormComponent, resolve: {conta: ContaResolverGuard}},
   { path: 'conta/novo', component: ContaFormComponent, resolve: {conta: ContaResolverGuard}},
+  { path: 'despesa', component: DespesaListaComponent},
+  { path: 'despesa/detalhe/:id', component: DespesaDetalheComponent, resolve: {despesa: DespesaResolverGuard}},
+  { path: 'despesa/editar/:id', component: DespesaFormComponent, resolve: {despesa: DespesaResolverGuard}},
+  { path: 'despesa/novo', component: DespesaFormComponent, resolve: {despesa: DespesaResolverGuard}},
 ];
 
 @NgModule({
