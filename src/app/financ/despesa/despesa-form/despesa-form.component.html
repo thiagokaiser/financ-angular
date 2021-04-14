@@ -19,26 +19,38 @@
       </div>
       <div style="max-width:400px">
         <form [formGroup]="form" style="padding-top: 10px">    
-
+          
           <app-input-container errorMessage="Campo Obrigatorio" label="Descricao">     
             <input type="text" class="form-control" id="nome" placeholder="Descricao" formControlName="descricao"/>
           </app-input-container>    
-
+        
           <app-input-container errorMessage="Campo Obrigatorio" label="Valor">     
-            <input type="text" class="form-control" id="valor" placeholder="Valor" formControlName="valor"/>
-          </app-input-container>    
+            <input type="number" class="form-control" id="valor" placeholder="Valor" formControlName="valor"/>
+          </app-input-container>              
 
           <app-input-container errorMessage="Campo Obrigatorio" label="Dt Vencimento">            
             <input type="date" class="form-control" id="dtVencimento" formControlName="dtVencimento"/>
           </app-input-container>
 
           <app-input-container errorMessage="Campo Obrigatorio" label="Categoria">     
-            <input type="text" class="form-control" id="categoriaId" placeholder="Categoria" formControlName="categoriaId"/>
-          </app-input-container>    
-
+            <select name="categoriaId" id="categoriaId" class="form-control" placeholder="Categoria" formControlName="categoriaId">
+              <ng-container *ngIf="categorias$ | async as categorias">
+                <option *ngFor="let categoria of categorias" [value]="categoria.id">{{categoria.descricao}} </option>
+              </ng-container>
+            </select>
+          </app-input-container>                        
+          
           <app-input-container errorMessage="Campo Obrigatorio" label="Conta">     
-            <input type="text" class="form-control" id="contaId" placeholder="Conta" formControlName="contaId"/>
-          </app-input-container>    
+            <select name="contaId" id="contaId" class="form-control" placeholder="Conta" formControlName="contaId">
+              <ng-container *ngIf="contas$ | async as contas">
+                <option *ngFor="let conta of contas" [value]="conta.id">{{conta.descricao}} </option>
+              </ng-container>
+            </select>
+          </app-input-container>                                 
+          
+          
+          <input type="checkbox" id="pago" name="pago" formControlName="pago"/>         
+          
           
           <p></p>
           <div>

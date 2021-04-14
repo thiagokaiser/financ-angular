@@ -10,6 +10,11 @@ import { LoginService } from './security/login/login.service';
 import { loggedInGuard } from './security/loggedIn.guard';
 import { ApplicationErrorHandler } from './shared/app.error-handler';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -28,7 +33,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   providers: [
     LoginService, 
     loggedInGuard,
-    {provide: ErrorHandler, useClass: ApplicationErrorHandler}
+    {provide: ErrorHandler, useClass: ApplicationErrorHandler},
+    {provide: LOCALE_ID, useValue: 'pt-BR'}
   ],
   bootstrap: [AppComponent]
 })

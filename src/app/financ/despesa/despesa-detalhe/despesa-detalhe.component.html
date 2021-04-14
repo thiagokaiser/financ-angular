@@ -30,11 +30,19 @@
                     </tr>
                     <tr>
                         <th>dtVencimento</th>
-                        <td>{{ despesa.dtVencimento }}</td>
+                        <td>{{ despesa.dtVencimento | date:'dd/MM/yyyy' : '+0000'}}</td>                        
                     </tr>
                     <tr>
                         <th>pago</th>
                         <td>{{ despesa.pago }}</td>
+                    </tr>                    
+                    <tr>
+                        <th>Categoria</th>
+                        <td><i class="fa fa-circle" [ngStyle]="{'color': despesa.categoria.cor}"></i> {{ despesa.categoria.descricao }}</td>
+                    </tr>
+                    <tr>
+                        <th>Conta</th>
+                        <td>{{ despesa.conta?.descricao }}</td>
                     </tr>
                     <tr>
                         <th>numParcelas</th>
@@ -43,14 +51,6 @@
                     <tr>
                         <th>parcelaAtual</th>
                         <td>{{ despesa.parcelaAtual }}</td>
-                    </tr>
-                    <tr>
-                        <th>Categoria</th>
-                        <td>{{ despesa.categoria.descricao }}</td>
-                    </tr>
-                    <tr>
-                        <th>Conta</th>
-                        <td>{{ despesa.conta.descricao }}</td>
                     </tr>
                 </tbody>
             </table>            

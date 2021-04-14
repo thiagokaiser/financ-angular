@@ -4,6 +4,11 @@ import { DespesaService } from '../despesa.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
 import { Location } from '@angular/common';
+import { Observable } from 'rxjs';
+import { Categoria } from '../../categoria/categoria';
+import { Conta } from '../../conta/conta';
+import { CategoriaService } from '../../categoria/categoria.service';
+import { ContaService } from '../../conta/conta.service';
 
 @Component({
   selector: 'app-despesa-form',
@@ -16,10 +21,14 @@ export class DespesaFormComponent implements OnInit {
   idRegistro: number;
   erros = null;
   formLabel: string;
+  categorias$: Observable<Categoria[]>;
+  contas$: Observable<Conta[]>;
 
   constructor(
     private fb: FormBuilder,
     private service: DespesaService,        
+    private categService: CategoriaService,
+    private contaService: ContaService,
     private route: ActivatedRoute,
     private router: Router,
     private ns: NotificationService,
@@ -29,18 +38,31 @@ export class DespesaFormComponent implements OnInit {
   ngOnInit() {
     const despesa = this.route.snapshot.data['despesa'];
     this.formLabel = despesa.id == 0 ? 'Novo' : 'Edita'
-    
+    console.log(despesa);
     this.form = this.fb.group({
       id: [despesa.id],
       descricao: [despesa.descricao, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],      
-      categoriaId: [despesa.categoriaId, [Validators.required]],
-      contaId:  [despesa.contaId, [Validators.required]],      
+      categoriaId: [ despesa.categoria != null ? despesa.categoria.id : null, [Validators.required]],
+      contaId:  [ despesa.conta != null ? despesa.conta.id : null],      
       valor:  [despesa.valor, [Validators.required]],
-      dtVencimento: [despesa.dtVencimento, [Validators.required]], 
+      dtVencimento: [new Date(despesa.dtVencimento).toISOString().substring(0,10), [Validators.required]], 
       pago: [despesa.pago],
       numParcelas: [despesa.numParcelas],
       parcelaAtual: [despesa.parcelaAtual]      
     });
+    
+    this.form.get('pago').valueChanges.subscribe(val => {
+      if (this.form.get('pago').value == true) {
+        this.form.controls['contaId'].setValidators([Validators.required]);
+        this.form.controls['contaId'].updateValueAndValidity();
+      } else {
+        this.form.controls['contaId'].clearValidators();
+        this.form.controls['contaId'].updateValueAndValidity();
+      }
+    });
+    
+    this.categorias$ = this.categService.list();
+    this.contas$ = this.contaService.list();
   }
 
   onSubmit() {    

@@ -36,23 +36,30 @@
             <th mat-sort-header="id">#</th>
             <th mat-sort-header="pago">Pago</th>            
             <th mat-sort-header="descricao">Despesa</th>            
-            <th mat-sort-header="valor" class="visible-xs">valor</th>            
+            <th mat-sort-header="valorxs" class="visible-xs">valor</th>
             <th mat-sort-header="categoria">Categoria</th>            
             <th>Parcela</th>            
             <th mat-sort-header="dtVencimento">dtVencimento</th>            
-            <th mat-sort-header="valor" class="hidden-xs">valor</th>                        
+            <th mat-sort-header="valor" class="hidden-xs">valor</th>
           </tr>
         </thead>
         <tbody *ngIf="despesas$ | async as despesas">
           <tr *ngFor="let despesa of despesas.content | paginate: config" (click)="onDetalhe(despesa.id)">
             <td>{{ despesa.id }}</td>
-            <td>{{ despesa.pago }}</td>            
+            <td>
+              <ng-template [ngIf]="despesa.pago" [ngIfElse]="elseBlockPago">
+                <i class="fa fa-check" style="color:#41db53"></i>
+              </ng-template>
+              <ng-template #elseBlockPago>
+                <i class="fa fa-times" style="color:red"></i>
+              </ng-template>               
+            </td>            
             <td>{{ despesa.descricao }}</td>            
-            <td class="visible-xs">{{ despesa.valor }}</td>            
-            <td>{{ despesa.categoria.descricao }}</td>            
+            <td class="visible-xs">{{ despesa.valor | number : '1.2-2'}}</td>
+            <td><i class="fa fa-circle" [ngStyle]="{'color': despesa.categoria.cor}"></i> {{ despesa.categoria.descricao }}</td>            
             <td>{{ despesa.parcelaAtual }}/{{ despesa.numParcelas }}</td>            
-            <td>{{ despesa.dtVencimento }}</td>            
-            <td class="hidden-xs">{{ despesa.valor }}</td>            
+            <td>{{ despesa.dtVencimento | date:'dd/MM/yyyy' : '+0000' }}</td>            
+            <td class="hidden-xs">{{ despesa.valor | number : '1.2-2'}}</td>
           </tr>
         </tbody>
       </table>

@@ -59,6 +59,11 @@ export class DespesaListaComponent implements OnInit {
   sortData(sort: Sort){
     this.orderby = `${sort.active}`;
     this.direction = `${sort.direction}`;
+
+    if(this.orderby == "valorxs"){
+      this.orderby = "valor";
+    }
+    
     this.onRefresh();
   }  
 

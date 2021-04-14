@@ -42,7 +42,7 @@
           <tr *ngFor="let categoria of categorias.content | paginate: config" (click)="onDetalhe(categoria.id)">
             <td>{{ categoria.id }}</td>
             <td>{{ categoria.descricao }}</td>            
-            <td>{{ categoria.cor }}</td>            
+            <td><i class="fa fa-circle" [ngStyle]="{'color': categoria.cor}"></i></td>            
           </tr>
         </tbody>
       </table>
