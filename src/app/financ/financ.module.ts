@@ -15,10 +15,11 @@ import { DespesaFormComponent } from './despesa/despesa-form/despesa-form.compon
 import { DespesaListaComponent } from './despesa/despesa-lista/despesa-lista.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatSortModule } from '@angular/material/sort';
+import { DateFilterComponent } from './despesa/despesa-lista/date-filter/date-filter.component';
 
 @NgModule({
   declarations: [
-    HomeComponent,
+    HomeComponent, 
     CategoriaDetalheComponent,CategoriaFormComponent, CategoriaListaComponent,
     ContaDetalheComponent, ContaFormComponent, ContaListaComponent,
     DespesaDetalheComponent, DespesaFormComponent, DespesaListaComponent
@@ -35,6 +36,8 @@ import { MatSortModule } from '@angular/material/sort';
   exports:[
     HomeComponent
   ],
-  providers: []
+  entryComponents:[    
+  ],
+  providers: []  
 })
 export class FinancModule { }

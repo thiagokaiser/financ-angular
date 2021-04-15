@@ -17,7 +17,7 @@ export class AlertModalService {
   showConfirm(title: string, msg: string, okTxt?: string, cancelTxt?: string){
     const modalRef: BsModalRef = this.modalService.show(ConfirmModalComponent);
     modalRef.content.title = title;
-    modalRef.content.msg = msg;
+    modalRef.content.msg = msg;    
 
     if (okTxt){
       modalRef.content.okTxt = okTxt;

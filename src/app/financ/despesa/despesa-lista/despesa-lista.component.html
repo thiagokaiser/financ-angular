@@ -9,60 +9,70 @@
 <section class="content">
   <!-- Small boxes (Stat box) -->
   <div class="box box-primary">            
-    <div class="box-body">      
-      <div class="row" style="max-width: 400px;">
-        <div class="col-sm-6">
+    <div class="box-body" style="max-width:800px;">      
+      <div class="row">
+        <div class="col-sm-4">
           <div class="btn-group btn-group-sm" role="group">
             <button type="button" class="btn btn-default" [routerLink]="['novo']"><i class="fa fa-file-o" aria-hidden="true"></i> Novo</button>{{' '}}
             <button type="button" class="btn btn-default" (click)="onRefresh()"><i class="fa fa-refresh" aria-hidden="true"></i> Atualizar</button>        
           </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
+          <div class="btn-group btn-group-sm" role="group">
+            <button type="button" class="btn btn-default" (click)="onPrev()"><i class="fa fa-chevron-circle-left"></i></button>                        
+            <button type="button" class="btn btn-default" (click)="onDateFilter()">{{ dtInicial }} - {{ dtFinal }}</button>                    
+            <button type="button" class="btn btn-default" (click)="onNext()"><i class="fa fa-chevron-circle-right"></i></button>
+          </div>
+        </div>        
+        <div class="col-sm-4">
           <div class="input-group input-group-sm">
             <input type="text" class="form-control" placeholder="Search for..." [(ngModel)]="searchtext" >
             <span class="input-group-btn">
               <button class="btn btn-default" type="button" (click)="onSearch(searchtext)"><i class="fa fa-search"></i></button>
+              <button class="btn btn-default" type="button" (click)="onClear()"><i class="fa fa-ban" aria-hidden="true"></i></button>        
             </span>
           </div><!-- /input-group -->
         </div>
       </div>      
-      <p></p>
-      <table class="table table-hover table-pointer"  style="max-width:800px;" 
-             matSort (matSortChange)="sortData($event)" 
-             matSortDisableClear="true"
-             matSortActive="id" matSortDirection="asc">            
-        <thead>
-          <tr>
-            <th mat-sort-header="id">#</th>
-            <th mat-sort-header="pago">Pago</th>            
-            <th mat-sort-header="descricao">Despesa</th>            
-            <th mat-sort-header="valorxs" class="visible-xs">valor</th>
-            <th mat-sort-header="categoria">Categoria</th>            
-            <th>Parcela</th>            
-            <th mat-sort-header="dtVencimento">dtVencimento</th>            
-            <th mat-sort-header="valor" class="hidden-xs">valor</th>
-          </tr>
-        </thead>
-        <tbody *ngIf="despesas$ | async as despesas">
-          <tr *ngFor="let despesa of despesas.content | paginate: config" (click)="onDetalhe(despesa.id)">
-            <td>{{ despesa.id }}</td>
-            <td>
-              <ng-template [ngIf]="despesa.pago" [ngIfElse]="elseBlockPago">
-                <i class="fa fa-check" style="color:#41db53"></i>
-              </ng-template>
-              <ng-template #elseBlockPago>
-                <i class="fa fa-times" style="color:red"></i>
-              </ng-template>               
-            </td>            
-            <td>{{ despesa.descricao }}</td>            
-            <td class="visible-xs">{{ despesa.valor | number : '1.2-2'}}</td>
-            <td><i class="fa fa-circle" [ngStyle]="{'color': despesa.categoria.cor}"></i> {{ despesa.categoria.descricao }}</td>            
-            <td>{{ despesa.parcelaAtual }}/{{ despesa.numParcelas }}</td>            
-            <td>{{ despesa.dtVencimento | date:'dd/MM/yyyy' : '+0000' }}</td>            
-            <td class="hidden-xs">{{ despesa.valor | number : '1.2-2'}}</td>
-          </tr>
-        </tbody>
-      </table>
+      <p></p>      
+      <div class="table-responsive">
+        <table class="table table-hover table-pointer table-bordered"
+              matSort (matSortChange)="sortData($event)" 
+              matSortDisableClear="true"
+              matSortActive="id" matSortDirection="asc">            
+          <thead>
+            <tr>
+              <th mat-sort-header="id">#</th>
+              <th mat-sort-header="pago">Pago</th>            
+              <th mat-sort-header="descricao">Despesa</th>            
+              <th mat-sort-header="valorxs" class="visible-xs">valor</th>
+              <th mat-sort-header="categoria">Categoria</th>            
+              <th>Parcela</th>            
+              <th mat-sort-header="dtVencimento">dtVencimento</th>            
+              <th mat-sort-header="valor" class="hidden-xs">valor</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="despesas$ | async as despesas">
+            <tr *ngFor="let despesa of despesas.content | paginate: config" (click)="onDetalhe(despesa.id)">
+              <td>{{ despesa.id }}</td>
+              <td>
+                <ng-template [ngIf]="despesa.pago" [ngIfElse]="elseBlockPago">
+                  <i class="fa fa-check" style="color:#41db53"></i>
+                </ng-template>
+                <ng-template #elseBlockPago>
+                  <i class="fa fa-times" style="color:red"></i>
+                </ng-template>               
+              </td>            
+              <td>{{ despesa.descricao }}</td>            
+              <td class="visible-xs">{{ despesa.valor | number : '1.2-2'}}</td>
+              <td><i class="fa fa-circle" [ngStyle]="{'color': despesa.categoria.cor}"></i> {{ despesa.categoria.descricao }}</td>            
+              <td>{{ despesa.parcelaAtual }}/{{ despesa.numParcelas }}</td>            
+              <td>{{ despesa.dtVencimento | date:'dd/MM/yyyy' : '+0000' }}</td>            
+              <td class="hidden-xs">{{ despesa.valor | number : '1.2-2'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div class="row">
         <div class="col-md-6">
           <pagination-controls 
