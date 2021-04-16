@@ -30,8 +30,17 @@ export class DespesaDetalheComponent implements OnInit {
   }
 
   onEdit(id) {    
-    this.router.navigate(['/financ/despesa/editar', id]);    
+    this.router.navigate(['/financ/despesa/editar',id,'edit']);    
   }
+
+  onEditAll(id){
+    this.router.navigate(['/financ/despesa/editar', id, 'all']);    
+  }
+
+  onEditUnpaid(id){
+    this.router.navigate(['/financ/despesa/editar', id, 'unpaid']);    
+  }
+
   onCancel(){
     this.router.navigate(['/financ/despesa']);
   }
@@ -45,16 +54,30 @@ export class DespesaDetalheComponent implements OnInit {
   }
 
   onDelete(despesa: Despesa) {
-    const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja eliminar o despesa?');
+    const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja eliminar a despesa "' + despesa.descricao + '" ?');
     result$.asObservable().pipe(
       take(1),
       switchMap(result => result ? this.service.remove(despesa.id) : EMPTY)
     ).subscribe(
       success => {
-        this.ns.notify('Despesa eliminado com sucesso.')
+        this.ns.notify('Despesa eliminada com sucesso.')
         this.router.navigate(['/financ/despesa'])
       }
     );
+  }
+
+  onDeleteAll(despesa: Despesa){
+    const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja eliminar todas as parcelas não pagas da despesa "' + despesa.descricao + '" ?');
+    result$.asObservable().pipe(
+      take(1),
+      switchMap(result => result ? this.service.removeByIdentificador(despesa.identificador) : EMPTY)
+    ).subscribe(
+      success => {
+        this.ns.notify('Despesas eliminadas com sucesso.')
+        this.router.navigate(['/financ/despesa'])
+      }
+    );
+
   }
     
 }

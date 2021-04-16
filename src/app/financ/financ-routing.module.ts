@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'conta/novo', component: ContaFormComponent, resolve: {conta: ContaResolverGuard}},
   { path: 'despesa', component: DespesaListaComponent},
   { path: 'despesa/detalhe/:id', component: DespesaDetalheComponent, resolve: {despesa: DespesaResolverGuard}},
-  { path: 'despesa/editar/:id', component: DespesaFormComponent, resolve: {despesa: DespesaResolverGuard}},
+  { path: 'despesa/editar/:id/:operacao', component: DespesaFormComponent, resolve: {despesa: DespesaResolverGuard}},  
   { path: 'despesa/novo', component: DespesaFormComponent, resolve: {despesa: DespesaResolverGuard}},
 ];
 

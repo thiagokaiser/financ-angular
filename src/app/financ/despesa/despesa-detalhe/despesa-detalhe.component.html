@@ -12,9 +12,36 @@
         <div class="box-body">                               
             <div class="btn-group btn-group-sm" role="group">
                 <button class="btn btn-default" (click)="onNew()"><i class="fa fa-file-o" aria-hidden="true"></i> Novo</button>    
-                <button class="btn btn-default" (click)="onEdit(despesa.id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button>
-                <button class="btn btn-default" (click)="onDelete(despesa)"><i class="fa fa-trash-o" aria-hidden="true"></i> Remover</button>
+                
+                <ng-template [ngIf]="despesa.numParcelas == 1" [ngIfElse]="elseParcelado">
+                    <button class="btn btn-default" (click)="onEdit(despesa.id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button>                
+                    <button class="btn btn-default" (click)="onDelete(despesa)"><i class="fa fa-trash-o" aria-hidden="true"></i> Remover</button>
+                </ng-template>
                 <button class="btn btn-default" (click)="onCancel()"><i class="fa fa-undo" aria-hidden="true"></i> Voltar</button>
+
+                <ng-template #elseParcelado>
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Editar
+                        <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a style="cursor: pointer" (click)="onEdit(despesa.id)">Somente esta parcela</a></li>                            
+                            <li><a style="cursor: pointer" (click)="onEditUnpaid(despesa.id)">Todas parcelas não pagas</a></li>                    
+                            <li><a style="cursor: pointer" (click)="onEditAll(despesa.id)">Todas parcelas</a></li>                    
+                        </ul>
+                    </div>                                
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i> Remover
+                        <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a style="cursor: pointer" (click)="onDelete(despesa)">Somente esta parcela</a></li>
+                            <li><a style="cursor: pointer" (click)="onDeleteAll(despesa)">Todas parcelas não pagas</a></li>                    
+                        </ul>
+                    </div>                
+                </ng-template>  
             </div>
             <p></p>
 
@@ -26,7 +53,7 @@
                     </tr>                    
                     <tr>
                         <th>Valor</th>
-                        <td>{{ despesa.valor }}</td>
+                        <td>{{ despesa.valor | number : '1.2-2'}}</td>
                     </tr>
                     <tr>
                         <th>dtVencimento</th>
@@ -43,14 +70,14 @@
                     <tr>
                         <th>Conta</th>
                         <td>{{ despesa.conta?.descricao }}</td>
+                    </tr>                    
+                    <tr>
+                        <th>parcelaAtual</th>
+                        <td>{{ despesa.parcelaAtual }}</td>
                     </tr>
                     <tr>
                         <th>numParcelas</th>
                         <td>{{ despesa.numParcelas }}</td>
-                    </tr>
-                    <tr>
-                        <th>parcelaAtual</th>
-                        <td>{{ despesa.parcelaAtual }}</td>
                     </tr>
                 </tbody>
             </table>            
