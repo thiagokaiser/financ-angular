@@ -1,8 +1,8 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Perfil
-        <small>Registrar</small>
+        Senha
+        <small>Alterar</small>
     </h1>                    
 </section>
 
@@ -15,32 +15,20 @@
             <div *ngIf="hasError">      
                 <table>
                     <tr *ngFor="let erro of erros ">
-                        <td><span class="text-red"><i class="fa fa-remove"></i>{{ erro }}</span></td>
+                        <td><span class="text-red"><i class="fa fa-remove"></i>{{ erro.description }}</span></td>
                     </tr>
                 </table>                      
             </div>
-            <form [formGroup]="form" style="padding-top: 10px">    
+            <form [formGroup]="form" style="padding-top: 10px">                    
 
-                <app-input-container errorMessage="Campo Obrigatorio" label="Email">     
-                    <input type="text" class="form-control" id="email" placeholder="Email" formControlName="email"/>
-                </app-input-container>    
-
-                <app-input-container errorMessage="Campo Obrigatorio" label="Nome">     
-                    <input type="text" class="form-control" id="nome" placeholder="Nome Completo" formControlName="nome"/>
-                </app-input-container>    
-
-                <app-input-container errorMessage="Campo Obrigatorio" label="Sobrenome">     
-                    <input type="text" class="form-control" id="sobrenome" placeholder="Nome Completo" formControlName="sobrenome"/>
-                </app-input-container>                
-
-                <app-input-container errorMessage="Campo Obrigatorio / Deve ter entre 6 e 20 caracteres" label="Senha">               
-                    <input type="password" class="form-control" id="senha" placeholder="Password" formControlName="senha"/>
+                <app-input-container errorMessage="Campo Obrigatorio / Deve ter entre 6 e 20 caracteres" label="Nova Senha">               
+                    <input type="password" class="form-control" id="newPassword" placeholder="Nova Senha" formControlName="newPassword"/>
                 </app-input-container>    
 
                 <div class="form-group" [class.has-success]="hasSuccessPass()"
                                         [class.has-error]="form.hasError('notSame')">
-                    <label>Confirme sua Senha</label>
-                    <input type="password" class="form-control" id="confirmPassword" placeholder="Password" formControlName="confirmPassword"/>
+                    <label>Confirme sua Nova Senha</label>
+                    <input type="password" class="form-control" id="confirmNewPassword" placeholder="Confirme sua Nova Senha" formControlName="confirmNewPassword"/>
                     <span class="help-block" *ngIf="hasSuccessPass()"><i class="fa fa-check"></i>Ok</span>
                     <span class="help-block" *ngIf="form.hasError('notSame')"><i class="fa fa-remove"></i>As senhas não conferem</span>
                 </div>

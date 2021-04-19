@@ -36,4 +36,14 @@ export class PerfilService{
         return this.http.post(`${environment.API}auth/refresh_token`, null).pipe(take(1));
     }
 
+    forgotPassword(email){                
+        return this.http.post(`${environment.API}auth/forgot`, email).pipe(take(1));
+    }
+
+    resetPassword(token, senha){                
+        return this.http.post(`${environment.API}auth/reset_password/${token}`, senha).pipe(take(1));
+    }
+
+
+
 }

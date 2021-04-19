@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
   }
 
   forgotPass(){
-    this.ns.notify("Entre em contato com o administrador")
+    this.router.navigate(['/security/forgot']);                              
   }
 
 }

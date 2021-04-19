@@ -31,7 +31,7 @@ export class RegistrarComponent implements OnInit {
       email: ['',[Validators.required, Validators.email]],
       nome: ['', [Validators.required]],
       sobrenome: ['', [Validators.required]],      
-      senha: ['', [Validators.required]],
+      senha: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
       confirmPassword: ['']
     }, {validator: this.checkPasswords });
   }
@@ -51,20 +51,20 @@ export class RegistrarComponent implements OnInit {
     if (this.form.valid) {      
       let msgSuccess = 'Registrado com sucesso';              
       this.service.registrar(this.form.getRawValue())
-                  .subscribe(
-                    success => {                                                      
-                      //this.loginService.user = {accessToken : success['accessToken']}                      
-                      //this.loginService.saveToken()
-                      this.ns.notify(msgSuccess)                    
-                      this.router.navigate(['/security/login']);          
-                    },
-                    error => { 
-                      this.hasError = true;                              
-                      this.erros = error.error.erros;
-                      console.log(this.erros);                      
-                      throw error          
-                    }
-                  );      
+      .subscribe(
+        success => {                                                      
+          //this.loginService.user = {accessToken : success['accessToken']}                      
+          //this.loginService.saveToken()
+          this.ns.notify(msgSuccess)                    
+          this.router.navigate(['/security/login']);          
+        },
+        error => { 
+          this.hasError = true;                              
+          this.erros = error.error.erros;
+          console.log(this.erros);                      
+          throw error          
+        }
+      );      
     }
     else{
       this.form.markAllAsTouched();      

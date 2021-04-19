@@ -7,6 +7,8 @@ import { PerfilFormComponent } from './perfil/perfil-form/perfil-form.component'
 import { loggedInGuard } from './loggedIn.guard';
 import { PerfilResolverGuard } from './perfil/guards/perfil-resolver.guard';
 import { AlteraSenhaComponent } from './perfil/altera-senha/altera-senha.component';
+import { EsqueceuSenhaComponent } from './perfil/esqueceu-senha/esqueceu-senha.component';
+import { ResetaSenhaComponent } from './perfil/reseta-senha/reseta-senha.component';
 
 const routes: Routes = [
   {
@@ -17,6 +19,12 @@ const routes: Routes = [
   },
   {
     path: 'login', component: LoginComponent
+  },
+  {
+    path: 'forgot', component: EsqueceuSenhaComponent
+  },
+  {
+    path: 'resetPassword/:token', component: ResetaSenhaComponent
   },
   {
     path: 'perfil', component: PerfilDetalheComponent, canLoad: [loggedInGuard], canActivate: [loggedInGuard]
