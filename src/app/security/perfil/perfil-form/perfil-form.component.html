@@ -18,13 +18,13 @@
           <form [formGroup]="form" style="padding-top: 10px">    
 
               <app-input-container errorMessage="Campo Obrigatorio" label="Nome">     
-                <input type="text" class="form-control" id="firstName" placeholder="Nome Completo" formControlName="firstName"/>
+                <input type="text" class="form-control" id="nome" placeholder="Nome Completo" formControlName="nome"/>
               </app-input-container>    
 
               <app-input-container errorMessage="Campo Obrigatorio" label="Sobrenome">     
-                  <input type="text" class="form-control" id="lastName" placeholder="Nome Completo" formControlName="lastName"/>
-                </app-input-container>    
-                                    
+                  <input type="text" class="form-control" id="sobrenome" placeholder="Nome Completo" formControlName="sobrenome"/>
+              </app-input-container>    
+
               <app-input-container errorMessage="Campo Obrigatorio" label="Dt Nascimento">         
                 <input type="date" class="form-control" id="dtNascimento" placeholder="Dt Nascimento" formControlName="dtNascimento"/>
               </app-input-container>
@@ -39,11 +39,7 @@
 
               <app-input-container errorMessage="Campo Obrigatorio" label="Descrição">               
                   <input type="text" class="form-control" id="descricao" placeholder="Descrição" formControlName="descricao"/>
-              </app-input-container>    
-
-              <app-input-container errorMessage="É necessario informar a senha para salvar as alterações" label="Confirme sua senha">               
-                <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password"/>
-              </app-input-container>    
+              </app-input-container>                  
 
               <p></p>
               <div>

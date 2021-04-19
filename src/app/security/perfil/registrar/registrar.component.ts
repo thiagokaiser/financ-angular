@@ -29,21 +29,21 @@ export class RegistrarComponent implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       email: ['',[Validators.required, Validators.email]],
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],      
-      password: ['', [Validators.required]],
+      nome: ['', [Validators.required]],
+      sobrenome: ['', [Validators.required]],      
+      senha: ['', [Validators.required]],
       confirmPassword: ['']
     }, {validator: this.checkPasswords });
   }
 
   checkPasswords(group: FormGroup) {
-    let pass = group.controls.password.value;
+    let pass = group.controls.senha.value;
     let confirmPass = group.controls.confirmPassword.value;    
     return pass === confirmPass ? null : { notSame: true }     
   }
 
   hasSuccessPass(): boolean{            
-    return this.form.controls.password.dirty && (this.checkPasswords(this.form) == null)
+    return this.form.controls.senha.dirty && (this.checkPasswords(this.form) == null)
   } 
 
   onSubmit() {        
@@ -53,10 +53,10 @@ export class RegistrarComponent implements OnInit {
       this.service.registrar(this.form.getRawValue())
                   .subscribe(
                     success => {                                                      
-                      this.loginService.user = {accessToken : success['accessToken']}                      
-                      this.loginService.saveToken()
+                      //this.loginService.user = {accessToken : success['accessToken']}                      
+                      //this.loginService.saveToken()
                       this.ns.notify(msgSuccess)                    
-                      this.router.navigate(['/security/perfil']);          
+                      this.router.navigate(['/security/login']);          
                     },
                     error => { 
                       this.hasError = true;                              

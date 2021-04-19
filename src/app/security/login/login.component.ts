@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      senha: ['', [Validators.required]],
     });
     this.navigateTo = this.activatedRoute.snapshot.params['to'] || btoa('/');
   }  
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     console.log("login");
     this.loginService.login(this.form.value.email,
-                            this.form.value.password)
+                            this.form.value.senha)
                             .subscribe(success => {
                               
                             },

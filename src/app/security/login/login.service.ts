@@ -19,10 +19,10 @@ export class LoginService{
                                       .subscribe((e: NavigationEnd) => this.lastUrl = e.url);
                 }
 
-    login(email: string, password: string): Observable<User>{                        
+    login(email: string, senha: string): Observable<User>{                        
 
         return this.http.post<User>(`${environment.API}login`,
-                                    {email: email, senha: password}).pipe(
+                                    {email: email, senha: senha}).pipe(
                                         tap(user => this.user = {
                                             email: user.email,                                            
                                             accessToken: user.accessToken
@@ -39,8 +39,8 @@ export class LoginService{
     saveUserName(){        
         var tokenDecoded = jwt_decode(this.user.accessToken);        
         this.user.email = tokenDecoded['email'];
-        this.user.firstName = tokenDecoded['firstName'];
-        this.user.lastName = tokenDecoded['lastName'];
+        this.user.nome = tokenDecoded['nome'];
+        this.user.sobrenome = tokenDecoded['sobrenome'];
     }
 
     isLoggedIn(): boolean {        

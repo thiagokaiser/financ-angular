@@ -1,8 +1,8 @@
 export interface User{
-    firstName?: string
-    lastName?: string
+    nome?: string
+    sobrenome?: string
     email?: string
-    password?: string
+    senha?: string
     accessToken: string
     dtNascimento?: Date
     cidade?: string

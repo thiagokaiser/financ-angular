@@ -7,6 +7,7 @@ import { LoginService } from '../../login/login.service';
 import { Observable } from 'rxjs';
 import { User } from '../../user';
 import { Location } from '@angular/common';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-perfil-form',
@@ -36,13 +37,12 @@ export class PerfilFormComponent implements OnInit {
     
     this.form = this.fb.group({
       email: [{ value: perfil.email, disabled: true }],
-      firstName: [perfil.firstName, [Validators.required]],
-      lastName: [perfil.lastName, [Validators.required]],
+      nome: [perfil.nome, [Validators.required]],
+      sobrenome: [perfil.sobrenome, [Validators.required]],
       dtNascimento: [new Date(perfil.dtNascimento).toISOString().substring(0,10), [Validators.required]],
-      cidade: [perfil.cidade, [Validators.required]],  
-      estado: [perfil.estado, [Validators.required]],  
-      descricao: [perfil.descricao, [Validators.required]],      
-      password: ['', [Validators.required]]
+      cidade: [perfil.cidade],  
+      estado: [perfil.estado],  
+      descricao: [perfil.descricao]      
     });
   }
 
@@ -50,24 +50,22 @@ export class PerfilFormComponent implements OnInit {
     this.submitted = true;    
     if (this.form.valid) {      
       let msgSuccess = 'Alterado com sucesso';            
-      this.service.updatePerfil(this.form.getRawValue())
-                  .subscribe(
-                    success => {                                
-                      this.loginService.user.accessToken = success['accessToken']
-                      this.loginService.saveToken()
-                      this.ns.notify(msgSuccess)                    
-                      this.router.navigate(['/security/perfil']);          
-                    },
-                    error => { 
-                      this.hasError = true;                   
-                      this.erros = error.error.message;
-                      throw error          
-                    }
-                  );      
+      this.service.updatePerfil(this.form.getRawValue()).pipe(        
+        switchMap(res => {return this.service.refreshToken()})
+      ).subscribe(
+        res => {
+          console.log(res)
+          this.loginService.user.accessToken = res['accessToken']
+          this.loginService.saveToken()
+          this.ns.notify(msgSuccess)                    
+          this.router.navigate(['/security/perfil']);          
+        }
+      );    
     }
     else{
       this.form.markAllAsTouched();      
-    }
+    }   
+
   }
 
   onCancel() {    
@@ -78,3 +76,7 @@ export class PerfilFormComponent implements OnInit {
   }
 
 }
+function take(arg0: number): import("rxjs").OperatorFunction<Object, unknown> {
+  throw new Error('Function not implemented.');
+}
+

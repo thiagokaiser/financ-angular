@@ -21,9 +21,9 @@
                         <h4></h4>
                         <div class="texto_user">                        
                             <table>
-                                <tr><td><i class="glyphicon glyphicon-user"></i></td><td>{{ user.firstName }} {{ user.lastName }}</td></tr>
+                                <tr><td><i class="glyphicon glyphicon-user"></i></td><td>{{ user.nome }} {{ user.sobrenome }}</td></tr>
                                 <tr><td><i class="glyphicon glyphicon-envelope"></i></td><td>{{ user.email }}</td></tr>
-                                <tr><td><i class="glyphicon glyphicon-gift"></i></td><td>{{ user.dtNascimento | date: 'dd/MM/yyyy' }}</td></tr>
+                                <tr><td><i class="glyphicon glyphicon-gift"></i></td><td>{{ user.dtNascimento | date: 'dd/MM/yyyy' : '+0000' }}</td></tr>
                                 <tr><td><i class="glyphicon glyphicon-map-marker"></i></td><td>{{ user.cidade }} - {{ user.estado }}</td></tr>
                             </table>                        
                             <p>{{ user.descricao }}</p>

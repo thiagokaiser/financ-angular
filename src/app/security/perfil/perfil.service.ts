@@ -10,26 +10,30 @@ import { LoginService } from '../login/login.service';
 })
 export class PerfilService{
 
-    host = `${environment.API}security/`
+    host = `${environment.API}usuarios/`
 
     constructor(
         private http: HttpClient
         ){}
 
     loadPerfil(email: string){        
-        return this.http.post<User>(`${this.host}perfil`, {'email': email}).pipe(take(1));
+        return this.http.get<User>(`${this.host}email?email=${email}`).pipe(take(1));
     }
 
     updatePerfil(user: User){                
-        return this.http.put(`${this.host}perfil`, user).pipe(take(1));
+        return this.http.put(`${this.host}${user.email}`, user).pipe(take(1));
     }
 
     registrar(user: User){        
-        return this.http.post(`${this.host}registrar`, user).pipe(take(1));
+        return this.http.post(`${this.host}`, user).pipe(take(1));
     }
 
     changePassword(changePass: ChangePasswordViewModel){                
         return this.http.put(`${this.host}senha`, changePass).pipe(take(1));
+    }
+
+    refreshToken(){                
+        return this.http.post(`${environment.API}auth/refresh_token`, null).pipe(take(1));
     }
 
 }
