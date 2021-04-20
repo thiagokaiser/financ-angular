@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
 import { PerfilService } from '../perfil.service';
 import { LoginService } from '../../login/login.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-esqueceu-senha',
@@ -16,6 +17,8 @@ export class EsqueceuSenhaComponent implements OnInit {
   submitted = false
   erros = null
   hasError = false
+  email = ""
+  emailReadyonly = false
 
   constructor(
     private fb: FormBuilder,
@@ -23,15 +26,21 @@ export class EsqueceuSenhaComponent implements OnInit {
     private loginService: LoginService,
     private ns: NotificationService,
     private router: Router,
-    private route: ActivatedRoute
-    
+    private route: ActivatedRoute,
+    private location: Location    
     ) { }
 
   ngOnInit() {
 
+    this.email = this.route.snapshot.params['email'];
+
     this.form = this.fb.group({
-      email: ['', [Validators.email]]
-    })      
+      email: [this.email, [Validators.email, Validators.required]]
+    })          
+
+    if(this.email != undefined){
+      this.emailReadyonly = true;      
+    }
   } 
 
   onSubmit() {        
@@ -42,7 +51,7 @@ export class EsqueceuSenhaComponent implements OnInit {
       .subscribe(
         success => {                                                                            
           this.ns.notify(msgSuccess)                    
-          this.router.navigate(['/security/login']);          
+          this.location.back();
         },
         error => { 
           this.hasError = true;                   
@@ -53,7 +62,7 @@ export class EsqueceuSenhaComponent implements OnInit {
         }
       );      
     }
-    else{
+    else{      
       this.form.markAllAsTouched();      
     }
   }
@@ -61,6 +70,6 @@ export class EsqueceuSenhaComponent implements OnInit {
   onCancel() {    
     this.submitted = false;
     this.form.reset();        
-    this.router.navigate(['/security/login'])
+    this.location.back();
   }
 }

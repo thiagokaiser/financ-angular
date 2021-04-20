@@ -18,16 +18,17 @@
                         <td><span class="text-red"><i class="fa fa-remove"></i>{{ erro.description }}</span></td>
                     </tr>
                 </table>                      
-            </div>
+            </div>            
             <form [formGroup]="form" style="padding-top: 10px">    
                 
-                <app-input-container errorMessage="Campo Obrigatorio" label="Email">               
-                    <input type="text" class="form-control" id="email" placeholder="Email" formControlName="email"/>
+                <app-input-container errorMessage="Campo Obrigatorio / Email inválido" label="Email">               
+                    <input type="text" class="form-control" id="email" placeholder="Email" formControlName="email" [readonly]="emailReadyonly"/>
                 </app-input-container>                
 
                 <p></p>
+                <p>Será enviado um email com o link para alteração de senha.</p>
                 <div>
-                    <button type="submit" class="btn btn-default" (click)="onSubmit()"><i class="fa fa-check" aria-hidden="true"></i> Salvar</button>{{' '}}
+                    <button type="submit" class="btn btn-default" (click)="onSubmit()"><i class="fa fa-check" aria-hidden="true"></i> Enviar</button>{{' '}}
                     <button type="button" class="btn btn-default" (click)="onCancel()"><i class="fa fa-times" aria-hidden="true"></i> Cancelar</button>
                 </div>
             </form>

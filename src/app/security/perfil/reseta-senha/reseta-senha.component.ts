@@ -55,7 +55,7 @@ export class ResetaSenhaComponent implements OnInit {
       .subscribe(
         success => {                                                                            
           this.ns.notify(msgSuccess)                    
-          this.router.navigate(['/security/login']);          
+          this.loginService.logout()
         },
         error => { 
           this.hasError = true;                   

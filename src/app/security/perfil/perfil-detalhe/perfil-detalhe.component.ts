@@ -32,7 +32,7 @@ export class PerfilDetalheComponent implements OnInit {
   }
 
   onChangePass(){
-    this.router.navigate(['security/perfil/altera-senha'])
+    this.router.navigate(['security/forgot/' + this.loginService.user.email])
   }
 
   onChangeImg(){
