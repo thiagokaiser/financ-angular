@@ -93,23 +93,7 @@ export class DespesaFormComponent implements OnInit {
       if (this.idRegistro){
         msgSuccess = 'Alterado com sucesso';
       }      
-      if(this.operacao == 'edit'){
-        this.service.save(this.form.value).subscribe(
-          success => {
-            this.ns.notify(msgSuccess)          
-            if(this.idRegistro){
-              this.router.navigate(['/financ/despesa/detalhe', this.idRegistro]);
-            }
-            else{
-              this.router.navigate(['/financ/despesa']);
-            }                              
-          },
-          error => {          
-            this.erros = error.error.errors;
-            throw error          
-          }
-        );      
-      }else if(this.operacao == 'all'){
+      if(this.operacao == 'all'){
         this.service.updateAll(this.form.value).subscribe(
           success => {
             this.ns.notify(msgSuccess)          
@@ -141,7 +125,22 @@ export class DespesaFormComponent implements OnInit {
             throw error          
           }
         );      
-      }      
+      }else{        
+        this.service.save(this.form.value).subscribe(
+          success => {              
+              this.ns.notify(msgSuccess)          
+              if(this.idRegistro){
+              this.router.navigate(['/financ/despesa/detalhe', this.idRegistro]);
+            }else{
+              this.router.navigate(['/financ/despesa']);
+            }                              
+          },
+          error => {          
+            this.erros = error.error.errors;
+            throw error          
+          }
+        );              
+      }
     }
     else{
       this.form.markAllAsTouched();      

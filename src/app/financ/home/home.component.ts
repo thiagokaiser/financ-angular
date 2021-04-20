@@ -1,13 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html'
 })
-export class HomeComponent implements OnInit {
-
-  @ViewChild("barChart", { static:true }) elemento: ElementRef;
+export class HomeComponent implements OnInit {  
 
   constructor() { }
 
