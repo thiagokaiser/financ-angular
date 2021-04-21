@@ -24,6 +24,7 @@ export class DespesaFormComponent implements OnInit {
   categorias$: Observable<Categoria[]>;
   contas$: Observable<Conta[]>;
   operacao: string;
+  msgSuccess: string;
 
   constructor(
     private fb: FormBuilder,
@@ -41,11 +42,11 @@ export class DespesaFormComponent implements OnInit {
     this.operacao = this.route.snapshot.params['operacao'];
     this.idRegistro = despesa.id;
     this.formLabel = despesa.id == 0 ? 'Novo' : 'Edita';    
-    console.log(despesa);
+    
     this.form = this.fb.group({
       id: [despesa.id],
       identificador: [despesa.identificador],
-      descricao: [despesa.descricao, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],      
+      descricao: [despesa.descricao, [Validators.required, Validators.minLength(5), Validators.maxLength(60)]],      
       categoriaId: [ despesa.categoria != null ? despesa.categoria.id : null, [Validators.required]],
       contaId:  [ despesa.conta != null ? despesa.conta.id : null],      
       valor:  [despesa.valor, [Validators.required]],
@@ -88,21 +89,15 @@ export class DespesaFormComponent implements OnInit {
   onSubmit() {
     this.submitted = true;    
     if (this.form.valid) {      
-      let msgSuccess = 'Criado com sucesso';      
+      this.msgSuccess = 'Criado com sucesso';      
       this.idRegistro = this.form.value.id;
       if (this.idRegistro){
-        msgSuccess = 'Alterado com sucesso';
+        this.msgSuccess = 'Alterado com sucesso';
       }      
       if(this.operacao == 'all'){
         this.service.updateAll(this.form.value).subscribe(
           success => {
-            this.ns.notify(msgSuccess)          
-            if(this.idRegistro){
-              this.router.navigate(['/financ/despesa/detalhe', this.idRegistro]);
-            }
-            else{
-              this.router.navigate(['/financ/despesa']);
-            }                              
+            this.submitSucess();
           },
           error => {          
             this.erros = error.error.errors;
@@ -112,13 +107,7 @@ export class DespesaFormComponent implements OnInit {
       }else if(this.operacao == 'unpaid'){
         this.service.updateUnpaid(this.form.value).subscribe(
           success => {
-            this.ns.notify(msgSuccess)          
-            if(this.idRegistro){
-              this.router.navigate(['/financ/despesa/detalhe', this.idRegistro]);
-            }
-            else{
-              this.router.navigate(['/financ/despesa']);
-            }                              
+            this.submitSucess();            
           },
           error => {          
             this.erros = error.error.errors;
@@ -128,12 +117,7 @@ export class DespesaFormComponent implements OnInit {
       }else{        
         this.service.save(this.form.value).subscribe(
           success => {              
-              this.ns.notify(msgSuccess)          
-              if(this.idRegistro){
-              this.router.navigate(['/financ/despesa/detalhe', this.idRegistro]);
-            }else{
-              this.router.navigate(['/financ/despesa']);
-            }                              
+            this.submitSucess();                             
           },
           error => {          
             this.erros = error.error.errors;
@@ -151,6 +135,16 @@ export class DespesaFormComponent implements OnInit {
     this.form.reset();        
     this.location.back();
 
+  }
+
+  submitSucess(){
+    this.ns.notify(this.msgSuccess)          
+    if(this.idRegistro){
+      this.router.navigate(['/financ/despesa/detalhe', this.idRegistro]);
+    }
+    else{
+      this.router.navigate(['/financ/despesa']);
+    }
   }
 
 }

@@ -18,6 +18,10 @@ export class DespesaService extends CrudService<Despesa>{
     return this.http.get<ListDespesa>(`${environment.API}despesas/page`, {params: pager});                   
   }  
 
+  getTotals(params) {    
+    return this.http.get<ListDespesa>(`${environment.API}despesas/totals`, {params: params}).pipe(take(1));                   
+  }  
+
   removeByIdentificador(identificador) {    
     return this.http.delete(`${environment.API}despesas/identificador/${identificador}`).pipe(take(1));                   
   }  

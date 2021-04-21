@@ -89,7 +89,24 @@
               <option value="100">100</option>
           </select>
         </div>    
-      </div>            
+      </div>   
+      <div class="row">
+        <div class="col-md-12">
+          <div class="pull-right">
+            <table class="table table-condensed">
+                <tr>
+                    <th class="text-right" style="vertical-align: bottom;">Pago:</th><td style="font-size:20px"> {{ totalPago | number : '1.2-2'}}</td>
+                </tr>
+                <tr>
+                    <th class="text-right" style="vertical-align: bottom;">Pendente:</th><td style="font-size:20px"> {{ totalPendente | number : '1.2-2' }}</td>
+                </tr>
+                <tr>
+                    <th class="text-right" style="vertical-align: bottom;">Total:</th><td style="font-size:20px"> {{ total | number : '1.2-2' }}</td>
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>         
     </div>
   </div>
 </section>

@@ -26,6 +26,9 @@ export class DespesaListaComponent implements OnInit {
   result: any;
   dtInicial: String = "";
   dtFinal: String = "";  
+  total = 0.0;
+  totalPago = 0.0;
+  totalPendente = 0.0;
 
   public config: PaginationInstance = {
       id: 'advanced',
@@ -107,6 +110,8 @@ export class DespesaListaComponent implements OnInit {
         this.config.totalItems = x['totalElements']        
       })
     )    
+
+    this.getTotals(params);
     
   } 
 
@@ -155,5 +160,15 @@ export class DespesaListaComponent implements OnInit {
     this.searchtext = ""
     this.config.currentPage = 1
     this.onRefresh()
+  }
+
+  getTotals(params){    
+    let totais = this.service.getTotals(params).subscribe(
+      success => {
+        this.total = success['total'],
+        this.totalPago = success['totalPago'],
+        this.totalPendente = success['totalPendente']
+      }
+    );   
   }
 }

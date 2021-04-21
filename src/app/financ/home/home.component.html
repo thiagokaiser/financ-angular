@@ -18,32 +18,33 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-            <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-aqua">
-                        <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
+            <div class="row" style="max-width: 800px;">                
+                <div class="col-md-5 col-sm-6 col-xs-12">
+                    <div class="info-box bg-yellow" (click)="onDateFilter()" style="cursor: pointer">
+                        <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+
                         <div class="info-box-content">
-                            <span class="info-box-text">despesas mes</span>
-                            <span class="info-box-number">R$ 123</span>
-                            <div class="progress">
-                                <div class="progress-bar" style="width: 10%"></div>
-                            </div>
-                            <span class="progress-description">
-                                Total: 123
-                            </span>
+                            <span class="info-box-text"><u>Clique para alterar</u></span>
+                            <span class="info-box-number">{{ dtInicial }}</span>
+                            <span class="info-box-number">{{ dtFinal }}</span>
+                            
                         </div>
                         <!-- /.info-box-content -->
                     </div>
                     <!-- /.info-box -->
                 </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-yellow" data-toggle="modal" data-target="#div-btn-mes">
-                        <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
-
+                <div class="col-md-7 col-sm-6 col-xs-12">
+                    <div class="info-box bg-aqua">
+                        <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">Clique para alterar</span>
-                            <span class="info-box-number">123</span>
-                            
+                            <span class="">Pago: <b>{{ totalPago | number : '1.2-2'}}</b></span><br>
+                            <span class="">Pendente: <b>{{ totalPendente | number : '1.2-2' }}</b></span>
+                            <div class="progress">
+                                <div class="progress-bar" [ngStyle]="{width: + totalPagoPercent + '%'}"></div>
+                            </div>
+                            <span class="progress-description">
+                                Total: <b>{{ total | number : '1.2-2' }}</b>
+                            </span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -108,29 +109,33 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive">
-                                <table class="table no-margin table-condensed">
+                                <table class="table no-margin table-condensed table-hover table-pointer">
                                     <thead>
                                         <tr>
                                             <th>Despesa</th>
                                             <th>Valor</th>
-                                            <th></th>                                    
+                                            <th>Vencimento</th>                                    
                                         </tr>
                                     </thead>
-                                    <tbody>                                        
-                                        <tr>
-                                            <td>asd</td>
-                                            <td>123</td>                                    
-                                            <td><a class="btn btn-default btn-sm" href="#"><span class="glyphicon glyphicon-list-alt"></span></a> </td>
-                                        </tr>                    
-                                       
-                                    </tbody>
+                                    <tbody *ngIf="despesasPendentes$ | async as despesasPendentes">
+                                        <tr *ngFor="let despesa of despesasPendentes.content | paginate: configPendente" (click)="onDetalheDespesa(despesa.id)">                                          
+                                          <td>{{ despesa.descricao }}</td>            
+                                          <td>{{ despesa.valor | number : '1.2-2'}}</td>                                          
+                                          <td>{{ despesa.dtVencimento | date:'dd/MM/yyyy' : '+0000' }}</td>            
+                                        </tr>
+                                      </tbody>
                                 </table>
+                            </div>    
+                            <div class="row">
+                                <pagination-controls 
+                                    [id]="configPendente.id"
+                                    (pageChange)="onPageChangePendente($event)">
+                                </pagination-controls>
                             </div>
-                            <!-- /.table-responsive -->
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer clearfix">            
-                            <a href="#" class="btn btn-sm btn-default btn-flat pull-right">Ver Todas</a>
+                            <a (click)="onTodasDespesas()" class="btn btn-sm btn-default btn-flat pull-right">Ver Todas</a>
                         </div>
                         <!-- /.box-footer -->
                     </div>
@@ -151,28 +156,34 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive">
-                                <table class="table no-margin table-condensed">
+                                <table class="table no-margin table-condensed table-hover table-pointer">
                                     <thead>
                                         <tr>
                                             <th>Despesa</th>
                                             <th>Valor</th>
-                                            <th></th>                                    
+                                            <th>Vencimento</th>                                    
                                         </tr>
                                     </thead>
-                                    <tbody>                                        
-                                        <tr>
-                                            <td>asd</td>
-                                            <td>123</td>                                    
-                                            <td><a class="btn btn-default btn-sm" href="#"><span class="glyphicon glyphicon-list-alt"></span></a> </td>
-                                        </tr>                                                            
-                                    </tbody>
+                                    <tbody *ngIf="despesasPagas$ | async as despesasPagas">
+                                        <tr *ngFor="let despesa of despesasPagas.content | paginate: configPago" (click)="onDetalheDespesa(despesa.id)">                                          
+                                          <td>{{ despesa.descricao }}</td>            
+                                          <td>{{ despesa.valor | number : '1.2-2'}}</td>    
+                                          <td>{{ despesa.dtVencimento | date:'dd/MM/yyyy' : '+0000' }}</td>                                         
+                                        </tr>
+                                      </tbody>
                                 </table>
+                            </div>    
+                            <div class="row">
+                                <pagination-controls 
+                                    [id]="configPago.id"
+                                    (pageChange)="onPageChangePago($event)">
+                                </pagination-controls>
                             </div>
-                            <!-- /.table-responsive -->
+
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer clearfix">            
-                            <a href="#" class="btn btn-sm btn-default btn-flat pull-right">Ver Todas</a>
+                            <a (click)="onTodasDespesas()" class="btn btn-sm btn-default btn-flat pull-right">Ver Todas</a>
                         </div>
                         <!-- /.box-footer -->
                     </div>
