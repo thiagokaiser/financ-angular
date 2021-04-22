@@ -70,8 +70,7 @@ export class HomeComponent implements OnInit {
         datasets: [{              
           data: [],
           backgroundColor: "#3c8dbc",
-          borderWidth: 1
-          
+          borderWidth: 1          
         }]
       },
       options: {
@@ -81,8 +80,7 @@ export class HomeComponent implements OnInit {
         scales: {
           yAxes: [{
             ticks: {
-                suggestedMin: 0,
-                
+                suggestedMin: 0,                
             }
           }],
           xAxes: [{
@@ -135,8 +133,7 @@ export class HomeComponent implements OnInit {
       take(1),
       map(result => this.result = result)
     ).subscribe(
-      success => {
-        console.log(this.result)
+      success => {        
         this.dtInicialBarChart = this.result.dtInicial;
         this.dtFinalBarChart = this.result.dtFinal;
         this.updateBarChart();
@@ -149,12 +146,12 @@ export class HomeComponent implements OnInit {
     this.dtInicial = new Date(y, m, 1).toISOString().substring(0,10);
     this.dtFinal = new Date(y, m + 1, 0).toISOString().substring(0,10);
 
-    this.dtInicialBarChart = new Date(y, m - 11, 1).toISOString().substring(0,7)    
-    this.dtFinalBarChart = this.dtInicial.substring(0,7)
+    this.dtInicialBarChart = new Date(y, m - 10, 1).toISOString().substring(0,7)    
+    this.dtFinalBarChart = new Date(y, m + 1, 1).toISOString().substring(0,7)
   }
 
   getTotals(params){    
-    let totais = this.service.getTotals(params).subscribe(
+    this.service.getTotals(params).subscribe(
       success => {
         this.total = success['total']
         this.totalPago = success['totalPago']
@@ -180,7 +177,7 @@ export class HomeComponent implements OnInit {
     this.service.getTotalsByMonth(paramsBarChart).subscribe(
       success => {        
         success.forEach(res => {          
-          this.barChart.data.labels.push(res.ano + '-' + res.mes);
+          this.barChart.data.labels.push(res.ano + '-' + res.mes.toString().padStart(2,'0'));
           this.barChart.data.datasets.forEach((dataset) => {
               dataset.data.push(res.total);              
           });          
@@ -190,8 +187,7 @@ export class HomeComponent implements OnInit {
     );   
   }
 
-  updatePieChart(params){
-    
+  updatePieChart(params){    
     this.pieChart.data.labels = [];
     this.pieChart.data.datasets.forEach((dataset) => {
         dataset.data = [];
@@ -262,8 +258,7 @@ export class HomeComponent implements OnInit {
   }
 
   onDetalheDespesa(id){
-    this.router.navigate(['/financ/despesa/detalhe', id]);    
-
+    this.router.navigate(['/financ/despesa/detalhe', id]);
   }
 
   onTodasDespesas(){
