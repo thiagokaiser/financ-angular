@@ -19,7 +19,15 @@ export class DespesaService extends CrudService<Despesa>{
   }  
 
   getTotals(params) {    
-    return this.http.get<ListDespesa>(`${environment.API}despesas/totals`, {params: params}).pipe(take(1));                   
+    return this.http.get<any>(`${environment.API}despesas/totals`, {params: params}).pipe(take(1));                   
+  }  
+
+  getTotalsByCateg(params) {    
+    return this.http.get<any>(`${environment.API}despesas/totalsByCateg`, {params: params}).pipe(take(1));                   
+  }  
+
+  getTotalsByMonth(params) {    
+    return this.http.get<any>(`${environment.API}despesas/totalsByMonth`, {params: params}).pipe(take(1));                   
   }  
 
   removeByIdentificador(identificador) {    

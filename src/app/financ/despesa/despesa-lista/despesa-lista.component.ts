@@ -1,15 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Despesa, ListDespesa } from '../despesa';
-import { Observable, Subject, EMPTY } from 'rxjs';
+import { ListDespesa } from '../despesa';
+import { Observable } from 'rxjs';
 import { DespesaService } from '../despesa.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSort, Sort } from '@angular/material/sort';
 import { PaginationInstance } from 'ngx-pagination';
-import { map, switchMap, take, tap } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { DateFilterComponent } from './date-filter/date-filter.component';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Component({
   selector: 'app-despesa-lista',
@@ -21,11 +18,11 @@ export class DespesaListaComponent implements OnInit {
 
   despesas$: Observable<ListDespesa>;  
   searchtext: string = "";  
-  orderBy: string = "id";
+  orderBy: string = "dtVencimento";
   direction: string = "asc";
   result: any;
-  dtInicial: String = "";
-  dtFinal: String = "";  
+  dtInicial: string = "";
+  dtFinal: string = "";  
   total = 0.0;
   totalPago = 0.0;
   totalPendente = 0.0;
@@ -41,8 +38,7 @@ export class DespesaListaComponent implements OnInit {
     private service: DespesaService,
     private router: Router,
     private route: ActivatedRoute,
-    private alertService: AlertModalService,
-    private modalService: BsModalService
+    private alertService: AlertModalService    
   ) { }
     
   ngOnInit() {
@@ -109,14 +105,13 @@ export class DespesaListaComponent implements OnInit {
       tap(x => {
         this.config.totalItems = x['totalElements']        
       })
-    )    
+    )
 
-    this.getTotals(params);
-    
+    this.getTotals(params);    
   } 
 
   onDateFilter() {    
-    const result$ = this.modalDateFilter()    
+    const result$ = this.alertService.modalDateFilter(this.dtInicial, this.dtFinal)    
     result$.asObservable().pipe(
       take(1),
       map(result => this.result = result)
@@ -129,13 +124,6 @@ export class DespesaListaComponent implements OnInit {
     );    
   } 
 
-  modalDateFilter(){
-    const modalRef: BsModalRef = this.modalService.show(DateFilterComponent);    
-    modalRef.content.form.controls['dtInicial'].setValue(this.dtInicial);
-    modalRef.content.form.controls['dtFinal'].setValue(this.dtFinal);    
-    return (<DateFilterComponent>modalRef.content).confirmResult;
-  }  
-
   onPrev(){
     this.updateDates(this.dtInicial, -1)
     this.onRefresh();
@@ -146,10 +134,8 @@ export class DespesaListaComponent implements OnInit {
     this.onRefresh();
   }
 
-  updateDates(date: String, month: number){
-    
-    var dataAtual = new Date(date.substring(0,10)), y = dataAtual.getUTCFullYear(), m = dataAtual.getUTCMonth() + month;    
-    
+  updateDates(date: String, month: number){    
+    var dataAtual = new Date(date.substring(0,10)), y = dataAtual.getUTCFullYear(), m = dataAtual.getUTCMonth() + month;        
     this.dtInicial = new Date(y, m, 1).toISOString().substring(0,10);
     this.dtFinal = new Date(y, m + 1, 0).toISOString().substring(0,10);
   }
@@ -163,7 +149,7 @@ export class DespesaListaComponent implements OnInit {
   }
 
   getTotals(params){    
-    let totais = this.service.getTotals(params).subscribe(
+    this.service.getTotals(params).subscribe(
       success => {
         this.total = success['total'],
         this.totalPago = success['totalPago'],

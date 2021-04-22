@@ -56,12 +56,8 @@
                         <td>{{ despesa.valor | number : '1.2-2'}}</td>
                     </tr>
                     <tr>
-                        <th>dtVencimento</th>
+                        <th>Vencimento</th>
                         <td>{{ despesa.dtVencimento | date:'dd/MM/yyyy' : '+0000'}}</td>                        
-                    </tr>
-                    <tr>
-                        <th>pago</th>
-                        <td>{{ despesa.pago }}</td>
                     </tr>                    
                     <tr>
                         <th>Categoria</th>
@@ -72,13 +68,24 @@
                         <td>{{ despesa.conta?.descricao }}</td>
                     </tr>                    
                     <tr>
-                        <th>parcelaAtual</th>
+                        <th>Parcela Atual</th>
                         <td>{{ despesa.parcelaAtual }}</td>
                     </tr>
                     <tr>
-                        <th>numParcelas</th>
+                        <th>Num. Parcelas</th>
                         <td>{{ despesa.numParcelas }}</td>
                     </tr>
+                    <tr>
+                        <th>Pago</th>
+                        <td>
+                            <ng-template [ngIf]="despesa.pago" [ngIfElse]="elseBlockPago">
+                                <i class="fa fa-check" style="color:#41db53"></i>
+                            </ng-template>
+                            <ng-template #elseBlockPago>
+                                <i class="fa fa-times" style="color:red"></i>
+                            </ng-template>               
+                        </td>   
+                    </tr>                    
                 </tbody>
             </table>            
         </div>

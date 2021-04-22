@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Chart } from 'chart.js';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { PaginationInstance } from 'ngx-pagination';
 import { Observable } from 'rxjs';
 import { take, map, tap } from 'rxjs/operators';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { ListDespesa } from '../despesa/despesa';
-import { DateFilterComponent } from '../despesa/despesa-lista/date-filter/date-filter.component';
 import { DespesaService } from '../despesa/despesa.service';
 
 @Component({
@@ -24,7 +22,11 @@ export class HomeComponent implements OnInit {
   totalPendente = 0.0;
   dtInicial: string;
   dtFinal: string;
+  dtInicialBarChart: string;
+  dtFinalBarChart: string;
   result: any;
+  pieChart: any;
+  barChart: any;
 
   public configPendente: PaginationInstance = {
     id: 'pagPendente',
@@ -44,13 +46,53 @@ export class HomeComponent implements OnInit {
     private service: DespesaService,
     private router: Router,
     private route: ActivatedRoute,
-    private alertService: AlertModalService,
-    private modalService: BsModalService
+    private alertService: AlertModalService    
   ) { }
 
   ngOnInit() {
-    this.onRefresh();
 
+    this.pieChart = new Chart("pieChart",{
+      type: 'doughnut',
+      data:{
+        labels: [],
+        datasets: [{
+          data: [],
+          backgroundColor: [],
+          hoverOffset: 4
+        }]
+      }
+    }); 
+
+    this.barChart = new Chart("barChart", {
+      type: 'bar',
+      data: {
+        labels: [],
+        datasets: [{              
+          data: [],
+          backgroundColor: "#3c8dbc",
+          borderWidth: 1
+          
+        }]
+      },
+      options: {
+        legend:{
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+                suggestedMin: 0,
+                
+            }
+          }],
+          xAxes: [{
+            maxBarThickness: 100
+          }]
+        }
+      }           
+    });
+
+    this.onRefresh();
   }  
 
   onRefresh(){
@@ -64,8 +106,8 @@ export class HomeComponent implements OnInit {
       dtFinal: this.dtFinal,
     };
 
-    this.barChart();
-    this.pieChart();
+    this.updateBarChart();
+    this.updatePieChart(params);
 
     this.getTotals(params);
 
@@ -74,7 +116,7 @@ export class HomeComponent implements OnInit {
   }
 
   onDateFilter() {    
-    const result$ = this.modalDateFilter()    
+    const result$ = this.alertService.modalDateFilter(this.dtInicial, this.dtFinal)
     result$.asObservable().pipe(
       take(1),
       map(result => this.result = result)
@@ -87,19 +129,28 @@ export class HomeComponent implements OnInit {
     );    
   } 
 
-  modalDateFilter(){
-    const modalRef: BsModalRef = this.modalService.show(DateFilterComponent);    
-    modalRef.content.form.controls['dtInicial'].setValue(this.dtInicial);
-    modalRef.content.form.controls['dtFinal'].setValue(this.dtFinal);    
-    return (<DateFilterComponent>modalRef.content).confirmResult;
-  }  
+  onMonthFilter() {    
+    const result$ = this.alertService.modalMonthFilter(this.dtInicialBarChart, this.dtFinalBarChart)    
+    result$.asObservable().pipe(
+      take(1),
+      map(result => this.result = result)
+    ).subscribe(
+      success => {
+        console.log(this.result)
+        this.dtInicialBarChart = this.result.dtInicial;
+        this.dtFinalBarChart = this.result.dtFinal;
+        this.updateBarChart();
+      }
+    );    
+  }
 
-  updateDates(){
-    
+  updateDates(){    
     var dataAtual = new Date(), y = dataAtual.getUTCFullYear(), m = dataAtual.getUTCMonth();    
-    
     this.dtInicial = new Date(y, m, 1).toISOString().substring(0,10);
     this.dtFinal = new Date(y, m + 1, 0).toISOString().substring(0,10);
+
+    this.dtInicialBarChart = new Date(y, m - 11, 1).toISOString().substring(0,7)    
+    this.dtFinalBarChart = this.dtInicial.substring(0,7)
   }
 
   getTotals(params){    
@@ -113,35 +164,53 @@ export class HomeComponent implements OnInit {
     );   
   }
 
-  barChart(){
-    new Chart("barChart", {
-      type: 'bar',
-      data: {
-          labels: ["1","2","3","4","5","6","7","8","9","10","11","12"],
-          datasets: [{              
-              data: [1,2,3,4,5,6,7,8,9,10,11,12],
-              backgroundColor: "#3c8dbc",
-              borderWidth: 1            
-          }]
-      },
-      options: {
-          legend:{
-            display: false
-          }
+  updateBarChart(){
+    this.barChart.data.labels = [];
+    this.barChart.data.datasets.forEach((dataset) => {
+        dataset.data = [];        
+    });    
+    this.barChart.update();
+
+    let paramsBarChart = {
+      dtInicial: this.dtInicialBarChart,
+      dtFinal: this.dtFinalBarChart,
+      search: ''
+    }
+    
+    this.service.getTotalsByMonth(paramsBarChart).subscribe(
+      success => {        
+        success.forEach(res => {          
+          this.barChart.data.labels.push(res.ano + '-' + res.mes);
+          this.barChart.data.datasets.forEach((dataset) => {
+              dataset.data.push(res.total);              
+          });          
+        });                     
+        this.barChart.update();        
       }
-    });
+    );   
   }
 
-  pieChart(){
-    new Chart("pieChart",{
-      type: 'doughnut',
-      data:{
-        labels: ['asdasdasdsad','dsdsasdasd','dasasda','asdqweqwe','asdsasdqweqw','asdasdasddd'],
-        datasets:[{
-          data: [1,2,3,1,2,3]        
-        }]
+  updatePieChart(params){
+    
+    this.pieChart.data.labels = [];
+    this.pieChart.data.datasets.forEach((dataset) => {
+        dataset.data = [];
+        dataset.backgroundColor = [];
+    });    
+    this.pieChart.update();
+    
+    this.service.getTotalsByCateg(params).subscribe(
+      success => {        
+        success.forEach(categ => {          
+          this.pieChart.data.labels.push(categ.descricao);
+          this.pieChart.data.datasets.forEach((dataset) => {
+              dataset.data.push(categ.total);
+              dataset.backgroundColor.push(categ.cor);
+          });          
+        });                     
+        this.pieChart.update();        
       }
-    });
+    );       
   }
 
   refreshTablePago(){

@@ -30,17 +30,15 @@
       <table class="table table-hover table-pointer"  style="max-width:800px;" 
              matSort (matSortChange)="sortData($event)" 
              matSortDisableClear="true"
-             matSortActive="id" matSortDirection="asc">            
+             matSortActive="descricao" matSortDirection="asc">            
         <thead>
-          <tr>
-            <th mat-sort-header="id">#</th>
+          <tr>            
             <th mat-sort-header="descricao">Nome</th>            
             <th>Cor</th>            
           </tr>
         </thead>
         <tbody *ngIf="categorias$ | async as categorias">
-          <tr *ngFor="let categoria of categorias.content | paginate: config" (click)="onDetalhe(categoria.id)">
-            <td>{{ categoria.id }}</td>
+          <tr *ngFor="let categoria of categorias.content | paginate: config" (click)="onDetalhe(categoria.id)">            
             <td>{{ categoria.descricao }}</td>            
             <td><i class="fa fa-circle" [ngStyle]="{'color': categoria.cor}"></i></td>            
           </tr>

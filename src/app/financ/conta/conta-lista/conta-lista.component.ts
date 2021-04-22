@@ -17,7 +17,7 @@ export class ContaListaComponent implements OnInit {
 
   contas$: Observable<ListConta>;  
   searchtext: string = "";  
-  orderby: string = "id";
+  orderby: string = "descricao";
   direction: string = "asc";
 
   public config: PaginationInstance = {

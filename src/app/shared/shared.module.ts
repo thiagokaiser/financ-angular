@@ -6,21 +6,22 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../security/auth.interceptor';
 import { SnackbarComponent } from './messages/snackbar/snackbar.component';
 import { NotificationService } from './messages/notification.service';
-import { DateFilterComponent } from '../financ/despesa/despesa-lista/date-filter/date-filter.component';
+import { DateFilterComponent } from './date-filter/date-filter.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MonthFilterComponent } from './month-filter/month-filter.component';
 
 @NgModule({
   declarations: [    
-  ConfirmModalComponent, InputContainerComponent, SnackbarComponent, DateFilterComponent
+  ConfirmModalComponent, InputContainerComponent, SnackbarComponent, DateFilterComponent, MonthFilterComponent
 ],
   imports: [
     CommonModule, ReactiveFormsModule
   ],
   exports:[
-    ConfirmModalComponent, InputContainerComponent, SnackbarComponent, DateFilterComponent
+    ConfirmModalComponent, InputContainerComponent, SnackbarComponent, DateFilterComponent, MonthFilterComponent
   ],
   entryComponents:[
-    ConfirmModalComponent, DateFilterComponent
+    ConfirmModalComponent, DateFilterComponent, MonthFilterComponent
   ]
 })
 export class SharedModule {

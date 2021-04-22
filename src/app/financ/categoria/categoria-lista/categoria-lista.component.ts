@@ -17,7 +17,7 @@ export class CategoriaListaComponent implements OnInit {
 
   categorias$: Observable<ListCategoria>;  
   searchtext: string = "";  
-  orderby: string = "id";
+  orderby: string = "descricao";
   direction: string = "asc";
 
   public config: PaginationInstance = {

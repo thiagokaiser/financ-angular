@@ -39,10 +39,9 @@
         <table class="table table-hover table-pointer table-bordered"
               matSort (matSortChange)="sortData($event)" 
               matSortDisableClear="true"
-              matSortActive="id" matSortDirection="asc">            
+              matSortActive="dtVencimento" matSortDirection="asc">            
           <thead>
-            <tr>
-              <th mat-sort-header="id">#</th>
+            <tr>              
               <th mat-sort-header="pago">Pago</th>            
               <th mat-sort-header="descricao">Despesa</th>            
               <th mat-sort-header="valorxs" class="visible-xs">Valor</th>
@@ -53,8 +52,7 @@
             </tr>
           </thead>
           <tbody *ngIf="despesas$ | async as despesas">
-            <tr *ngFor="let despesa of despesas.content | paginate: config" (click)="onDetalhe(despesa.id)">
-              <td>{{ despesa.id }}</td>
+            <tr *ngFor="let despesa of despesas.content | paginate: config" (click)="onDetalhe(despesa.id)">              
               <td>
                 <ng-template [ngIf]="despesa.pago" [ngIfElse]="elseBlockPago">
                   <i class="fa fa-check" style="color:#41db53"></i>
