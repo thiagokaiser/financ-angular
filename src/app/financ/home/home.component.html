@@ -15,8 +15,7 @@
                 </button>
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
             </div>
-        </div>
-        <!-- /.box-header -->
+        </div>        
         <div class="box-body">
             <div class="row" style="max-width: 800px;">                
                 <div class="col-md-5 col-sm-6 col-xs-12">
@@ -28,10 +27,8 @@
                             <span class="info-box-number">{{ dtInicial }}</span>
                             <span class="info-box-number">{{ dtFinal }}</span>
                             
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
+                        </div>                        
+                    </div>                    
                 </div>
                 <div class="col-md-7 col-sm-6 col-xs-12">
                     <div class="info-box bg-aqua">
@@ -45,10 +42,8 @@
                             <span class="progress-description">
                                 Total: <b>{{ total | number : '1.2-2' }}</b>
                             </span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
+                        </div>                        
+                    </div>                    
                 </div>
             </div>
         </div>
@@ -56,30 +51,7 @@
     <div class="row">        
         <div class="col-md-8">            
             <div class="row">
-                <div class="col-md-12">
-                    <!-- TABLE: LATEST ORDERS -->
-                    <!-- BAR CHART -->
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Pagamentos entre {{ dtFinalBarChart }} e {{ dtInicialBarChart }}</h3>                            
-                            <div class="box-tools pull-right">
-                                <button class="btn btn-box-tool" (click)="onMonthFilter()">Filtro</button>
-                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>                                
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            
-                            <div class="chart">
-                                <canvas id="barChart" height="230"></canvas>
-                            </div>
-                        </div><!-- /.box-body -->
-                    </div><!-- /.box -->                    
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- DONUT CHART -->
+                <div class="col-md-12">                    
                     <div class="box box-info">
                         <div class="box-header with-border">
                             <h3 class="box-title">Despesas por Categoria</h3>
@@ -89,11 +61,36 @@
                             </div>
                         </div>
                         <div class="box-body">
-                            <canvas id="pieChart" height="150"></canvas>
-                        </div><!-- /.box-body -->
-                    </div><!-- /.box -->
+                            <div style="min-height: 350px;">
+                                <canvas id="pieChart"></canvas>
+                            </div>                            
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">                    
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Pagamentos entre {{ dtFinalBarChart }} e {{ dtInicialBarChart }}</h3>                            
+                            <div class="box-tools pull-right">
+                                <button class="btn btn-box-tool" (click)="onMonthFilter()">Filtro</button>
+                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>                                
+                            </div>
+                        </div>
+                        <div class="box-body">                            
+                            <div class="table-responsive" >
+                                <div style="min-width: 600px;">
+                                    <div class="table" >
+                                        <canvas id="barChart" height="230"></canvas>
+                                    </div>                         
+                                </div>
+                            </div>
+                        </div>
+                    </div>        
+                </div>
+            </div>            
         </div>
         <div class="col-md-4">
             <div class="row">

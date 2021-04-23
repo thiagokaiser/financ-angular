@@ -10,14 +10,18 @@ import { PerfilDetalheComponent } from './perfil/perfil-detalhe/perfil-detalhe.c
 import { PerfilService } from './perfil/perfil.service';
 import { EsqueceuSenhaComponent } from './perfil/esqueceu-senha/esqueceu-senha.component';
 import { ResetaSenhaComponent } from './perfil/reseta-senha/reseta-senha.component';
+import { PerfilImagemComponent } from './perfil/perfil-imagem/perfil-imagem.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
-  declarations: [LoginComponent, RegistrarComponent, PerfilFormComponent, PerfilDetalheComponent, EsqueceuSenhaComponent, ResetaSenhaComponent],
+  declarations: [LoginComponent, RegistrarComponent, EsqueceuSenhaComponent, ResetaSenhaComponent,
+    PerfilFormComponent, PerfilDetalheComponent, PerfilImagemComponent],
   imports: [
     CommonModule,
     SecurityRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    ImageCropperModule
   ],
   providers: [PerfilService]
 })

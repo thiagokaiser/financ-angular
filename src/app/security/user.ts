@@ -1,4 +1,5 @@
 export interface User{
+    id?: string
     nome?: string
     sobrenome?: string
     email?: string
@@ -8,6 +9,7 @@ export interface User{
     cidade?: string
     estado?: string
     descricao?: string
+    imagePath?: string
 }
 
 export interface ChangePasswordViewModel{

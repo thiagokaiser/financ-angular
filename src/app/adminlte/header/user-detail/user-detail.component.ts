@@ -7,9 +7,7 @@ import { User } from 'src/app/security/user';
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.css']
 })
-export class UserDetailComponent implements OnInit {
-
-  imagePath = '/assets/img-user.jpg';
+export class UserDetailComponent implements OnInit {  
 
   constructor(private loginService: LoginService) { }
 

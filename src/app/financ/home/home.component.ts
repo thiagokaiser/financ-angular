@@ -60,6 +60,9 @@ export class HomeComponent implements OnInit {
           backgroundColor: [],
           hoverOffset: 4
         }]
+      },
+      options:{
+        maintainAspectRatio: false        
       }
     }); 
 
@@ -86,7 +89,8 @@ export class HomeComponent implements OnInit {
           xAxes: [{
             maxBarThickness: 100
           }]
-        }
+        },
+        maintainAspectRatio: false        
       }           
     });
 

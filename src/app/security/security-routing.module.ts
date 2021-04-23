@@ -8,6 +8,7 @@ import { loggedInGuard } from './loggedIn.guard';
 import { PerfilResolverGuard } from './perfil/guards/perfil-resolver.guard';
 import { EsqueceuSenhaComponent } from './perfil/esqueceu-senha/esqueceu-senha.component';
 import { ResetaSenhaComponent } from './perfil/reseta-senha/reseta-senha.component';
+import { PerfilImagemComponent } from './perfil/perfil-imagem/perfil-imagem.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,9 @@ const routes: Routes = [
   },
   {
     path: 'perfil', component: PerfilDetalheComponent, canLoad: [loggedInGuard], canActivate: [loggedInGuard]
+  },
+  {
+    path: 'perfil/imagem', component: PerfilImagemComponent, canLoad: [loggedInGuard], canActivate: [loggedInGuard]
   },
   {
     path: 'perfil/editar', component: PerfilFormComponent, 

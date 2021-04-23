@@ -24,6 +24,10 @@ export class PerfilService{
         return this.http.put(`${this.host}${user.email}`, user).pipe(take(1));
     }
 
+    uploadImagem(imagem: any){                
+        return this.http.post(`${this.host}picture`, imagem).pipe(take(1));
+    }
+
     registrar(user: User){        
         return this.http.post(`${this.host}`, user).pipe(take(1));
     }

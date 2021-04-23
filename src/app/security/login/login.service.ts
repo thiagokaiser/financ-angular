@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
+import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Observable, observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../user';
-import { tap, filter } from 'rxjs/operators';
+import { tap, filter, take } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
 import * as jwt_decode from "jwt-decode";
 
@@ -12,8 +12,10 @@ export class LoginService{
 
     user: User;
     lastUrl: string;
+    baseImagePath = 'https://curso-spring-avancado.s3-sa-east-1.amazonaws.com/cp';
 
     constructor(private http:HttpClient,
+                private httpBackend: HttpBackend,
                 private router: Router){
                     this.router.events.pipe(filter(e => e instanceof NavigationEnd))
                                       .subscribe((e: NavigationEnd) => this.lastUrl = e.url);
@@ -23,7 +25,7 @@ export class LoginService{
 
         return this.http.post<User>(`${environment.API}login`,
                                     {email: email, senha: senha}).pipe(
-                                        tap(user => this.user = {
+                                        tap(user => this.user = {                                                                                        
                                             email: user.email,                                            
                                             accessToken: user.accessToken
                                         })
@@ -32,18 +34,21 @@ export class LoginService{
 
     saveToken(){        
         localStorage.clear();
-        localStorage.setItem('sessionToken', this.user.accessToken);
+        localStorage.setItem('sessionToken', this.user.accessToken);        
         this.saveUserName()
     }
 
-    saveUserName(){        
+    saveUserName(){                
         var tokenDecoded = jwt_decode(this.user.accessToken);        
         this.user.email = tokenDecoded['email'];
         this.user.nome = tokenDecoded['nome'];
-        this.user.sobrenome = tokenDecoded['sobrenome'];
+        this.user.sobrenome = tokenDecoded['sobrenome'];     
+        this.user.id = tokenDecoded['id']
+        this.user.imagePath = "https://curso-spring-avancado.s3-sa-east-1.amazonaws.com/cp.jpg"
+        this.checkImagePath()
     }
 
-    isLoggedIn(): boolean {        
+    isLoggedIn(): boolean {           
         if(this.user == undefined){
             var sessionToken = localStorage.getItem('sessionToken');        
             if(sessionToken){
@@ -62,5 +67,19 @@ export class LoginService{
         this.user = undefined;
         localStorage.clear();
         this.router.navigate(['/security/login']);
+    }    
+
+    checkImagePath(){
+        console.log('checkImage')
+        const newHttpClient = new HttpClient(this.httpBackend);        
+        let path = this.baseImagePath + this.user.id + '.jpg?time=' + (new Date()).getTime();                
+        newHttpClient.get(path, {responseType: 'blob'}).subscribe(
+            success => {                
+                this.user.imagePath = path
+            },           
+            error =>{
+                console.log(error)
+            } 
+        );
     }
 }

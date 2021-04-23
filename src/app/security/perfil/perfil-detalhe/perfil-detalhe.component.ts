@@ -12,8 +12,7 @@ import { NotificationService } from 'src/app/shared/messages/notification.servic
   styleUrls: ['./perfil-detalhe.component.css']
 })
 export class PerfilDetalheComponent implements OnInit {
-  
-  imagePath = '/assets/img-user.jpg';
+    
   user$: Observable<User>
 
   constructor(
@@ -24,7 +23,7 @@ export class PerfilDetalheComponent implements OnInit {
     ) { }
 
   ngOnInit() {  
-    this.carregaPerfil();  
+    this.carregaPerfil();        
   }  
 
   onEdit(){
@@ -36,10 +35,14 @@ export class PerfilDetalheComponent implements OnInit {
   }
 
   onChangeImg(){
-    this.ns.notify("Recurso indisponivel no momento.")
+    this.router.navigate(['security/perfil/imagem'])
   }
 
   carregaPerfil(){        
     this.user$ = this.perfilService.loadPerfil(this.loginService.user.email)    
+  }
+
+  carregaImagem(){
+    return this.loginService.user.imagePath;
   }
 }
