@@ -15,9 +15,7 @@ import { DespesaListaComponent } from './despesa/despesa-lista/despesa-lista.com
 import { DespesaResolverGuard } from './despesa/guards/despesa-resolver.guard';
 
 const routes: Routes = [
-  {
-    path: 'home', component: HomeComponent
-  },    
+  { path: 'home', component: HomeComponent},    
   { path: 'categoria', component: CategoriaListaComponent},
   { path: 'categoria/detalhe/:id', component: CategoriaDetalheComponent, resolve: {categoria: CategoriaResolverGuard}},
   { path: 'categoria/editar/:id', component: CategoriaFormComponent, resolve: {categoria: CategoriaResolverGuard}},
@@ -30,6 +28,7 @@ const routes: Routes = [
   { path: 'despesa/detalhe/:id', component: DespesaDetalheComponent, resolve: {despesa: DespesaResolverGuard}},
   { path: 'despesa/editar/:id/:operacao', component: DespesaFormComponent, resolve: {despesa: DespesaResolverGuard}},  
   { path: 'despesa/novo', component: DespesaFormComponent, resolve: {despesa: DespesaResolverGuard}},
+  { path: '', pathMatch: 'full', redirectTo: 'home'}
 ];
 
 @NgModule({

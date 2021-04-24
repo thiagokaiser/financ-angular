@@ -11,8 +11,7 @@ import * as jwt_decode from "jwt-decode";
 export class LoginService{
 
     user: User;
-    lastUrl: string;
-    baseImagePath = 'https://curso-spring-avancado.s3-sa-east-1.amazonaws.com/cp';
+    lastUrl: string;    
 
     constructor(private http:HttpClient,
                 private httpBackend: HttpBackend,
@@ -63,7 +62,7 @@ export class LoginService{
         return this.user !== undefined;
     }
 
-    handleLogin(path: string = this.lastUrl){        
+    handleLogin(path: string = this.lastUrl){              
         this.router.navigate(['/security/login', btoa(path)]);
     }
 
@@ -73,8 +72,7 @@ export class LoginService{
         this.router.navigate(['/security/login']);
     }    
 
-    updateImagePath(){        
-        let path = this.baseImagePath + this.user.id + '.jpg?time=' + (new Date()).getTime();                
-        this.user.imagemPerfil = path        
+    updateImagePath(){                
+        this.user.imagemPerfil = this.user.imagemPerfil + '?time=' + (new Date()).getTime();
     }
 }

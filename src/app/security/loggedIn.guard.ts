@@ -7,11 +7,11 @@ export class loggedInGuard implements CanLoad, CanActivate{
 
     constructor(private loginService: LoginService){}
 
-    canLoad(route: Route): boolean {        
+    canLoad(route: Route): boolean {
         return this.checkAuthentication(route.path);
     }
 
-    canActivate(activatedRoute: ActivatedRouteSnapshot, routerState: RouterStateSnapshot): boolean{                
+    canActivate(activatedRoute: ActivatedRouteSnapshot, routerState: RouterStateSnapshot): boolean{
         return this.checkAuthentication(activatedRoute.routeConfig.path);
     }
 

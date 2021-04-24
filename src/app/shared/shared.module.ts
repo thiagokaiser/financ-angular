@@ -9,10 +9,11 @@ import { NotificationService } from './messages/notification.service';
 import { DateFilterComponent } from './date-filter/date-filter.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MonthFilterComponent } from './month-filter/month-filter.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [    
-  ConfirmModalComponent, InputContainerComponent, SnackbarComponent, DateFilterComponent, MonthFilterComponent
+  ConfirmModalComponent, InputContainerComponent, SnackbarComponent, DateFilterComponent, MonthFilterComponent, NotFoundComponent
 ],
   imports: [
     CommonModule, ReactiveFormsModule

@@ -29,11 +29,12 @@ export class LoginComponent implements OnInit {
       senha: ['', [Validators.required]],
     });
     this.navigateTo = this.activatedRoute.snapshot.params['to'] || btoa('/');
+    console.log(this.navigateTo);
+    
   }  
 
   login(){
-    this.submitted = true;
-    console.log("login");
+    this.submitted = true;    
     this.loginService.login(this.form.value.email,
                             this.form.value.senha)
                             .subscribe(success => {
@@ -50,7 +51,9 @@ export class LoginComponent implements OnInit {
                             },
                             ()=>{
                               this.loginService.saveToken();
-                              this.router.navigate([atob(this.navigateTo)]);                              
+                              this.router.navigate([atob(this.navigateTo)]);         
+                              console.log([atob(this.navigateTo)]);
+                              
                             });
   }
 
