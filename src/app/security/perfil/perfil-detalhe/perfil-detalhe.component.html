@@ -14,8 +14,10 @@
             <div *ngIf="user$ | async as user; else loading">
                 <div class="row">
                     <div class="col-md-4 col-sm-6 col-xs-12 imagem_perfil" style="max-width:200px;">                    
-                        <img [src]="carregaImagem()" class="preview preview--rounded">
-                        <a (click)="onChangeImg()" style="cursor: pointer;">Alterar Imagem</a>                    
+                        <div *ngIf="imagemPerfil() != undefined">
+                            <img [src]="imagemPerfil()" class="preview preview--rounded">
+                            <a (click)="onChangeImg()" style="cursor: pointer;">Alterar Imagem</a>                    
+                        </div>
                     </div>
                     <div class="col-md-8 col-sm-6 col-xs-12">                                
                         <h4></h4>
@@ -27,6 +29,7 @@
                                 <tr><td><i class="glyphicon glyphicon-map-marker"></i></td><td>{{ user.cidade }} - {{ user.estado }}</td></tr>
                             </table>                        
                             <p>{{ user.descricao }}</p>
+                            <p>{{ user.imagemPerfil }}</p>
                         </div>
 
                     </div>

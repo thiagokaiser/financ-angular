@@ -42,7 +42,8 @@ export class PerfilDetalheComponent implements OnInit {
     this.user$ = this.perfilService.loadPerfil(this.loginService.user.email)    
   }
 
-  carregaImagem(){
-    return this.loginService.user.imagePath;
+  imagemPerfil(){
+    return this.loginService.user.imagemPerfil
   }
+  
 }

@@ -9,7 +9,7 @@ export interface User{
     cidade?: string
     estado?: string
     descricao?: string
-    imagePath?: string
+    imagemPerfil?: string
 }
 
 export interface ChangePasswordViewModel{

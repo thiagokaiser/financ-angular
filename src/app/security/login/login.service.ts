@@ -3,7 +3,7 @@ import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Observable, observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../user';
-import { tap, filter, take } from 'rxjs/operators';
+import { tap, filter, take, map } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
 import * as jwt_decode from "jwt-decode";
 
@@ -35,27 +35,31 @@ export class LoginService{
     saveToken(){        
         localStorage.clear();
         localStorage.setItem('sessionToken', this.user.accessToken);        
-        this.saveUserName()
+        this.saveUserName()        
     }
 
     saveUserName(){                
         var tokenDecoded = jwt_decode(this.user.accessToken);        
-        this.user.email = tokenDecoded['email'];
-        this.user.nome = tokenDecoded['nome'];
-        this.user.sobrenome = tokenDecoded['sobrenome'];     
         this.user.id = tokenDecoded['id']
-        this.user.imagePath = "https://curso-spring-avancado.s3-sa-east-1.amazonaws.com/cp.jpg"
-        this.checkImagePath()
+        this.user.email = tokenDecoded['email'];        
+        this.loadUserProfile();        
     }
 
-    isLoggedIn(): boolean {           
+    async loadUserProfile(){        
+        let userProfile = await this.http.get<User>(`${environment.API}usuarios/${this.user.id}`).toPromise()
+        this.user.nome = userProfile.nome;
+        this.user.sobrenome = userProfile.sobrenome;             
+        this.user.imagemPerfil = userProfile.imagemPerfil + '?time=' + (new Date()).getTime();;            
+    }
+
+    isLoggedIn(): boolean {             
         if(this.user == undefined){
             var sessionToken = localStorage.getItem('sessionToken');        
             if(sessionToken){
                 this.user = { accessToken: sessionToken }                                    
-                this.saveUserName()
-            }        
-        }        
+                this.saveUserName()                
+            }
+        }
         return this.user !== undefined;
     }
 
@@ -69,17 +73,8 @@ export class LoginService{
         this.router.navigate(['/security/login']);
     }    
 
-    checkImagePath(){
-        console.log('checkImage')
-        const newHttpClient = new HttpClient(this.httpBackend);        
+    updateImagePath(){        
         let path = this.baseImagePath + this.user.id + '.jpg?time=' + (new Date()).getTime();                
-        newHttpClient.get(path, {responseType: 'blob'}).subscribe(
-            success => {                
-                this.user.imagePath = path
-            },           
-            error =>{
-                console.log(error)
-            } 
-        );
+        this.user.imagemPerfil = path        
     }
 }

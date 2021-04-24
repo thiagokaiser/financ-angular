@@ -50,13 +50,9 @@ export class PerfilFormComponent implements OnInit {
     this.submitted = true;    
     if (this.form.valid) {      
       let msgSuccess = 'Alterado com sucesso';            
-      this.service.updatePerfil(this.form.getRawValue()).pipe(        
-        switchMap(res => {return this.service.refreshToken()})
-      ).subscribe(
-        res => {
-          console.log(res)
-          this.loginService.user.accessToken = res['accessToken']
-          this.loginService.saveToken()
+      this.service.updatePerfil(this.form.getRawValue()).subscribe(
+        res => {          
+          this.loginService.loadUserProfile()
           this.ns.notify(msgSuccess)                    
           this.router.navigate(['/security/perfil']);          
         }

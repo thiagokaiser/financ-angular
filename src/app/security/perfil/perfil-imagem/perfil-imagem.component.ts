@@ -16,7 +16,7 @@ export class PerfilImagemComponent implements OnInit {
   
   user$: Observable<User>
   imageChangedEvent: any = '';  
-  croppedImage = this.loginService.user.imagePath;
+  croppedImage = this.loginService.user.imagemPerfil;
 
   constructor(
     private loginService: LoginService,
@@ -30,7 +30,7 @@ export class PerfilImagemComponent implements OnInit {
   }    
 
   onSubmit(){
-    if(this.croppedImage == this.loginService.user.imagePath){
+    if(this.croppedImage == this.loginService.user.imagemPerfil){
       this.ns.notify('Imagem nao alterada')
       this.router.navigate(['security/perfil/'])        
     }else{
@@ -41,7 +41,7 @@ export class PerfilImagemComponent implements OnInit {
       this.perfilService.uploadImagem(formData).subscribe(
         success => {
           this.ns.notify('Imagem atualizada com sucesso.')
-          this.loginService.checkImagePath()
+          this.loginService.updateImagePath()
           this.router.navigate(['security/perfil/'])        
         }
       )  
@@ -53,7 +53,12 @@ export class PerfilImagemComponent implements OnInit {
   }  
 
   carregaPerfil(){        
-    this.user$ = this.perfilService.loadPerfil(this.loginService.user.email)    
+    this.user$ = this.perfilService.loadPerfil(this.loginService.user.email)
+    this.user$.subscribe(
+      success =>{
+        this.croppedImage = this.loginService.user.imagemPerfil
+      }
+    )
   }  
 
   fileChangeEvent(event: any): void {
