@@ -24,37 +24,33 @@ export class LoginComponent implements OnInit {
               private ns: NotificationService) { }
 
   ngOnInit() {
+
+    if(this.loginService.isLoggedIn()){
+      this.router.navigate(['/'])
+    }    
+
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required]],
     });
-    this.navigateTo = this.activatedRoute.snapshot.params['to'] || btoa('/');
-    console.log(this.navigateTo);
-    
+    this.navigateTo = this.activatedRoute.snapshot.params['to'] || btoa('/');    
   }  
 
   login(){
     this.submitted = true;    
-    this.loginService.login(this.form.value.email,
-                            this.form.value.senha)
-                            .subscribe(success => {
-                              
-                            },
-                            error => {                              
-                              this.hasError = true; 
-                              try{                                
-                                this.erros = error.error.message;
-                              }                             
-                              catch{
-                                throw error;
-                              }                                                            
-                            },
-                            ()=>{
-                              this.loginService.saveToken();
-                              this.router.navigate([atob(this.navigateTo)]);         
-                              console.log([atob(this.navigateTo)]);
-                              
-                            });
+    this.loginService.login(this.form.value.email,this.form.value.senha).subscribe(
+      success => {
+        this.ns.notify('Login realizado com sucesso.')
+      },
+      error => {                              
+        this.hasError = true;                               
+        this.erros = error.error.message;                              
+        throw error;                              
+      },
+      ()=>{
+        this.loginService.saveToken();
+        this.router.navigate([atob(this.navigateTo)]);
+      });
   }
 
   forgotPass(){

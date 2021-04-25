@@ -39,9 +39,9 @@ export class PerfilImagemComponent implements OnInit {
       formData.append('file', file);
 
       this.perfilService.uploadImagem(formData).subscribe(
-        success => {
+        success => {          
           this.ns.notify('Imagem atualizada com sucesso.')
-          this.loginService.updateImagePath()
+          this.loginService.updateImagePath(success.imagemPerfil)
           this.router.navigate(['security/perfil/'])        
         }
       )  

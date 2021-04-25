@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { HttpBackend, HttpClient } from '@angular/common/http';
-import { Observable, observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../user';
-import { tap, filter, take, map } from 'rxjs/operators';
+import { tap, filter } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
 import * as jwt_decode from "jwt-decode";
 
@@ -11,10 +11,10 @@ import * as jwt_decode from "jwt-decode";
 export class LoginService{
 
     user: User;
-    lastUrl: string;    
+    lastUrl: string;
+    baseImagePath = 'https://curso-spring-avancado.s3-sa-east-1.amazonaws.com/cp.jpg'
 
-    constructor(private http:HttpClient,
-                private httpBackend: HttpBackend,
+    constructor(private http:HttpClient,                
                 private router: Router){
                     this.router.events.pipe(filter(e => e instanceof NavigationEnd))
                                       .subscribe((e: NavigationEnd) => this.lastUrl = e.url);
@@ -47,8 +47,14 @@ export class LoginService{
     async loadUserProfile(){        
         let userProfile = await this.http.get<User>(`${environment.API}usuarios/${this.user.id}`).toPromise()
         this.user.nome = userProfile.nome;
-        this.user.sobrenome = userProfile.sobrenome;             
-        this.user.imagemPerfil = userProfile.imagemPerfil + '?time=' + (new Date()).getTime();;            
+        this.user.sobrenome = userProfile.sobrenome;
+        
+        if(userProfile.imagemPerfil){
+            this.user.imagemPerfil = userProfile.imagemPerfil + '?time=' + (new Date()).getTime();;            
+        }else{
+            this.user.imagemPerfil = this.baseImagePath
+        }          
+        
     }
 
     isLoggedIn(): boolean {             
@@ -67,12 +73,12 @@ export class LoginService{
     }
 
     logout(){
-        this.user = undefined;
         localStorage.clear();
+        this.user = undefined;        
         this.router.navigate(['/security/login']);
     }    
 
-    updateImagePath(){                
-        this.user.imagemPerfil = this.user.imagemPerfil + '?time=' + (new Date()).getTime();
+    updateImagePath(imagemPerfil){                
+        this.user.imagemPerfil = imagemPerfil + '?time=' + (new Date()).getTime();
     }
 }

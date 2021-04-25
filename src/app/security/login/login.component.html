@@ -1,19 +1,15 @@
-<body class="login-page">    
+<body class="login-page" style="background-color: #ecf0f5;">    
     <div class="login-box">
         <div class="login-box-body">
             <h1 class="text-center">Login</h1>                
-            <div class="modal-body">                
-                    
-                <form class="needs-validation" novalidate [formGroup]="form" style="padding-top: 10px">    
-                    
-                    <app-input-container errorMessage="Email invalido" label="Email">                    
+            <div class="modal-body">                    
+                <form class="needs-validation" novalidate [formGroup]="form" style="padding-top: 10px">                    
+                    <app-input-container errorMessage="Email inválido" label="Email">                    
                         <input type="text"class="form-control" id="email" placeholder="Email" formControlName="email"/>
-                    </app-input-container>
-                    
-                    <app-input-container errorMessage="Campo Obrigatorio" label="Password">                            
+                    </app-input-container>                    
+                    <app-input-container errorMessage="Campo Obrigatório" label="Password">                            
                         <input type="password" class="form-control" id="senha" placeholder="Password" formControlName="senha"/>
-                    </app-input-container>
-                    
+                    </app-input-container>                    
                     <span class="text-red" *ngIf="hasError"><i class="fa fa-remove"></i>{{ erros }}</span>
                     <p></p>          
                     <div>
@@ -22,7 +18,7 @@
                 </form>         
                 <p></p>                                    
                 <ul class="">
-                    <li><a [routerLink]="['/security/registrar']">Registrar</a></li>   
+                    <li><a [routerLink]="['/security/registrar']">Novo cadastro</a></li>   
                     <li><a (click)="forgotPass()" style="cursor: pointer;">Esqueceu a senha?</a></li>   
                 </ul>
             </div>

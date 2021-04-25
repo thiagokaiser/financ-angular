@@ -49,19 +49,20 @@ export class RegistrarComponent implements OnInit {
   onSubmit() {        
     this.submitted = true;    
     if (this.form.valid) {      
-      let msgSuccess = 'Registrado com sucesso';              
+      let msgSuccess = 'Cadastro realizado com sucesso';              
       this.service.registrar(this.form.getRawValue())
       .subscribe(
         success => {                                                      
           //this.loginService.user = {accessToken : success['accessToken']}                      
           //this.loginService.saveToken()
+          console.log(msgSuccess);
+          
           this.ns.notify(msgSuccess)                    
           this.router.navigate(['/security/login']);          
         },
         error => { 
           this.hasError = true;                              
-          this.erros = error.error.erros;
-          console.log(this.erros);                      
+          this.erros = error.error.errors;          
           throw error          
         }
       );      
