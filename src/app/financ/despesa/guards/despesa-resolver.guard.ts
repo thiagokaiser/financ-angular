@@ -20,7 +20,9 @@ export class DespesaResolverGuard implements Resolve<Despesa> {
 
     return of({
       id: 0,
+      categoria: null,
       categoriaId: null,
+      conta: null,
       contaId: null,
       descricao: null,
       valor: 0,

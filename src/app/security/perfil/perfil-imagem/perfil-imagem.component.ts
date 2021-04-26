@@ -69,7 +69,7 @@ export class PerfilImagemComponent implements OnInit {
     this.croppedImage = event.base64;
   }
 
-  imageLoaded(image: HTMLImageElement) {
+  imageLoaded() {
     // show cropper
   }
 

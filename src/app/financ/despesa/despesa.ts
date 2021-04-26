@@ -1,6 +1,11 @@
+import { Categoria } from "../categoria/categoria";
+import { Conta } from "../conta/conta";
+
 export interface Despesa{
     id: number,
+    categoria: Categoria,
     categoriaId: number,
+    conta: Conta,
     contaId: number,    
     descricao: string,
     valor: number,
