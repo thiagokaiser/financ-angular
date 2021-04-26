@@ -1,13 +1,11 @@
-<body class="hold-transition skin-blue-light sidebar-mini">
-  <div class="wrapper" *ngIf="isLoggedIn(); else inicio">
-    <app-header></app-header>
-    <app-menu></app-menu>
-    <app-body></app-body>
-    <app-snackbar></app-snackbar>
-    <app-footer></app-footer>
-  </div>  
-  <ng-template #inicio>
-    <router-outlet></router-outlet>
-    <app-snackbar></app-snackbar>
-  </ng-template>  
-</body>
+<div class="wrapper" *ngIf="isLoggedIn(); else inicio">
+  <app-header></app-header>
+  <app-menu></app-menu>
+  <app-body></app-body>
+  <app-snackbar></app-snackbar>
+  <app-footer></app-footer>
+</div>  
+<ng-template #inicio>
+  <router-outlet></router-outlet>
+  <app-snackbar></app-snackbar>
+</ng-template>

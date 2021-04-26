@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -6,9 +8,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    @Inject(DOCUMENT) private document: Document,
+    private render: Renderer2
+  ) { }
 
   ngOnInit() {
   }
 
+  onDespesa(){
+    this.router.navigate(['/financ/despesa']);
+    this.render.removeClass(this.document.body, 'sidebar-open')
+  }
+
+  onHome(){
+    this.router.navigate(['/financ/home']);
+    this.render.removeClass(this.document.body, 'sidebar-open')
+  }
+
+  onCategoria(){
+    this.router.navigate(['/financ/categoria']);
+    this.render.removeClass(this.document.body, 'sidebar-open')
+  }
+
+  onConta(){
+    this.router.navigate(['/financ/conta']);
+    this.render.removeClass(this.document.body, 'sidebar-open')
+  }
 }
