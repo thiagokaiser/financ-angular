@@ -30,15 +30,15 @@ export class DespesaService extends CrudService<Despesa>{
     return this.http.get<any>(`${environment.API}despesas/totalsByMonth`, {params: params}).pipe(take(1));                   
   }  
 
-  removeByIdentificador(identificador) {    
-    return this.http.delete(`${environment.API}despesas/identificador/${identificador}`).pipe(take(1));                   
+  removeByIdParcela(idParcela) {    
+    return this.http.delete(`${environment.API}despesas/idParcela/${idParcela}`).pipe(take(1));                   
   }  
 
   updateAll(despesa: Despesa) {
-    return this.http.put(`${environment.API}despesas/all/${despesa.identificador}`, despesa).pipe(take(1));
+    return this.http.put(`${environment.API}despesas/all/${despesa.idParcela}`, despesa).pipe(take(1));
   }
 
   updateUnpaid(despesa: Despesa) {
-    return this.http.put(`${environment.API}despesas/unpaid/${despesa.identificador}`, despesa).pipe(take(1));
+    return this.http.put(`${environment.API}despesas/unpaid/${despesa.idParcela}`, despesa).pipe(take(1));
   }
 }

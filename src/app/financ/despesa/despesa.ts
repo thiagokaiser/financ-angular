@@ -8,7 +8,7 @@ export interface Despesa{
     pago: Boolean,
     numParcelas: number, 
     parcelaAtual: number,
-    identificador: number
+    idParcela: number
 }
 
 export interface ListDespesa{

@@ -28,7 +28,7 @@ export class DespesaResolverGuard implements Resolve<Despesa> {
       pago: false,
       numParcelas: 0, 
       parcelaAtual: 0,
-      identificador: 0
+      idParcela: 0
     });
   }  
 }

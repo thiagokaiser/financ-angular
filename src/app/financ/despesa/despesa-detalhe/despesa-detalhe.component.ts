@@ -70,7 +70,7 @@ export class DespesaDetalheComponent implements OnInit {
     const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja eliminar todas as parcelas não pagas da despesa "' + despesa.descricao + '" ?');
     result$.asObservable().pipe(
       take(1),
-      switchMap(result => result ? this.service.removeByIdentificador(despesa.identificador) : EMPTY)
+      switchMap(result => result ? this.service.removeByIdParcela(despesa.idParcela) : EMPTY)
     ).subscribe(
       success => {
         this.ns.notify('Despesas eliminadas com sucesso.')

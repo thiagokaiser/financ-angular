@@ -45,7 +45,7 @@ export class DespesaFormComponent implements OnInit {
     
     this.form = this.fb.group({
       id: [despesa.id],
-      identificador: [despesa.identificador],
+      idParcela: [despesa.idParcela],
       descricao: [despesa.descricao, [Validators.required, Validators.minLength(5), Validators.maxLength(60)]],      
       categoriaId: [ despesa.categoria != null ? despesa.categoria.id : null, [Validators.required]],
       contaId:  [ despesa.conta != null ? despesa.conta.id : null],      
