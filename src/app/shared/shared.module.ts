@@ -10,6 +10,7 @@ import { DateFilterComponent } from './date-filter/date-filter.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MonthFilterComponent } from './month-filter/month-filter.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { LoadingService } from './loading.service';
 
 @NgModule({
   declarations: [    
@@ -31,6 +32,7 @@ export class SharedModule {
       ngModule: SharedModule,
       providers: [
         NotificationService,
+        LoadingService,
         {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
       ]
     }

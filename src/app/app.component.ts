@@ -1,17 +1,23 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LoginService } from './security/login/login.service';
+import { LoadingService } from './shared/loading.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
-  title = 'FinancAngular';
+  title = 'FinancAngular';  
 
-  constructor(private loginService: LoginService){}
+  constructor(
+    private loginService: LoginService,
+    private loadingService: LoadingService
+    ){}
 
   isLoggedIn(){
     return this.loginService.isLoggedIn();
   }
+  
 }

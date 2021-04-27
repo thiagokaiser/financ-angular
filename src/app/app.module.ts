@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 registerLocaleData(localePt);
 
@@ -24,6 +25,7 @@ registerLocaleData(localePt);
     HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
+    MatProgressSpinnerModule,
     AppRoutingModule,
     AdminlteModule,
     ModalModule.forRoot(),

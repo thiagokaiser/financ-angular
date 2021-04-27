@@ -2,21 +2,42 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { LoginService } from './login/login.service';
+import { finalize } from 'rxjs/operators';
+import { LoadingService } from '../shared/loading.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor{
 
-    constructor(private loginService: LoginService){}
+    private totalRequests = 0;
+
+    constructor(
+        private loginService: LoginService,
+        private loadingService: LoadingService
+        ){}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{   
-        //console.log(request);             
+
+        let requestAux = request.clone();
+
+        this.totalRequests++;
+        this.loadingService.setLoading(true);
+
+        console.log(this.totalRequests);             
         if(this.loginService.isLoggedIn()){
-            const authRequest = request.clone({setHeaders:{
+            requestAux = request.clone({setHeaders:{
                 'Authorization': `Bearer ${this.loginService.user.accessToken}`
-            }})
-            return next.handle(authRequest)
-        }        
-        return next.handle(request)
+            }})            
+        }       
+
+        return next.handle(requestAux).pipe(
+            finalize(() => {
+                this.totalRequests--;
+                if (this.totalRequests === 0) {
+                    console.log(this.totalRequests);             
+                    this.loadingService.setLoading(false);
+                }
+            })
+        );
 
     }
 }

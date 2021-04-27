@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    
     this.pieChart = new Chart("pieChart",{
       type: 'doughnut',
       data:{
