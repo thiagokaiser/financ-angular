@@ -13,7 +13,7 @@ export class AppComponent {
 
   constructor(
     private loginService: LoginService,
-    private loadingService: LoadingService
+    public loadingService: LoadingService
     ){}
 
   isLoggedIn(){

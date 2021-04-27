@@ -24,7 +24,7 @@ import { LoadingService } from './loading.service';
   ],
   entryComponents:[
     ConfirmModalComponent, DateFilterComponent, MonthFilterComponent
-  ]
+  ]  
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders{
