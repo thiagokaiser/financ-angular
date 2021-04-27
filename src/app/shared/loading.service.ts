@@ -8,5 +8,6 @@ export class LoadingService {
   
   setLoading(isLoading: boolean) {
     this.isLoading$$.next(isLoading);
+    console.log(isLoading)
   }
 }

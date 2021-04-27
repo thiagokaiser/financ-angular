@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor{
         this.totalRequests++;
         this.loadingService.setLoading(true);
 
-        console.log(this.totalRequests);             
+        console.log(request.url);             
         if(this.loginService.isLoggedIn()){
             requestAux = request.clone({setHeaders:{
                 'Authorization': `Bearer ${this.loginService.user.accessToken}`
