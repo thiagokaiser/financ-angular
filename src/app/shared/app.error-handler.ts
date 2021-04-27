@@ -30,13 +30,17 @@ export class ApplicationErrorHandler extends ErrorHandler{
                         this.ns.notify('Não Autorizado.')
                         break;
                     case 403:
+                        this.injector.get(LoginService).logout()
                         this.ns.notify('Não Autorizado.')
                         break;
                     case 404:                        
                         this.ns.notify('Recurso não encontrado.')
                         break;                    
+                    case 422:                        
+                        this.ns.notify('Ocorreram erros.')
+                        break;                    
                     default:                        
-                        this.ns.notify('Recurso não encontrado.')
+                        this.ns.notify('Ocorreram erros.')
                         break;
                                        
                 }

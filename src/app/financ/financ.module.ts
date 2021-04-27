@@ -35,7 +35,8 @@ import { MatSortModule } from '@angular/material/sort';
   exports:[
     HomeComponent
   ],
-  entryComponents:[    
+  entryComponents:[
+    
   ],
   providers: []  
 })

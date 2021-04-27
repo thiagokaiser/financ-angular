@@ -1,8 +1,10 @@
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Injectable } from '@angular/core';
-import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
-import { MonthFilterComponent } from './month-filter/month-filter.component';
-import { DateFilterComponent } from './date-filter/date-filter.component';
+import { ConfirmModalComponent } from './modals/confirm-modal/confirm-modal.component';
+import { MonthFilterComponent } from './modals/month-filter/month-filter.component';
+import { DateFilterComponent } from './modals/date-filter/date-filter.component';
+import { CategoriaFormModalComponent } from './modals/categoria-form-modal/categoria-form-modal.component';
+import { ContaFormModalComponent } from './modals/conta-form-modal/conta-form-modal.component';
 
 enum AlertTypes {
   DANGER = 'danger',
@@ -42,6 +44,18 @@ export class AlertModalService {
     modalRef.content.form.controls['dtInicial'].setValue(dtInicial);
     modalRef.content.form.controls['dtFinal'].setValue(dtFinal);    
     return (<DateFilterComponent>modalRef.content).confirmResult;
-  }  
+  }
+
+  modalNewCateg(){
+    const modalRef: BsModalRef = this.modalService.show(CategoriaFormModalComponent);
+    return (<CategoriaFormModalComponent>modalRef.content).confirmResult;
+  }
+
+  modalNewConta(){
+    const modalRef: BsModalRef = this.modalService.show(ContaFormModalComponent);
+    return (<ContaFormModalComponent>modalRef.content).confirmResult;
+  }
 
 }
+
+

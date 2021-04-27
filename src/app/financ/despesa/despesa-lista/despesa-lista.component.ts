@@ -29,7 +29,7 @@ export class DespesaListaComponent implements OnInit {
 
   public config: PaginationInstance = {
       id: 'advanced',
-      itemsPerPage: 5,
+      itemsPerPage: 10,
       currentPage: 1,
       totalItems: 100
   };

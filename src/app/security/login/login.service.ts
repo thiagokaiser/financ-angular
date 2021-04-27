@@ -53,8 +53,7 @@ export class LoginService{
             this.user.imagemPerfil = userProfile.imagemPerfil + '?time=' + (new Date()).getTime();;            
         }else{
             this.user.imagemPerfil = this.baseImagePath
-        }          
-        
+        }        
     }
 
     isLoggedIn(): boolean {             

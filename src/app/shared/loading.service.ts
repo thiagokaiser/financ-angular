@@ -7,7 +7,6 @@ export class LoadingService {
   isLoading$ = this.isLoading$$.asObservable();
   
   setLoading(isLoading: boolean) {
-    this.isLoading$$.next(isLoading);
-    console.log(isLoading)
+    this.isLoading$$.next(isLoading);    
   }
 }

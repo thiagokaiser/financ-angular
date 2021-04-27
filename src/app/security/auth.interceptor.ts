@@ -16,13 +16,10 @@ export class AuthInterceptor implements HttpInterceptor{
         ){}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{   
-
         let requestAux = request.clone();
-
         this.totalRequests++;
         this.loadingService.setLoading(true);
-
-        console.log(request.url);             
+        
         if(this.loginService.isLoggedIn()){
             requestAux = request.clone({setHeaders:{
                 'Authorization': `Bearer ${this.loginService.user.accessToken}`
@@ -32,8 +29,7 @@ export class AuthInterceptor implements HttpInterceptor{
         return next.handle(requestAux).pipe(
             finalize(() => {
                 this.totalRequests--;
-                if (this.totalRequests === 0) {
-                    console.log(this.totalRequests);             
+                if (this.totalRequests === 0) {                    
                     this.loadingService.setLoading(false);
                 }
             })

@@ -1,4 +1,4 @@
-import { Component, OnInit, ErrorHandler } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DespesaService } from '../despesa.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,6 +9,11 @@ import { Categoria } from '../../categoria/categoria';
 import { Conta } from '../../conta/conta';
 import { CategoriaService } from '../../categoria/categoria.service';
 import { ContaService } from '../../conta/conta.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { CategoriaFormModalComponent } from '../../../shared/modals/categoria-form-modal/categoria-form-modal.component';
+import { take } from 'rxjs/operators';
+import { ContaFormModalComponent } from 'src/app/shared/modals/conta-form-modal/conta-form-modal.component';
+import { AlertModalService } from 'src/app/shared/alert-modal.service';
 
 @Component({
   selector: 'app-despesa-form',
@@ -34,7 +39,8 @@ export class DespesaFormComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private ns: NotificationService,
-    private location: Location
+    private location: Location,
+    private alertService: AlertModalService     
   ) { }
 
   ngOnInit() {
@@ -146,5 +152,25 @@ export class DespesaFormComponent implements OnInit {
       this.router.navigate(['/financ/despesa']);
     }
   }
+
+  onNewCateg(){
+    const result$ = this.alertService.modalNewCateg()
+    result$.asObservable().pipe(take(1)).subscribe(
+      success => {
+        this.categorias$ = this.categService.list();        
+      }
+    );
+  }
+
+  onNewConta(){
+    const result2$ = this.alertService.modalNewConta()
+    result2$.asObservable().pipe(take(1)).subscribe(
+      success => {
+        this.contas$ = this.contaService.list();        
+      }
+    );
+  }
+
+  
 
 }

@@ -32,20 +32,30 @@
             <input type="date" class="form-control" id="dtVencimento" formControlName="dtVencimento"/>
           </app-input-container>
 
-          <app-input-container errorMessage="Campo Obrigatorio" label="Categoria">     
-            <select name="categoriaId" id="categoriaId" class="form-control" placeholder="Categoria" formControlName="categoriaId">
-              <ng-container *ngIf="categorias$ | async as categorias">
-                <option *ngFor="let categoria of categorias" [value]="categoria.id">{{categoria.descricao}} </option>
-              </ng-container>
-            </select>
+          <app-input-container errorMessage="Campo Obrigatorio" label="Categoria">            
+            <div class="input-group">
+              <select name="categoriaId" id="categoriaId" class="form-control" placeholder="Categoria" formControlName="categoriaId">
+                <ng-container *ngIf="categorias$ | async as categorias">
+                  <option *ngFor="let categoria of categorias" [value]="categoria.id">{{categoria.descricao}} </option>
+                </ng-container>
+              </select>
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" (click)="onNewCateg()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+              </span>
+            </div>
           </app-input-container>
           
           <app-input-container errorMessage="Campo Obrigatorio" label="Conta">     
-            <select name="contaId" id="contaId" class="form-control" placeholder="Conta" formControlName="contaId">
-              <ng-container *ngIf="contas$ | async as contas">
-                <option *ngFor="let conta of contas" [value]="conta.id">{{conta.descricao}} </option>
-              </ng-container>
-            </select>
+            <div class="input-group">
+              <select name="contaId" id="contaId" class="form-control" placeholder="Conta" formControlName="contaId">
+                <ng-container *ngIf="contas$ | async as contas">
+                  <option *ngFor="let conta of contas" [value]="conta.id">{{conta.descricao}} </option>
+                </ng-container>
+              </select>
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" (click)="onNewConta()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+              </span>
+            </div>
           </app-input-container>                    
           
           <div *ngIf="idRegistro != 0">
