@@ -15,12 +15,10 @@
                 <div class="col-md-5 col-sm-6 col-xs-12">
                     <div class="info-box bg-yellow" (click)="onDateFilter()" style="cursor: pointer">
                         <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
-
                         <div class="info-box-content">
-                            <span class="info-box-text"><u>Filtro</u></span>
-                            <span class="info-box-number">{{ dtInicial }}</span>
-                            <span class="info-box-number">{{ dtFinal }}</span>
-                            
+                            <u>Filtro:</u><br>
+                            De: <b style="font-size: 16px;">{{ dtInicial  | date:'dd/MM/yyyy' : '+0000' }}</b><br>
+                            Até: <b style="font-size: 16px;">{{ dtFinal  | date:'dd/MM/yyyy' : '+0000' }}</b><br>                            
                         </div>                        
                     </div>                    
                 </div>
@@ -62,7 +60,7 @@
                 <div class="col-md-12">                    
                     <div class="box box-info">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Pagamentos entre {{ dtFinalBarChart }} e {{ dtInicialBarChart }}</h3>                            
+                            <h3 class="box-title">Pagamentos entre {{ dtInicialBarChart  | date:'MM/yyyy' : '+0000' }} e {{ dtFinalBarChart  | date:'MM/yyyy' : '+0000' }}</h3>                            
                             <div class="box-tools pull-right">
                                 <button class="btn btn-box-tool" (click)="onMonthFilter()">Filtro</button>                                
                             </div>

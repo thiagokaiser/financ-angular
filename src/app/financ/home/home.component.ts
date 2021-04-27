@@ -72,7 +72,8 @@ export class HomeComponent implements OnInit {
         labels: [],
         datasets: [{              
           data: [],
-          backgroundColor: "#3c8dbc",
+          backgroundColor: 'rgba(60, 141, 188, 0.5)',          
+          borderColor: 'rgba(60, 141, 188, 1)',
           borderWidth: 1          
         }]
       },
@@ -181,7 +182,7 @@ export class HomeComponent implements OnInit {
     this.service.getTotalsByMonth(paramsBarChart).subscribe(
       success => {        
         success.forEach(res => {          
-          this.barChart.data.labels.push(res.ano + '-' + res.mes.toString().padStart(2,'0'));
+          this.barChart.data.labels.push(res.mes.toString().padStart(2,'0') + '/' + res.ano);
           this.barChart.data.datasets.forEach((dataset) => {
               dataset.data.push(res.total);              
           });          
