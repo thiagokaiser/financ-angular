@@ -20,15 +20,15 @@
       <div style="max-width:400px">
         <form [formGroup]="form" style="padding-top: 10px">    
           
-          <app-input-container errorMessage="Campo Obrigatorio / Deve ter entre 5 e 60 caracteres" label="Descricao">     
-            <input type="text" class="form-control" id="nome" placeholder="Descricao" formControlName="descricao"/>
+          <app-input-container errorMessage="Campo Obrigatorio / Deve ter entre 3 e 60 caracteres" label="Descrição">     
+            <input type="text" class="form-control" id="nome" placeholder="Descrição" formControlName="descricao"/>
           </app-input-container>    
         
           <app-input-container errorMessage="Campo Obrigatorio" label="Valor">     
             <input type="number" class="form-control" id="valor" placeholder="Valor" formControlName="valor"/>
           </app-input-container>              
 
-          <app-input-container errorMessage="Campo Obrigatorio" label="Dt Vencimento">            
+          <app-input-container errorMessage="Campo Obrigatorio / Data inválida" label="Dt Vencimento">            
             <input type="date" class="form-control" id="dtVencimento" formControlName="dtVencimento"/>
           </app-input-container>
 

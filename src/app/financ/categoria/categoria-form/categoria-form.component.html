@@ -20,11 +20,11 @@
       <div style="max-width:400px">
         <form [formGroup]="form" style="padding-top: 10px">    
 
-          <app-input-container errorMessage="Campo Obrigatorio" label="Descricao">     
-            <input type="text" class="form-control" id="nome" placeholder="Descricao" formControlName="descricao"/>
+          <app-input-container errorMessage="Campo Obrigatório / Campo deve ter entre 3 e 80 caracteres" label="Descrição">     
+            <input type="text" class="form-control" id="nome" placeholder="Descrição" formControlName="descricao"/>
           </app-input-container>    
 
-          <app-input-container errorMessage="Campo Obrigatorio" label="Cor">     
+          <app-input-container errorMessage="Campo Obrigatório" label="Cor">     
             <input type="color" class="form-control" id="nome" placeholder="Cor" formControlName="cor" style="max-width:60px"/>
           </app-input-container>    
           

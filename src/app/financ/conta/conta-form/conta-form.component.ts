@@ -28,11 +28,11 @@ export class ContaFormComponent implements OnInit {
 
   ngOnInit() {
     const conta = this.route.snapshot.data['conta'];
-    this.formLabel = conta.id == 0 ? 'Novo' : 'Edita'
+    this.formLabel = conta.id == 0 ? 'Novo' : 'Editar'
     
     this.form = this.fb.group({
       id: [conta.id],
-      descricao: [conta.descricao, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]]      
+      descricao: [conta.descricao, [Validators.required, Validators.minLength(3), Validators.maxLength(80)]]      
     });
   }
 

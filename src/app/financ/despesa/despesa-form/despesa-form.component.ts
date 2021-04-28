@@ -47,12 +47,12 @@ export class DespesaFormComponent implements OnInit {
     const despesa = this.route.snapshot.data['despesa'];
     this.operacao = this.route.snapshot.params['operacao'];
     this.idRegistro = despesa.id;
-    this.formLabel = despesa.id == 0 ? 'Novo' : 'Edita';    
+    this.formLabel = despesa.id == 0 ? 'Nova' : 'Editar';    
     
     this.form = this.fb.group({
       id: [despesa.id],
       idParcela: [despesa.idParcela],
-      descricao: [despesa.descricao, [Validators.required, Validators.minLength(5), Validators.maxLength(60)]],      
+      descricao: [despesa.descricao, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],      
       categoriaId: [ despesa.categoria != null ? despesa.categoria.id : null, [Validators.required]],
       contaId:  [ despesa.conta != null ? despesa.conta.id : null],      
       valor:  [despesa.valor, [Validators.required]],
@@ -67,13 +67,13 @@ export class DespesaFormComponent implements OnInit {
     }
 
     if(this.operacao == 'all'){
-      this.formLabel = 'Editando todas parcelas';
+      this.formLabel = 'Editar todas parcelas';
       this.form.controls['valor'].disable();
       this.form.controls['dtVencimento'].disable();
       this.form.controls['pago'].disable();      
       this.form.controls['contaId'].disable();      
     }else if(this.operacao == 'unpaid'){
-      this.formLabel = 'Editando todas parcelas não pagas';
+      this.formLabel = 'Editar todas parcelas não pagas';
       this.form.controls['dtVencimento'].disable();      
       this.form.controls['pago'].disable();      
     }

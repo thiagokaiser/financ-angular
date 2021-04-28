@@ -1,44 +1,46 @@
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <h1>
-        Senha
-        <small>Alterar</small>
-    </h1>                    
-</section>
+<div style="background-color: #ecf0f5;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Senha
+            <small>Alterar</small>
+        </h1>                    
+    </section>
 
-<!-- Main content -->
-<section class="content">
-    <!-- Your Page Content Here -->                    
+    <!-- Main content -->
+    <section class="content">
+        <!-- Your Page Content Here -->                    
 
-    <div class="box box-primary">            
-        <div class="box-body">
-            <div *ngIf="hasError">      
-                <table>
-                    <tr *ngFor="let erro of erros ">
-                        <td><span class="text-red"><i class="fa fa-remove"></i>{{ erro.description }}</span></td>
-                    </tr>
-                </table>                      
+        <div class="box box-primary">            
+            <div class="box-body">
+                <div *ngIf="hasError">      
+                    <table>
+                        <tr *ngFor="let erro of erros ">
+                            <td><span class="text-red"><i class="fa fa-remove"></i>{{ erro.description }}</span></td>
+                        </tr>
+                    </table>                      
+                </div>
+                <form [formGroup]="form" style="padding-top: 10px">                    
+
+                    <app-input-container errorMessage="Campo Obrigatorio / Deve ter entre 6 e 20 caracteres" label="Nova Senha">               
+                        <input type="password" class="form-control" id="newPassword" placeholder="Nova Senha" formControlName="newPassword"/>
+                    </app-input-container>    
+
+                    <div class="form-group" [class.has-success]="hasSuccessPass()"
+                                            [class.has-error]="form.hasError('notSame')">
+                        <label>Confirme sua Nova Senha</label>
+                        <input type="password" class="form-control" id="confirmNewPassword" placeholder="Confirme sua Nova Senha" formControlName="confirmNewPassword"/>
+                        <span class="help-block" *ngIf="hasSuccessPass()"><i class="fa fa-check"></i>Ok</span>
+                        <span class="help-block" *ngIf="form.hasError('notSame')"><i class="fa fa-remove"></i>As senhas não conferem</span>
+                    </div>
+
+                    <p></p>
+                    <div>
+                        <button type="submit" class="btn btn-default" (click)="onSubmit()"><i class="fa fa-check" aria-hidden="true"></i> Salvar</button>{{' '}}
+                        <button type="button" class="btn btn-default" (click)="onCancel()"><i class="fa fa-times" aria-hidden="true"></i> Cancelar</button>
+                    </div>
+                </form>
             </div>
-            <form [formGroup]="form" style="padding-top: 10px">                    
-
-                <app-input-container errorMessage="Campo Obrigatorio / Deve ter entre 6 e 20 caracteres" label="Nova Senha">               
-                    <input type="password" class="form-control" id="newPassword" placeholder="Nova Senha" formControlName="newPassword"/>
-                </app-input-container>    
-
-                <div class="form-group" [class.has-success]="hasSuccessPass()"
-                                        [class.has-error]="form.hasError('notSame')">
-                    <label>Confirme sua Nova Senha</label>
-                    <input type="password" class="form-control" id="confirmNewPassword" placeholder="Confirme sua Nova Senha" formControlName="confirmNewPassword"/>
-                    <span class="help-block" *ngIf="hasSuccessPass()"><i class="fa fa-check"></i>Ok</span>
-                    <span class="help-block" *ngIf="form.hasError('notSame')"><i class="fa fa-remove"></i>As senhas não conferem</span>
-                </div>
-
-                <p></p>
-                <div>
-                    <button type="submit" class="btn btn-default" (click)="onSubmit()"><i class="fa fa-check" aria-hidden="true"></i> Salvar</button>{{' '}}
-                    <button type="button" class="btn btn-default" (click)="onCancel()"><i class="fa fa-times" aria-hidden="true"></i> Cancelar</button>
-                </div>
-            </form>
-        </div>
-    </div>                    
-</section><!-- /.content -->	
+        </div>                    
+    </section><!-- /.content -->	
+</div>

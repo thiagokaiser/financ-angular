@@ -17,27 +17,27 @@
           </div>
           <form [formGroup]="form" style="padding-top: 10px">    
 
-              <app-input-container errorMessage="Campo Obrigatório" label="Nome">     
+              <app-input-container errorMessage="Campo Obrigatório / Campo deve ter no máximo 80 caracteres" label="Nome">     
                 <input type="text" class="form-control" id="nome" placeholder="Nome Completo" formControlName="nome"/>
               </app-input-container>    
 
-              <app-input-container errorMessage="Campo Obrigatório" label="Sobrenome">     
+              <app-input-container errorMessage="Campo Obrigatório / Campo deve ter no máximo 80 caracteres" label="Sobrenome">     
                   <input type="text" class="form-control" id="sobrenome" placeholder="Nome Completo" formControlName="sobrenome"/>
               </app-input-container>    
 
-              <app-input-container errorMessage="Campo Obrigatório" label="Dt Nascimento">         
+              <app-input-container errorMessage="Campo Obrigatório / Data inválida" label="Dt Nascimento">         
                 <input type="date" class="form-control" id="dtNascimento" placeholder="Dt Nascimento" formControlName="dtNascimento"/>
               </app-input-container>
     
-              <app-input-container errorMessage="Campo Obrigatório" label="Cidade">         
+              <app-input-container errorMessage="Campo Obrigatório / Campo deve ter no máximo 30 caracteres" label="Cidade">         
                 <input type="text" class="form-control" id="cidade" placeholder="Cidade" formControlName="cidade"/>
               </app-input-container>
     
-              <app-input-container errorMessage="Campo Obrigatório" label="Estado">               
+              <app-input-container errorMessage="Campo Obrigatório / Campo deve ter no máximo 30 caracteres" label="Estado">               
                 <input type="text" class="form-control" id="estado" placeholder="Estado" formControlName="estado"/>
               </app-input-container>    
 
-              <app-input-container errorMessage="Campo Obrigatório" label="Descrição">               
+              <app-input-container errorMessage="Campo Obrigatório / Campo deve ter no máximo 80 caracteres" label="Descrição">               
                   <input type="text" class="form-control" id="descricao" placeholder="Descrição" formControlName="descricao"/>
               </app-input-container>                  
 

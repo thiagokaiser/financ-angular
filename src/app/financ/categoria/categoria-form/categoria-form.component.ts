@@ -28,11 +28,11 @@ export class CategoriaFormComponent implements OnInit {
 
   ngOnInit() {
     const categoria = this.route.snapshot.data['categoria'];
-    this.formLabel = categoria.id == 0 ? 'Novo' : 'Edita'
+    this.formLabel = categoria.id == 0 ? 'Novo' : 'Editar'
     
     this.form = this.fb.group({
       id: [categoria.id],
-      descricao: [categoria.descricao, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
+      descricao: [categoria.descricao, [Validators.required, Validators.minLength(3), Validators.maxLength(80)]],
       cor: [categoria.cor, [Validators.required]]      
     });
   }
