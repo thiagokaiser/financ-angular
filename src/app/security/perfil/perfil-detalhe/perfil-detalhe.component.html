@@ -13,10 +13,10 @@
         <div class="box-body">
             <div *ngIf="user$ | async as user; else loading">
                 <div class="row">
-                    <div class="col-md-4 col-sm-6 col-xs-12 imagem_perfil" style="max-width:200px;">                    
+                    <div class="col-md-4 col-sm-6 col-xs-12 imagem_perfil">
                         <div *ngIf="imagemPerfil() != undefined">
                             <img [src]="imagemPerfil()" class="preview preview--rounded">
-                            <a (click)="onChangeImg()" style="cursor: pointer;">Alterar Imagem</a>                    
+                            <a (click)="onChangeImg()" class="pointer">Alterar Imagem</a>                    
                         </div>
                     </div>
                     <div class="col-md-8 col-sm-6 col-xs-12">                                

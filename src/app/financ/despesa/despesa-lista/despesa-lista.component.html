@@ -9,7 +9,7 @@
 <section class="content">
   <!-- Small boxes (Stat box) -->
   <div class="box box-primary">            
-    <div class="box-body" style="max-width:800px;">      
+    <div class="box-body lista">
       <div class="row">
         <div class="col-sm-4">
           <div class="btn-group btn-group-sm" role="group">
@@ -55,10 +55,10 @@
             <tr *ngFor="let despesa of despesas.content | paginate: config" (click)="onDetalhe(despesa.id)">              
               <td>
                 <ng-template [ngIf]="despesa.pago" [ngIfElse]="elseBlockPago">
-                  <i class="fa fa-check" style="color:#41db53"></i>
+                  <i class="fa fa-check pago"></i>
                 </ng-template>
                 <ng-template #elseBlockPago>
-                  <i class="fa fa-times" style="color:red"></i>
+                  <i class="fa fa-times pago"></i>
                 </ng-template>               
               </td>            
               <td>{{ despesa.descricao }}</td>            
@@ -91,15 +91,15 @@
       <div class="row">
         <div class="col-md-12">
           <div class="pull-right">
-            <table class="table table-condensed">
+            <table class="table table-condensed totais-despesa">
                 <tr>
-                    <th class="text-right" style="vertical-align: bottom;">Pago:</th><td style="font-size:20px"> {{ totalPago | number : '1.2-2'}}</td>
+                    <th class="text-right">Pago:</th><td> {{ totalPago | number : '1.2-2'}}</td>
                 </tr>
                 <tr>
-                    <th class="text-right" style="vertical-align: bottom;">Pendente:</th><td style="font-size:20px"> {{ totalPendente | number : '1.2-2' }}</td>
+                    <th class="text-right">Pendente:</th><td> {{ totalPendente | number : '1.2-2' }}</td>
                 </tr>
                 <tr>
-                    <th class="text-right" style="vertical-align: bottom;">Total:</th><td style="font-size:20px"> {{ total | number : '1.2-2' }}</td>
+                    <th class="text-right">Total:</th><td> {{ total | number : '1.2-2' }}</td>
                 </tr>
             </table>
           </div>

@@ -16,69 +16,58 @@
             <td><span class="text-red"><i class="fa fa-remove"></i> {{ erro.fieldName }} - {{ erro.message }}</span></td>
           </tr>
         </table>
-      </div>
-      <div style="max-width:400px">
-        <form [formGroup]="form" style="padding-top: 10px">    
-          
-          <app-input-container errorMessage="Campo Obrigatorio / Deve ter entre 3 e 60 caracteres" label="Descrição">     
-            <input type="text" class="form-control" id="nome" placeholder="Descrição" formControlName="descricao"/>
-          </app-input-container>    
-        
-          <app-input-container errorMessage="Campo Obrigatorio" label="Valor">     
-            <input type="number" class="form-control" id="valor" placeholder="Valor" formControlName="valor"/>
-          </app-input-container>              
-
-          <app-input-container errorMessage="Campo Obrigatorio / Data inválida" label="Dt Vencimento">            
-            <input type="date" class="form-control" id="dtVencimento" formControlName="dtVencimento"/>
-          </app-input-container>
-
-          <app-input-container errorMessage="Campo Obrigatorio" label="Categoria">            
-            <div class="input-group">
-              <select name="categoriaId" id="categoriaId" class="form-control" placeholder="Categoria" formControlName="categoriaId">
-                <ng-container *ngIf="categorias$ | async as categorias">
-                  <option *ngFor="let categoria of categorias" [value]="categoria.id">{{categoria.descricao}} </option>
-                </ng-container>
-              </select>
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button" (click)="onNewCateg()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
-              </span>
-            </div>
-          </app-input-container>
-          
-          <app-input-container errorMessage="Campo Obrigatorio" label="Conta">     
-            <div class="input-group">
-              <select name="contaId" id="contaId" class="form-control" placeholder="Conta" formControlName="contaId">
-                <ng-container *ngIf="contas$ | async as contas">
-                  <option *ngFor="let conta of contas" [value]="conta.id">{{conta.descricao}} </option>
-                </ng-container>
-              </select>
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button" (click)="onNewConta()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
-              </span>
-            </div>
-          </app-input-container>                    
-          
-          <div *ngIf="idRegistro != 0">
-            <app-input-container label="Parcela Atual">     
-              <input type="number" class="form-control" id="parcelaAtual" placeholder="Parcela Atual" formControlName="parcelaAtual"/>
-            </app-input-container>          
+      </div>      
+      <form [formGroup]="form" class="form-size-limited">            
+        <app-input-container errorMessage="Campo Obrigatorio / Deve ter entre 3 e 60 caracteres" label="Descrição">     
+          <input type="text" class="form-control" id="nome" placeholder="Descrição" formControlName="descricao"/>
+        </app-input-container>          
+        <app-input-container errorMessage="Campo Obrigatorio" label="Valor">     
+          <input type="number" class="form-control" id="valor" placeholder="Valor" formControlName="valor"/>
+        </app-input-container>              
+        <app-input-container errorMessage="Campo Obrigatorio / Data inválida" label="Dt Vencimento">            
+          <input type="date" class="form-control" id="dtVencimento" formControlName="dtVencimento"/>
+        </app-input-container>
+        <app-input-container errorMessage="Campo Obrigatorio" label="Categoria">            
+          <div class="input-group">
+            <select name="categoriaId" id="categoriaId" class="form-control" placeholder="Categoria" formControlName="categoriaId">
+              <ng-container *ngIf="categorias$ | async as categorias">
+                <option *ngFor="let categoria of categorias" [value]="categoria.id">{{categoria.descricao}} </option>
+              </ng-container>
+            </select>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" (click)="onNewCateg()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+            </span>
           </div>
-
-          <app-input-container label="Num. Parcelas">     
-            <input type="number" class="form-control" id="numParcelas" placeholder="Numero de Parcelas" formControlName="numParcelas"/>
+        </app-input-container>        
+        <app-input-container errorMessage="Campo Obrigatorio" label="Conta">     
+          <div class="input-group">
+            <select name="contaId" id="contaId" class="form-control" placeholder="Conta" formControlName="contaId">
+              <ng-container *ngIf="contas$ | async as contas">
+                <option *ngFor="let conta of contas" [value]="conta.id">{{conta.descricao}} </option>
+              </ng-container>
+            </select>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" (click)="onNewConta()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+            </span>
+          </div>
+        </app-input-container>                            
+        <div *ngIf="idRegistro != 0">
+          <app-input-container label="Parcela Atual">     
+            <input type="number" class="form-control" id="parcelaAtual" placeholder="Parcela Atual" formControlName="parcelaAtual"/>
           </app-input-container>          
-
-          <label for="pago" class="checkbox-inline">
-            <input type="checkbox" id="pago" name="pago" formControlName="pago"/><b>Despesa Paga?</b>
-          </label>
-          
-          <br><br>
-          <div>
-            <button type="submit" class="btn btn-default" (click)="onSubmit()"><i class="fa fa-check" aria-hidden="true"></i> Salvar</button>{{' '}}
-            <button type="button" class="btn btn-default" (click)="onCancel()"><i class="fa fa-times" aria-hidden="true"></i> Cancelar</button>
-          </div>
-        </form>
-      </div>
+        </div>
+        <app-input-container label="Num. Parcelas">     
+          <input type="number" class="form-control" id="numParcelas" placeholder="Numero de Parcelas" formControlName="numParcelas"/>
+        </app-input-container>          
+        <label for="pago" class="checkbox-inline">
+          <input type="checkbox" id="pago" name="pago" formControlName="pago"/><b>Despesa Paga?</b>
+        </label>        
+        <br><br>
+        <div>
+          <button type="submit" class="btn btn-default" (click)="onSubmit()"><i class="fa fa-check" aria-hidden="true"></i> Salvar</button>{{' '}}
+          <button type="button" class="btn btn-default" (click)="onCancel()"><i class="fa fa-times" aria-hidden="true"></i> Cancelar</button>
+        </div>
+      </form>      
     </div>
   </div>
 </section>

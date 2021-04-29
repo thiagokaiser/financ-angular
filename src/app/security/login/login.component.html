@@ -1,9 +1,9 @@
-<body class="login-page" style="background-color: #ecf0f5;">    
+<div class="login-page">    
     <div class="login-box">
         <div class="login-box-body">
             <h1 class="text-center">Login</h1>                
             <div class="modal-body">                    
-                <form class="needs-validation" novalidate [formGroup]="form" style="padding-top: 10px">                    
+                <form class="needs-validation" novalidate [formGroup]="form">                    
                     <app-input-container errorMessage="Email inválido" label="Email">                    
                         <input type="text"class="form-control" id="email" placeholder="Email" formControlName="email"/>
                     </app-input-container>                    
@@ -13,15 +13,15 @@
                     <span class="text-red" *ngIf="hasError"><i class="fa fa-remove"></i>{{ erros }}</span>
                     <p></p>          
                     <div>
-                        <button type="submit" [disabled]="form.invalid" class="btn btn-primary btn-lg btn-block" (click)="login()">Login</button>{{' '}}                        
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" (click)="login()">Login</button>{{' '}}                        
                     </div>
                 </form>         
                 <p></p>                                    
                 <ul class="">
                     <li><a [routerLink]="['/security/registrar']">Novo cadastro</a></li>   
-                    <li><a (click)="forgotPass()" style="cursor: pointer;">Esqueceu a senha?</a></li>   
+                    <li><a (click)="forgotPass()" class="pointer">Esqueceu a senha?</a></li>   
                 </ul>
             </div>
         </div>
     </div>
-</body>
+</div>

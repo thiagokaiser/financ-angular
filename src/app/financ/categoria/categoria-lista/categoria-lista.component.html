@@ -9,8 +9,8 @@
 <section class="content">
   <!-- Small boxes (Stat box) -->
   <div class="box box-primary">            
-    <div class="box-body">      
-      <div class="row" style="max-width: 400px;">
+    <div class="box-body lista">      
+      <div class="row">        
         <div class="col-sm-6">
           <div class="btn-group btn-group-sm" role="group">
             <button type="button" class="btn btn-default" [routerLink]="['novo']"><i class="fa fa-file-o" aria-hidden="true"></i> Novo</button>{{' '}}
@@ -24,10 +24,10 @@
               <button class="btn btn-default" type="button" (click)="onSearch(searchtext)"><i class="fa fa-search"></i></button>
             </span>
           </div><!-- /input-group -->
-        </div>
+        </div>        
       </div>      
       <p></p>
-      <table class="table table-hover table-pointer"  style="max-width:800px;" 
+      <table class="table table-hover table-pointer"
              matSort (matSortChange)="sortData($event)" 
              matSortDisableClear="true"
              matSortActive="descricao" matSortDirection="asc">            

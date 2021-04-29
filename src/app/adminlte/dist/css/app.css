@@ -4,3 +4,52 @@
 .sidebar-menu > li > a{
     cursor: pointer;
 }
+.dropdown-menu > li > a{
+    cursor: pointer;
+}
+.pointer{
+    cursor: pointer;
+}
+.totais-despesa > tr > th{
+    vertical-align: bottom;
+}
+.totais-despesa > tr > td{
+    font-size: 20px;
+}
+.fa-check.pago{
+    color:#41db53;
+}
+.fa-times.pago{
+    color:red;
+}
+.background{
+    background-color: #ecf0f5;
+}
+.login-page{
+    background-color: #ecf0f5;
+}
+.info-box-content .box-date-content{
+    font-size: 16px;
+    font-weight: bold;
+}
+.form-size-limited{
+    max-width: 400px;
+}
+.form-size-limited input[type=color]{
+    max-width: 60px;
+} 
+.table.table-detalhe{
+    max-width: 500px;
+}
+.box-body.lista{
+    max-width: 800px;
+}
+#info-gerais{
+    max-width: 800px;
+}
+#chart-mes{
+    min-width: 600px;
+}
+#chart-categ{
+    min-height: 350px;
+}

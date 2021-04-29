@@ -11,14 +11,14 @@
             <h3 class="box-title">Informações Gerais</h3>            
         </div>        
         <div class="box-body">
-            <div class="row" style="max-width: 800px;">                
+            <div class="row" id="info-gerais">                
                 <div class="col-md-5 col-sm-6 col-xs-12">
-                    <div class="info-box bg-yellow" (click)="onDateFilter()" style="cursor: pointer">
+                    <div class="info-box bg-yellow pointer" (click)="onDateFilter()">
                         <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
                         <div class="info-box-content">
                             <u>Filtro:</u><br>
-                            De: <b style="font-size: 16px;">{{ dtInicial  | date:'dd/MM/yyyy' : '+0000' }}</b><br>
-                            Até: <b style="font-size: 16px;">{{ dtFinal  | date:'dd/MM/yyyy' : '+0000' }}</b><br>                            
+                            De: <span class="box-date-content">{{ dtInicial  | date:'dd/MM/yyyy' : '+0000' }}</span><br>
+                            Até: <span class="box-date-content">{{ dtFinal  | date:'dd/MM/yyyy' : '+0000' }}</span><br>                            
                         </div>                        
                     </div>                    
                 </div>
@@ -26,8 +26,8 @@
                     <div class="info-box bg-aqua">
                         <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
                         <div class="info-box-content">
-                            <span class="">Pago: <b>{{ totalPago | number : '1.2-2'}}</b></span><br>
-                            <span class="">Pendente: <b>{{ totalPendente | number : '1.2-2' }}</b></span>
+                            Pago: <b>{{ totalPago | number : '1.2-2'}}</b><br>
+                            Pendente: <b>{{ totalPendente | number : '1.2-2' }}</b>
                             <div class="progress">
                                 <div class="progress-bar" [ngStyle]="{width: + totalPagoPercent + '%'}"></div>
                             </div>
@@ -49,7 +49,7 @@
                             <h3 class="box-title">Despesas por Categoria</h3>                            
                         </div>
                         <div class="box-body">
-                            <div style="min-height: 350px;">
+                            <div id="chart-categ">
                                 <canvas id="pieChart"></canvas>
                             </div>                            
                         </div>
@@ -66,9 +66,9 @@
                             </div>
                         </div>
                         <div class="box-body">                            
-                            <div class="table-responsive" >
-                                <div style="min-width: 600px;">
-                                    <div class="table" >
+                            <div class="table-responsive">
+                                <div id="chart-mes">
+                                    <div class="table">
                                         <canvas id="barChart" height="230"></canvas>
                                     </div>                         
                                 </div>
