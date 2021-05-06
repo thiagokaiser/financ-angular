@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AdminlteModule } from './adminlte/adminlte.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
@@ -14,6 +13,7 @@ import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 registerLocaleData(localePt);
 
@@ -27,7 +27,7 @@ registerLocaleData(localePt);
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     AppRoutingModule,
-    AdminlteModule,
+    DashboardModule,
     ModalModule.forRoot(),
     SharedModule.forRoot()
   ],
