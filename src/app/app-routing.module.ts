@@ -15,6 +15,11 @@ const routes: Routes = [
     loadChildren: './security/security.module#SecurityModule'    
   },
   {
+    path: 'admin',
+    loadChildren: './admin/admin.module#AdminModule',
+    canLoad: [loggedInGuard], canActivate: [loggedInGuard]
+  },
+  {
     path: '', pathMatch: 'full', redirectTo: 'financ/home'
   },
   { 

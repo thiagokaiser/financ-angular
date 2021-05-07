@@ -1,0 +1,63 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Usuario
+        <small>Detalhe</small>
+    </h1>      
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="box box-primary">            
+        <div class="box-body">                               
+            <div class="btn-group btn-group-sm" role="group">                
+                <button class="btn btn-default" (click)="onEdit(usuario.id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button>
+                <button class="btn btn-default" (click)="onDelete(usuario)"><i class="fa fa-trash-o" aria-hidden="true"></i> Remover</button>
+                <button class="btn btn-default" (click)="onCancel()"><i class="fa fa-undo" aria-hidden="true"></i> Voltar</button>
+            </div>
+            <p></p>
+            <table class="table table-detalhe">
+                <tbody>                                        
+                    <tr>
+                        <th>Id</th>                     
+                        <td>{{ usuario.id }}</td>          
+                    </tr>                 
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ usuario.email }}</td>       
+                    </tr>                 
+                    <tr>
+                        <th>Nome</th>
+                        <td>{{ usuario.nome }}</td>        
+                    </tr>                 
+                    <tr>
+                        <th>Sobrenome</th>
+                        <td>{{ usuario.sobrenome }}</td>   
+                    </tr>                 
+                    <tr>
+                        <th>Dt nascimento</th>
+                        <td>{{ usuario.dtNascimento | date: 'dd/MM/yyyy' : '+0000'}}</td>
+                    </tr>                 
+                    <tr>
+                        <th>Cidade</th>
+                        <td>{{ usuario.cidade }}</td>   
+                    </tr>                    
+                    <tr>
+                        <th>Estado</th>
+                        <td>{{ usuario.estado }}</td>      
+                    </tr>                 
+                    <tr>
+                        <th>Imagem perfil</th>
+                        <td>{{ usuario.imagemPerfil }}</td>
+                    </tr>                 
+                    <tr>
+                        <th>Descrição</th>
+                        <td>{{ usuario.descricao }}</td>   
+                    </tr>                 
+
+                </tbody>
+            </table>            
+        </div>
+    </div>    
+    <router-outlet></router-outlet>
+</section>

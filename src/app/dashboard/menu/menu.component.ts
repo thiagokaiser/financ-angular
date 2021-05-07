@@ -36,4 +36,9 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['/financ/conta']);
     this.render.removeClass(this.document.body, 'sidebar-open')
   }
+
+  onUser(){
+    this.router.navigate(['/admin/usuario']);
+    this.render.removeClass(this.document.body, 'sidebar-open')
+  }
 }

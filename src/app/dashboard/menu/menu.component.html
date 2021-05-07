@@ -9,6 +9,12 @@
         <li><a (click)="onDespesa()"><i class="fa fa-dollar"></i> <span>Despesas</span></a></li>
         <li><a (click)="onCategoria()"><i class="fa fa-tags"></i> <span>Categorias</span></a></li>
         <li><a (click)="onConta()"><i class="fa fa-credit-card"></i> <span>Contas</span></a></li>        
+        <li class="treeview">
+          <a href="#"><i class="fa fa-gear"></i> <span>Admin</span> <i class="fa fa-angle-left pull-right"></i></a>
+          <ul class="treeview-menu">
+              <li><a (click)="onUser()"><i class="fa fa-user"></i>Usuarios</a></li>              
+          </ul>
+      </li>          
       </ul>
     </section>
     <!-- /.sidebar -->

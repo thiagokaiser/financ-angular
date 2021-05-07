@@ -1,7 +1,7 @@
 .table-pointer > tbody > tr {
     cursor: pointer;
 }
-.sidebar-menu > li > a{
+.sidebar-menu > li a{
     cursor: pointer;
 }
 .dropdown-menu > li > a{
