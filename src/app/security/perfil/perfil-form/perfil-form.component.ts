@@ -36,6 +36,7 @@ export class PerfilFormComponent implements OnInit {
     const perfil = this.route.snapshot.data['user'];    
     
     this.form = this.fb.group({
+      id: [perfil.id],
       email: [{ value: perfil.email, disabled: true }],
       nome: [perfil.nome, [Validators.required]],
       sobrenome: [perfil.sobrenome, [Validators.required]],

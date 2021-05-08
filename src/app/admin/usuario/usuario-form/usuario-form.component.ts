@@ -46,20 +46,12 @@ export class UsuarioFormComponent implements OnInit {
   onSubmit() {    
     this.submitted = true;    
     if (this.form.valid) {      
-      let msgSuccess = 'Criado com sucesso';      
-      this.idRegistro = this.form.value.id;
-      if (this.idRegistro){
-        msgSuccess = 'Alterado com sucesso';
-      }      
-      this.service.save(this.form.value).subscribe(
+      let msgSuccess = 'Alterado com sucesso';
+      this.idRegistro = this.form.value.id;      
+      this.service.updateAdmin(this.form.value).subscribe(
         success => {
-          this.ns.notify(msgSuccess)          
-          if(this.idRegistro){
-            this.router.navigate(['/financ/usuario/detalhe', this.idRegistro]);
-          }
-          else{
-            this.router.navigate(['/financ/usuario']);
-          }                              
+          this.ns.notify(msgSuccess)                    
+          this.router.navigate(['/admin/usuario/detalhe', this.idRegistro]);          
         },
         error => {          
           this.erros = error.error.errors;

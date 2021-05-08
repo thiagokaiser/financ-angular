@@ -17,11 +17,11 @@ export class PerfilService{
         ){}
 
     loadPerfil(email: string){        
-        return this.http.get<User>(`${this.host}email?email=${email}`).pipe(take(1));
+        return this.http.get<User>(`${this.host}email/${email}`).pipe(take(1));
     }
 
     updatePerfil(user: User){                
-        return this.http.put(`${this.host}${user.email}`, user).pipe(take(1));
+        return this.http.put(`${this.host}${user.id}`, user).pipe(take(1));
     }
 
     uploadImagem(imagem: any){                
