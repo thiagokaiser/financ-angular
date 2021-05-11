@@ -1,6 +1,8 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/security/login/login.service';
+import { User } from 'src/app/security/user';
 
 @Component({
   selector: 'app-menu',
@@ -11,10 +13,15 @@ export class MenuComponent implements OnInit {
   constructor(
     private router: Router,
     @Inject(DOCUMENT) private document: Document,
-    private render: Renderer2
+    private render: Renderer2,
+    private loginService: LoginService
   ) { }
 
   ngOnInit() {
+  }
+
+  userAdmin(){    
+    return this.loginService.isAdmin();
   }
 
   onDespesa(){

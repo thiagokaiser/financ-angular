@@ -10,6 +10,7 @@ export interface User{
     estado?: string
     descricao?: string
     imagemPerfil?: string
+    perfis?: string[]
 }
 
 export interface ChangePasswordViewModel{

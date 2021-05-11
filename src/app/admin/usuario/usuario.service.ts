@@ -3,7 +3,6 @@ import { CrudService } from 'src/app/shared/crud.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Usuario, ListUsuario } from './usuario';
-import { _MatTabGroupBase } from '@angular/material';
 import { take } from 'rxjs/operators';
 import { User } from 'src/app/security/user';
 
@@ -23,6 +22,5 @@ export class UsuarioService extends CrudService<Usuario>{
   updateAdmin(usuario: User) {
     return this.http.put(`${environment.API}usuarios/admin/${usuario.id}`, usuario).pipe(take(1));
   }
-
 
 }

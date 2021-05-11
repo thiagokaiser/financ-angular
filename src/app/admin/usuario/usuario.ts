@@ -8,7 +8,6 @@ export interface Usuario{
     descricao: string;
     imagemPerfil: string;
     email: string;    
-    
 }
 
 export interface ListUsuario{

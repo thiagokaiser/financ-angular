@@ -16,7 +16,7 @@ export class UserDetailComponent implements OnInit {
 
   user(): User{    
     if(this.loginService.user != undefined){
-      if(this.loginService.user.nome != undefined){        
+      if(this.loginService.user.nome != undefined){
         return this.loginService.user;        
       }      
     }    

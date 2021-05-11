@@ -48,6 +48,7 @@ export class LoginService{
         let userProfile = await this.http.get<User>(`${environment.API}usuarios/${this.user.id}`).toPromise()
         this.user.nome = userProfile.nome;
         this.user.sobrenome = userProfile.sobrenome;
+        this.user.perfis = userProfile.perfis;
         
         if(userProfile.imagemPerfil){
             this.user.imagemPerfil = userProfile.imagemPerfil + '?time=' + (new Date()).getTime();;            
@@ -79,5 +80,12 @@ export class LoginService{
 
     updateImagePath(imagemPerfil){                
         this.user.imagemPerfil = imagemPerfil + '?time=' + (new Date()).getTime();
+    }
+
+    isAdmin(){
+        if(this.user.perfis != undefined){
+            return this.user.perfis.includes('ADMIN');
+        }
+        return false;        
     }
 }

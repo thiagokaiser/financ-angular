@@ -27,9 +27,9 @@
               "src/custom-theme.scss",
               "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/app/dashboard/dist/css/AdminLTE.min.css",
+              "src/app/dashboard/dist/css/AdminLTE.css",
               "src/app/dashboard/dist/css/app.css",
-              "src/app/dashboard/dist/css/skins/skin-blue-light.min.css",
+              "src/app/dashboard/dist/css/skin-blue-light.css",
               "src/app/dashboard/dist/font-awesome/css/font-awesome.min.css"
             ],
             "scripts": [
@@ -37,7 +37,7 @@
               "node_modules/jquery-ui-dist/jquery-ui.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/hammerjs/hammer.min.js",
-              "src/app/dashboard/dist/js/adminlte.min.js"
+              "src/app/dashboard/dist/js/adminlte.js"
             ]
           },
           "configurations": {

@@ -38,8 +38,9 @@ export class UsuarioDetalheComponent implements OnInit {
   }
 
   onRefresh(){    
-    let categ = this.route.snapshot.data['usuario'];           
-    this.usuario = categ;    
+    this.usuario = this.route.snapshot.data['usuario'];           
+    console.log(this.usuario);
+    
   }    
 
   onDelete(usuario: Usuario) {

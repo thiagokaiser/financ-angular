@@ -54,7 +54,16 @@
                         <th>Descrição</th>
                         <td>{{ usuario.descricao }}</td>   
                     </tr>                 
-
+                    <tr>
+                        <th>Perfis</th>
+                        <td>
+                            <table>                           
+                                <tr *ngFor="let perfil of usuario.perfis">                    
+                                    <td>{{ perfil }}</td>                           
+                                </tr>                
+                            </table>         
+                        </td>
+                    </tr>
                 </tbody>
             </table>            
         </div>
