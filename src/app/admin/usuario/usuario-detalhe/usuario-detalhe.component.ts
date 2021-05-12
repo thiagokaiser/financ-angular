@@ -6,6 +6,7 @@ import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { UsuarioService } from '../usuario.service';
 import { take, switchMap } from 'rxjs/operators';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
+import { Perfil } from '../perfil';
 
 @Component({
   selector: 'app-usuario-detalhe',
@@ -26,7 +27,7 @@ export class UsuarioDetalheComponent implements OnInit {
       });
     }
 
-  ngOnInit() {        
+  ngOnInit() {    
   }
 
   onEdit(id) {    
@@ -38,9 +39,7 @@ export class UsuarioDetalheComponent implements OnInit {
   }
 
   onRefresh(){    
-    this.usuario = this.route.snapshot.data['usuario'];           
-    console.log(this.usuario);
-    
+    this.usuario = this.route.snapshot.data['usuario'];    
   }    
 
   onDelete(usuario: Usuario) {
@@ -55,5 +54,33 @@ export class UsuarioDetalheComponent implements OnInit {
       }
     );
   }
-    
+
+  onDeletePerfil(usuarioId, perfil) {
+    const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja eliminar o perfil ' + perfil + ' ?');
+    result$.asObservable().pipe(
+      take(1),
+      switchMap(result => result ? this.service.removePerfil(usuarioId, perfil) : EMPTY)
+    ).subscribe(
+      success => {
+        this.ns.notify('Perfil eliminado com sucesso.')        
+        this.reloadUsuario(usuarioId)
+      }
+    );
+  }    
+
+  onAddPerfil(usuarioId){
+    const result2$ = this.alertService.modalAddPerfil(usuarioId)
+    result2$.asObservable().pipe(take(1)).subscribe(
+      success => {
+        this.ns.notify('Perfil adicionado com sucesso.')        
+        this.reloadUsuario(usuarioId)
+      }
+    );
+  }
+
+  reloadUsuario(usuarioId){
+    this.router.navigate(['/admin/usuario/detalhe', usuarioId]).then(async () => {          
+      this.usuario = await this.service.loadByID(usuarioId).toPromise();
+    })        
+  }
 }

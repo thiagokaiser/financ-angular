@@ -13,11 +13,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { LoadingService } from './loading.service';
 import { CategoriaFormModalComponent } from './modals/categoria-form-modal/categoria-form-modal.component';
 import { ContaFormModalComponent } from './modals/conta-form-modal/conta-form-modal.component';
+import { AddPerfilModalComponent } from './modals/add-perfil-modal/add-perfil-modal.component';
 
 @NgModule({
   declarations: [    
   ConfirmModalComponent, InputContainerComponent, SnackbarComponent, DateFilterComponent, MonthFilterComponent,
-  NotFoundComponent, CategoriaFormModalComponent, ContaFormModalComponent
+  NotFoundComponent, CategoriaFormModalComponent, ContaFormModalComponent, AddPerfilModalComponent
 ],
   imports: [
     CommonModule, ReactiveFormsModule
@@ -27,7 +28,7 @@ import { ContaFormModalComponent } from './modals/conta-form-modal/conta-form-mo
   ],
   entryComponents:[
     ConfirmModalComponent, DateFilterComponent, MonthFilterComponent, CategoriaFormModalComponent,
-    ContaFormModalComponent
+    ContaFormModalComponent, AddPerfilModalComponent
   ]  
 })
 export class SharedModule {

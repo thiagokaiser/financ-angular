@@ -55,12 +55,14 @@
                         <td>{{ usuario.descricao }}</td>   
                     </tr>                 
                     <tr>
-                        <th>Perfis</th>
+                        <th>Perfis <a (click)="onAddPerfil(usuario.id)" class="pointer"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a></th>                        
                         <td>
-                            <table>                           
+                            <table>
+                                <tr></tr>
                                 <tr *ngFor="let perfil of usuario.perfis">                    
-                                    <td>{{ perfil }}</td>                           
-                                </tr>                
+                                    <td>{{ perfil }}</td>
+                                    <td><a (click)="onDeletePerfil(usuario.id, perfil)" class="pointer"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>                           
+                                </tr>
                             </table>         
                         </td>
                     </tr>

@@ -5,6 +5,7 @@ import { MonthFilterComponent } from './modals/month-filter/month-filter.compone
 import { DateFilterComponent } from './modals/date-filter/date-filter.component';
 import { CategoriaFormModalComponent } from './modals/categoria-form-modal/categoria-form-modal.component';
 import { ContaFormModalComponent } from './modals/conta-form-modal/conta-form-modal.component';
+import { AddPerfilModalComponent } from './modals/add-perfil-modal/add-perfil-modal.component';
 
 enum AlertTypes {
   DANGER = 'danger',
@@ -54,6 +55,12 @@ export class AlertModalService {
   modalNewConta(){
     const modalRef: BsModalRef = this.modalService.show(ContaFormModalComponent);
     return (<ContaFormModalComponent>modalRef.content).confirmResult;
+  }
+
+  modalAddPerfil(usuarioId){
+    const modalRef: BsModalRef = this.modalService.show(AddPerfilModalComponent);
+    modalRef.content.form.controls['usuarioId'].setValue(usuarioId);    
+    return (<AddPerfilModalComponent>modalRef.content).confirmResult;
   }
 
 }

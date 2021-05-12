@@ -23,4 +23,12 @@ export class UsuarioService extends CrudService<Usuario>{
     return this.http.put(`${environment.API}usuarios/admin/${usuario.id}`, usuario).pipe(take(1));
   }
 
+  removePerfil(usuarioId, perfil) {
+    return this.http.delete(`${environment.API}usuarios/removePerfil/${usuarioId}/${perfil}`).pipe(take(1));
+  }
+
+  addPerfil(usuarioId, perfil) {
+    return this.http.post(`${environment.API}usuarios/addPerfil/${usuarioId}/${perfil}`, {}).pipe(take(1));
+  }
+
 }

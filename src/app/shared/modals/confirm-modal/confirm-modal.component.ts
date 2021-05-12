@@ -28,8 +28,7 @@ export class ConfirmModalComponent implements OnInit {
     this.onConfirmAndClose(true);
   }
 
-  private onConfirmAndClose(result: boolean){
-    console.log(result);
+  private onConfirmAndClose(result: boolean){    
     this.confirmResult.next(result);
     this.bsModalRef.hide();
   }
