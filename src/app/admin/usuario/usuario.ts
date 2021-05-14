@@ -1,13 +1,14 @@
 export interface Usuario{
-    id: number;
-    nome: string;
-    sobrenome: string;
-    dtNascimento: Date;
-    cidade: string;
-    estado: string;
-    descricao: string;
-    imagemPerfil: string;
-    email: string;    
+    id?: number
+    nome?: string
+    sobrenome?: string
+    email?: string    
+    dtNascimento?: Date
+    cidade?: string
+    estado?: string
+    descricao?: string
+    imagemPerfil?: string
+    perfis?: string[]
 }
 
 export interface ListUsuario{
