@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API: 'https://www.thiagokaiser.com.br:8443/'
+  API: 'https://backend.thiagokaiser.com.br/'
 };
