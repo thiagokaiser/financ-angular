@@ -41,6 +41,7 @@
             <th mat-sort-header="estado">Estado</th>                                    
             <th mat-sort-header="imagemPerfil">Imagem Perfil</th>                                    
             <th mat-sort-header="descricao">Descrição</th>                                    
+            <th mat-sort-header="perfil">Perfil</th>
           </tr>
         </thead>
         <tbody *ngIf="usuarios$ | async as usuarios">
@@ -54,6 +55,7 @@
             <td>{{ usuario.estado }}</td>      
             <td>{{ usuario.imagemPerfil }}</td>
             <td>{{ usuario.descricao }}</td>   
+            <td>{{ usuario.perfis }}</td>   
           </tr>
         </tbody>
       </table>
