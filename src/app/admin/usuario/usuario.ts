@@ -9,6 +9,7 @@ export interface Usuario{
     descricao?: string
     imagemPerfil?: string
     perfis?: string[]
+    lastLogin?: Date
 }
 
 export interface ListUsuario{

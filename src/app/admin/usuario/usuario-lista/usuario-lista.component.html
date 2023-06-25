@@ -42,6 +42,7 @@
             <th mat-sort-header="imagemPerfil">Imagem Perfil</th>                                    
             <th mat-sort-header="descricao">Descrição</th>                                    
             <th mat-sort-header="perfil">Perfil</th>
+            <th mat-sort-header="lastLogin">Last Login</th>
           </tr>
         </thead>
         <tbody *ngIf="usuarios$ | async as usuarios">
@@ -56,6 +57,7 @@
             <td>{{ usuario.imagemPerfil }}</td>
             <td>{{ usuario.descricao }}</td>   
             <td>{{ usuario.perfis }}</td>   
+            <td>{{ usuario.lastLogin | date: 'dd/MM/yyyy HH:mm'}}</td>
           </tr>
         </tbody>
       </table>
