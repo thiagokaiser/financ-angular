@@ -74,7 +74,6 @@ export class DespesaFormComponent implements OnInit {
       this.form.controls['contaId'].disable();      
     }else if(this.operacao == 'unpaid'){
       this.formLabel = 'Editar todas parcelas não pagas';
-      this.form.controls['dtVencimento'].disable();      
       this.form.controls['pago'].disable();      
     }
 
