@@ -3,76 +3,77 @@
     <h1>
         Usuario
         <small>Detalhe</small>
-    </h1>      
+    </h1>
 </section>
 <!-- Main content -->
 <section class="content">
     <!-- Small boxes (Stat box) -->
-    <div class="box box-primary">            
-        <div class="box-body">                               
-            <div class="btn-group btn-group-sm" role="group">                
+    <div class="box box-primary">
+        <div class="box-body">
+            <div class="btn-group btn-group-sm" role="group">
                 <button class="btn btn-default" (click)="onEdit(usuario.id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button>
                 <button class="btn btn-default" (click)="onDelete(usuario)"><i class="fa fa-trash-o" aria-hidden="true"></i> Remover</button>
+                <button class="btn btn-default" (click)="onDeleteData(usuario)"><i class="fa fa-trash-o" aria-hidden="true"></i> Remover Dados</button>
                 <button class="btn btn-default" (click)="onCancel()"><i class="fa fa-undo" aria-hidden="true"></i> Voltar</button>
             </div>
             <p></p>
             <table class="table table-detalhe">
-                <tbody>                                        
+                <tbody>
                     <tr>
-                        <th>Id</th>                     
-                        <td>{{ usuario.id }}</td>          
-                    </tr>                 
+                        <th>Id</th>
+                        <td>{{ usuario.id }}</td>
+                    </tr>
                     <tr>
                         <th>Email</th>
-                        <td>{{ usuario.email }}</td>       
-                    </tr>                 
+                        <td>{{ usuario.email }}</td>
+                    </tr>
                     <tr>
                         <th>Nome</th>
-                        <td>{{ usuario.nome }}</td>        
-                    </tr>                 
+                        <td>{{ usuario.nome }}</td>
+                    </tr>
                     <tr>
                         <th>Sobrenome</th>
-                        <td>{{ usuario.sobrenome }}</td>   
-                    </tr>                 
+                        <td>{{ usuario.sobrenome }}</td>
+                    </tr>
                     <tr>
                         <th>Dt nascimento</th>
                         <td>{{ usuario.dtNascimento | date: 'dd/MM/yyyy' : '+0000'}}</td>
-                    </tr>                 
+                    </tr>
                     <tr>
                         <th>Cidade</th>
-                        <td>{{ usuario.cidade }}</td>   
-                    </tr>                    
+                        <td>{{ usuario.cidade }}</td>
+                    </tr>
                     <tr>
                         <th>Estado</th>
-                        <td>{{ usuario.estado }}</td>      
-                    </tr>                 
+                        <td>{{ usuario.estado }}</td>
+                    </tr>
                     <tr>
                         <th>Imagem perfil</th>
                         <td>{{ usuario.imagemPerfil }}</td>
-                    </tr>                 
+                    </tr>
                     <tr>
                         <th>Descrição</th>
-                        <td>{{ usuario.descricao }}</td>   
-                    </tr>                 
+                        <td>{{ usuario.descricao }}</td>
+                    </tr>
                     <tr>
-                        <th>Perfis <a (click)="onAddPerfil(usuario.id)" class="pointer"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a></th>                        
+                        <th>Perfis <a (click)="onAddPerfil(usuario.id)" class="pointer"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a></th>
                         <td>
                             <table>
                                 <tr></tr>
-                                <tr *ngFor="let perfil of usuario.perfis">                    
+                                <tr *ngFor="let perfil of usuario.perfis">
                                     <td>{{ perfil }}</td>
-                                    <td><a (click)="onDeletePerfil(usuario.id, perfil)" class="pointer"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>                           
+                                    <td><a (click)="onDeletePerfil(usuario.id, perfil)" class="pointer"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                                 </tr>
-                            </table>         
+                            </table>
                         </td>
                     </tr>
                     <tr>
                         <th>Last Login</th>
-                        <td>{{ usuario.lastLogin | date: 'dd/MM/yyyy HH:mm'}}</td>   
-                    </tr>                 
+                        <td>{{ usuario.lastLogin | date: 'dd/MM/yyyy HH:mm'}}</td>
+                    </tr>
                 </tbody>
-            </table>            
+            </table>
         </div>
-    </div>    
+    </div>
     <router-outlet></router-outlet>
 </section>

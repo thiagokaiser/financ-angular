@@ -28,6 +28,7 @@ export class DespesaResolverGuard implements Resolve<Despesa> {
       valor: 0,
       dtVencimento: new Date(), 
       pago: false,
+      dtPagamento: null,
       numParcelas: 0, 
       parcelaAtual: 0,
       idParcela: 0

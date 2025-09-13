@@ -59,9 +59,12 @@
         <app-input-container label="Num. Parcelas">     
           <input type="number" class="form-control" id="numParcelas" placeholder="Numero de Parcelas" formControlName="numParcelas"/>
         </app-input-container>          
+        <app-input-container errorMessage="Data inválida" label="Dt Pagamento">            
+          <input type="date" class="form-control" id="dtPagamento" formControlName="dtPagamento"/>
+        </app-input-container>
         <label for="pago" class="checkbox-inline">
           <input type="checkbox" id="pago" name="pago" formControlName="pago"/><b>Despesa Paga?</b>
-        </label>        
+        </label>                
         <br><br>
         <div>
           <button type="submit" class="btn btn-default" (click)="onSubmit()"><i class="fa fa-check" aria-hidden="true"></i> Salvar</button>{{' '}}
