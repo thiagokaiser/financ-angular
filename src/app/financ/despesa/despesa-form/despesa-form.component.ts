@@ -58,6 +58,7 @@ export class DespesaFormComponent implements OnInit {
       valor:  [despesa.valor, [Validators.required]],
       dtVencimento: [new Date(despesa.dtVencimento).toISOString().substring(0,10), [Validators.required]],
       pago: [despesa.pago],
+      dtPagamento: [despesa.dtPagamento ? new Date(despesa.dtPagamento).toISOString().substring(0,10) : null],
       numParcelas: [despesa.numParcelas],
       parcelaAtual: [{ value: despesa.parcelaAtual, disabled: true}]
     });
@@ -71,21 +72,33 @@ export class DespesaFormComponent implements OnInit {
       this.form.controls['valor'].disable();
       this.form.controls['dtVencimento'].disable();
       this.form.controls['pago'].disable();
+      this.form.controls['dtPagamento'].disable();
       this.form.controls['contaId'].disable();
     }else if(this.operacao == 'unpaid'){
       this.formLabel = 'Editar todas parcelas não pagas';
       this.form.controls['pago'].disable();
+      this.form.controls['dtPagamento'].disable();
     }
 
     this.form.get('pago').valueChanges.subscribe(val => {
-      if (this.form.get('pago').value == true) {
+      if (val === true) {
         this.form.controls['contaId'].setValidators([Validators.required]);
         this.form.controls['contaId'].updateValueAndValidity();
+        if (!this.form.get('dtPagamento').value) {
+          const hoje = new Date().toISOString().substring(0,10);
+          this.form.get('dtPagamento').setValue(hoje);
+        }
+        this.form.get('dtPagamento').enable();
       } else {
         this.form.controls['contaId'].clearValidators();
         this.form.controls['contaId'].updateValueAndValidity();
+        this.form.get('dtPagamento').setValue(null);
+        this.form.get('dtPagamento').disable();
       }
     });
+    if (!this.form.get('pago').value) {
+      this.form.get('dtPagamento').disable();
+    }
 
     this.categorias$ = this.categService.list();
     this.contas$ = this.contaService.list();

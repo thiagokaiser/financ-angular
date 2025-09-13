@@ -75,6 +75,10 @@
                         <td>{{ despesa.numParcelas }}</td>
                     </tr>
                     <tr>
+                        <th>Data Pagamento</th>
+                        <td>{{ despesa.dtPagamento | date:'dd/MM/yyyy' : '+0000'}}</td>                        
+                    </tr>                                     
+                    <tr>
                         <th>Pago</th>
                         <td>
                             <ng-template [ngIf]="despesa.pago" [ngIfElse]="elseBlockPago">
@@ -84,7 +88,7 @@
                                 <i class="fa fa-times pago"></i>
                             </ng-template>               
                         </td>   
-                    </tr>                    
+                    </tr>                       
                 </tbody>
             </table>            
         </div>

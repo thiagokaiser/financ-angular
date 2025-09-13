@@ -9,8 +9,9 @@ export interface Despesa{
     contaId: number,    
     descricao: string,
     valor: number,
-    dtVencimento: Date, 
+    dtVencimento: Date,     
     pago: Boolean,
+    dtPagamento: Date,
     numParcelas: number, 
     parcelaAtual: number,
     idParcela: number
