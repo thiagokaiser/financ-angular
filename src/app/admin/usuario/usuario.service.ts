@@ -15,9 +15,9 @@ export class UsuarioService extends CrudService<Usuario>{
     super(http, `${environment.API}usuarios`);
   }
 
-  listPage(pager) {        
-    return this.http.get<ListUsuario>(`${environment.API}usuarios/page`, {params: pager});                   
-  }  
+  listPage(pager) {
+    return this.http.get<ListUsuario>(`${environment.API}usuarios/page`, {params: pager});
+  }
 
   updateAdmin(usuario: User) {
     return this.http.put(`${environment.API}usuarios/admin/${usuario.id}`, usuario).pipe(take(1));
@@ -29,6 +29,10 @@ export class UsuarioService extends CrudService<Usuario>{
 
   addPerfil(usuarioId, perfil) {
     return this.http.post(`${environment.API}usuarios/addPerfil/${usuarioId}/${perfil}`, {}).pipe(take(1));
+  }
+
+  removeData(usuarioId) {
+    return this.http.delete(`${environment.API}usuarios/${usuarioId}/data`).pipe(take(1));
   }
 
 }
