@@ -1,7 +1,7 @@
 import { Component, OnInit, ErrorHandler } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CategoriaService } from '../../../financ/categoria/categoria.service';
-import { BsModalRef } from 'ngx-bootstrap';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -18,50 +18,50 @@ export class CategoriaFormModalComponent implements OnInit {
   confirmResult: Subject<any>;
 
   constructor(
-    private fb: FormBuilder,    
+    private fb: FormBuilder,
     public bsModalRef: BsModalRef,
     private service: CategoriaService
-  ) { }  
+  ) { }
 
-  ngOnInit() {  
-    this.confirmResult = new Subject();  
+  ngOnInit() {
+    this.confirmResult = new Subject();
     this.formLabel = 'Novo'
-    
+
     this.form = this.fb.group({
       id: [null],
       descricao: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
-      cor: ['', [Validators.required]]      
+      cor: ['', [Validators.required]]
     });
-  }  
+  }
 
-  onClose(){    
+  onClose(){
     this.bsModalRef.hide();
   }
 
-  onConfirm(){    
-    if (this.form.valid) {  
-      this.submitted = true;    
-      if (this.form.valid) {      
+  onConfirm(){
+    if (this.form.valid) {
+      this.submitted = true;
+      if (this.form.valid) {
         this.service.save(this.form.value).subscribe(
-          success => {          
+          success => {
             this.onConfirmAndClose(this.form.value);
           },
-          error => {          
+          error => {
             this.erros = error.error.errors;
-            throw error          
+            throw error
           }
-        );      
+        );
       }
       else{
-        this.form.markAllAsTouched();      
-      }      
+        this.form.markAllAsTouched();
+      }
     }
     else{
-      this.form.markAllAsTouched();      
-    }    
+      this.form.markAllAsTouched();
+    }
   }
 
-  private onConfirmAndClose(result: any){        
+  private onConfirmAndClose(result: any){
     this.confirmResult.next(result);
     this.bsModalRef.hide();
   }
