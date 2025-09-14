@@ -3,17 +3,17 @@
   <h1>
     Usuarios
     <small>Lista</small>
-  </h1>      
+  </h1>
 </section>
 <!-- Main content -->
 <section class="content">
   <!-- Small boxes (Stat box) -->
-  <div class="box box-primary">            
-    <div class="box-body">      
-      <div class="row">        
+  <div class="box box-primary">
+    <div class="box-body">
+      <div class="row">
         <div class="col-sm-6">
-          <div class="btn-group btn-group-sm" role="group">            
-            <button type="button" class="btn btn-default" (click)="onRefresh()"><i class="fa fa-refresh" aria-hidden="true"></i> Atualizar</button>        
+          <div class="btn-group btn-group-sm" role="group">
+            <button type="button" class="btn btn-default" (click)="onRefresh()"><i class="fa fa-refresh" aria-hidden="true"></i> Atualizar</button>
           </div>
         </div>
         <div class="col-sm-6">
@@ -23,60 +23,64 @@
               <button class="btn btn-default" type="button" (click)="onSearch(searchtext)"><i class="fa fa-search"></i></button>
             </span>
           </div><!-- /input-group -->
-        </div>        
-      </div>      
+        </div>
+      </div>
       <p></p>
       <table class="table table-hover table-pointer"
-             matSort (matSortChange)="sortData($event)" 
-             matSortDisableClear="true"
-             matSortActive="id" matSortDirection="asc">            
+        matSort (matSortChange)="sortData($event)"
+        matSortDisableClear="true"
+        matSortActive="id" matSortDirection="asc">
         <thead>
-          <tr>            
-            <th mat-sort-header="id">#</th>                                    
-            <th mat-sort-header="email">Email</th>                                    
-            <th mat-sort-header="nome">Nome</th>                                    
-            <th mat-sort-header="sobrenome">Sobrenome</th>                                    
-            <th mat-sort-header="dtNascimento">Dt Nascimento</th>                                    
-            <th mat-sort-header="cidade">Cidade</th>                                    
-            <th mat-sort-header="estado">Estado</th>                                    
-            <th mat-sort-header="imagemPerfil">Imagem Perfil</th>                                    
-            <th mat-sort-header="descricao">Descrição</th>                                    
+          <tr>
+            <th mat-sort-header="id">#</th>
+            <th mat-sort-header="email">Email</th>
+            <th mat-sort-header="nome">Nome</th>
+            <th mat-sort-header="sobrenome">Sobrenome</th>
+            <th mat-sort-header="dtNascimento">Dt Nascimento</th>
+            <th mat-sort-header="cidade">Cidade</th>
+            <th mat-sort-header="estado">Estado</th>
+            <th mat-sort-header="imagemPerfil">Imagem Perfil</th>
+            <th mat-sort-header="descricao">Descrição</th>
             <th mat-sort-header="perfil">Perfil</th>
             <th mat-sort-header="lastLogin">Last Login</th>
           </tr>
         </thead>
-        <tbody *ngIf="usuarios$ | async as usuarios">
-          <tr *ngFor="let usuario of usuarios.content | paginate: config" (click)="onDetalhe(usuario.id)">            
-            <td>{{ usuario.id }}</td>          
-            <td>{{ usuario.email }}</td>       
-            <td>{{ usuario.nome }}</td>        
-            <td>{{ usuario.sobrenome }}</td>   
-            <td>{{ usuario.dtNascimento | date: 'dd/MM/yyyy' : '+0000'}}</td>
-            <td>{{ usuario.cidade }}</td>      
-            <td>{{ usuario.estado }}</td>      
-            <td>{{ usuario.imagemPerfil }}</td>
-            <td>{{ usuario.descricao }}</td>   
-            <td>{{ usuario.perfis }}</td>   
-            <td>{{ usuario.lastLogin | date: 'dd/MM/yyyy HH:mm'}}</td>
-          </tr>
-        </tbody>
+        @if (usuarios$ | async; as usuarios) {
+          <tbody>
+            @for (usuario of usuarios.content | paginate: config; track usuario) {
+              <tr (click)="onDetalhe(usuario.id)">
+                <td>{{ usuario.id }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.nome }}</td>
+                <td>{{ usuario.sobrenome }}</td>
+                <td>{{ usuario.dtNascimento | date: 'dd/MM/yyyy' : '+0000'}}</td>
+                <td>{{ usuario.cidade }}</td>
+                <td>{{ usuario.estado }}</td>
+                <td>{{ usuario.imagemPerfil }}</td>
+                <td>{{ usuario.descricao }}</td>
+                <td>{{ usuario.perfis }}</td>
+                <td>{{ usuario.lastLogin | date: 'dd/MM/yyyy HH:mm'}}</td>
+              </tr>
+            }
+          </tbody>
+        }
       </table>
       <div class="row">
         <div class="col-md-6">
-          <pagination-controls 
+          <pagination-controls
             [id]="config.id"
             (pageChange)="onPageChange($event)">
-          </pagination-controls>  
+          </pagination-controls>
         </div>
         <div class="col-md-6">
           Pag.Size:
           <select class="" [ngModel]="config.itemsPerPage" (ngModelChange)="onPageSize($event)">
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="20">20</option>
-              <option value="100">100</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="100">100</option>
           </select>
-        </div>    
+        </div>
       </div>
     </div>
   </div>
