@@ -6,7 +6,7 @@ import { UsuarioDetalheComponent } from './usuario/usuario-detalhe/usuario-detal
 import { UsuarioFormComponent } from './usuario/usuario-form/usuario-form.component';
 import { UsuarioListaComponent } from './usuario/usuario-lista/usuario-lista.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatSortModule } from '@angular/material';
+import { MatSortModule } from '@angular/material/sort';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModule } from '../shared/shared.module';
 
