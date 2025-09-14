@@ -39,7 +39,6 @@
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/jquery-ui-dist/jquery-ui.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/hammerjs/hammer.min.js",
               "src/app/dashboard/dist/js/adminlte.js"
             ],
             "browser": "src/main.ts"

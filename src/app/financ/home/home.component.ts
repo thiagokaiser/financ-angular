@@ -71,30 +71,32 @@ export class HomeComponent implements OnInit {
       type: 'bar',
       data: {
         labels: [],
-        datasets: [{              
+        datasets: [{
           data: [],
-          backgroundColor: 'rgba(60, 141, 188, 0.5)',          
+          backgroundColor: 'rgba(60, 141, 188, 0.5)',
           borderColor: 'rgba(60, 141, 188, 1)',
-          borderWidth: 1          
+          borderWidth: 1,
+          maxBarThickness: 100
         }]
       },
       options: {
-        legend:{
-          display: false
+        plugins: {
+          legend: {
+            display: false
+          }
         },
         scales: {
-          yAxes: [{
-            ticks: {
-                suggestedMin: 0,                
-            }
-          }],
-          xAxes: [{
-            maxBarThickness: 100
-          }]
+          y: {
+            beginAtZero: true,
+            suggestedMin: 0
+          },
+          x: {
+          }
         },
-        maintainAspectRatio: false        
-      }           
+        maintainAspectRatio: false
+      }
     });
+
 
     this.onRefresh();
   }  

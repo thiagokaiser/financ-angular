@@ -11,7 +11,7 @@ import { PerfilService } from './perfil/perfil.service';
 import { EsqueceuSenhaComponent } from './perfil/esqueceu-senha/esqueceu-senha.component';
 import { ResetaSenhaComponent } from './perfil/reseta-senha/reseta-senha.component';
 import { PerfilImagemComponent } from './perfil/perfil-imagem/perfil-imagem.component';
-import { ImageCropperModule } from 'ngx-image-cropper';
+import { ImageCropperComponent } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [LoginComponent, RegistrarComponent, EsqueceuSenhaComponent, ResetaSenhaComponent,
@@ -21,7 +21,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     SecurityRoutingModule,
     ReactiveFormsModule,
     SharedModule,
-    ImageCropperModule
+    ImageCropperComponent
   ],
   providers: [PerfilService]
 })
