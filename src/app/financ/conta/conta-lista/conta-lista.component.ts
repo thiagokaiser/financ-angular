@@ -13,7 +13,7 @@ import { tap } from 'rxjs/operators';
 })
 export class ContaListaComponent implements OnInit { 
   
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   contas$: Observable<ListConta>;  
   searchtext: string = "";  

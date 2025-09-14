@@ -14,7 +14,7 @@ import { AlertModalService } from 'src/app/shared/alert-modal.service';
 })
 export class DespesaListaComponent implements OnInit { 
   
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   despesas$: Observable<ListDespesa>;  
   searchtext: string = "";  

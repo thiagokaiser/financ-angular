@@ -14,7 +14,7 @@ export class InputContainerComponent implements OnInit, AfterContentInit {
 
   input: any;
 
-  @ContentChild(FormControlName, { static: false }) control: FormControlName;
+  @ContentChild(FormControlName) control: FormControlName;
 
   constructor() { }
 

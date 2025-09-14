@@ -13,7 +13,7 @@ import { tap } from 'rxjs/operators';
 })
 export class CategoriaListaComponent implements OnInit { 
   
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   categorias$: Observable<ListCategoria>;  
   searchtext: string = "";  

@@ -13,7 +13,7 @@ import { UsuarioService } from '../usuario.service';
 })
 export class UsuarioListaComponent implements OnInit { 
   
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   usuarios$: Observable<ListUsuario>;  
   searchtext: string = "";  
