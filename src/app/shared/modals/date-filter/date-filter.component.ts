@@ -4,8 +4,9 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-date-filter',
-  templateUrl: './date-filter.component.html'
+    selector: 'app-date-filter',
+    templateUrl: './date-filter.component.html',
+    standalone: false
 })
 export class DateFilterComponent implements OnInit {
 

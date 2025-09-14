@@ -9,8 +9,9 @@ import { NotificationService } from 'src/app/shared/messages/notification.servic
 import { Perfil } from '../perfil';
 
 @Component({
-  selector: 'app-usuario-detalhe',
-  templateUrl: './usuario-detalhe.component.html'
+    selector: 'app-usuario-detalhe',
+    templateUrl: './usuario-detalhe.component.html',
+    standalone: false
 })
 export class UsuarioDetalheComponent implements OnInit {
 

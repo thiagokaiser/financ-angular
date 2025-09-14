@@ -8,8 +8,9 @@ import { PaginationInstance } from 'ngx-pagination';
 import { tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-categoria-lista',
-  templateUrl: './categoria-lista.component.html'
+    selector: 'app-categoria-lista',
+    templateUrl: './categoria-lista.component.html',
+    standalone: false
 })
 export class CategoriaListaComponent implements OnInit { 
   

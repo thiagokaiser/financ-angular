@@ -3,9 +3,10 @@ import { LoginService } from 'src/app/security/login/login.service';
 import { User } from 'src/app/security/user';
 
 @Component({
-  selector: 'app-user-detail',
-  templateUrl: './user-detail.component.html',
-  styleUrls: ['./user-detail.component.css']
+    selector: 'app-user-detail',
+    templateUrl: './user-detail.component.html',
+    styleUrls: ['./user-detail.component.css'],
+    standalone: false
 })
 export class UserDetailComponent implements OnInit {  
 

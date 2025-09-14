@@ -5,8 +5,9 @@ import { LoginService } from 'src/app/security/login/login.service';
 import { User } from 'src/app/security/user';
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: './menu.component.html'
+    selector: 'app-menu',
+    templateUrl: './menu.component.html',
+    standalone: false
 })
 export class MenuComponent implements OnInit {
 

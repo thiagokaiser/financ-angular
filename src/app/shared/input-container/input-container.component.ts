@@ -2,9 +2,10 @@ import { Component, OnInit, ContentChild, AfterContentInit, Input } from '@angul
 import { FormControlName } from '@angular/forms';
 
 @Component({
-  selector: 'app-input-container',
-  templateUrl: './input-container.component.html',
-  styleUrls: ['./input-container.component.css']
+    selector: 'app-input-container',
+    templateUrl: './input-container.component.html',
+    styleUrls: ['./input-container.component.css'],
+    standalone: false
 })
 
 export class InputContainerComponent implements OnInit, AfterContentInit {

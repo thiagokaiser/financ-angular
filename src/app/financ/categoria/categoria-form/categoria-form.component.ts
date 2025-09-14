@@ -6,8 +6,9 @@ import { NotificationService } from 'src/app/shared/messages/notification.servic
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-categoria-form',
-  templateUrl: './categoria-form.component.html'
+    selector: 'app-categoria-form',
+    templateUrl: './categoria-form.component.html',
+    standalone: false
 })
 export class CategoriaFormComponent implements OnInit {
 

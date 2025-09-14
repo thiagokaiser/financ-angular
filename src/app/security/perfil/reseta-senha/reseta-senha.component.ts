@@ -6,9 +6,10 @@ import { PerfilService } from '../perfil.service';
 import { LoginService } from '../../login/login.service';
 
 @Component({
-  selector: 'app-reseta-senha',
-  templateUrl: './reseta-senha.component.html',
-  styleUrls: ['./reseta-senha.component.css']
+    selector: 'app-reseta-senha',
+    templateUrl: './reseta-senha.component.html',
+    styleUrls: ['./reseta-senha.component.css'],
+    standalone: false
 })
 export class ResetaSenhaComponent implements OnInit {
 

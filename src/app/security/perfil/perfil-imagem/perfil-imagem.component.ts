@@ -8,9 +8,10 @@ import { NotificationService } from 'src/app/shared/messages/notification.servic
 import { base64ToFile, ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
-  selector: 'app-perfil-imagem',
-  templateUrl: './perfil-imagem.component.html',
-  styleUrls: ['./perfil-imagem.component.css']
+    selector: 'app-perfil-imagem',
+    templateUrl: './perfil-imagem.component.html',
+    styleUrls: ['./perfil-imagem.component.css'],
+    standalone: false
 })
 export class PerfilImagemComponent implements OnInit {  
   

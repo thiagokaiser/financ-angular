@@ -3,8 +3,9 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-confirm-modal',
-  templateUrl: './confirm-modal.component.html'
+    selector: 'app-confirm-modal',
+    templateUrl: './confirm-modal.component.html',
+    standalone: false
 })
 export class ConfirmModalComponent implements OnInit {
 

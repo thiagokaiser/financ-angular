@@ -5,8 +5,9 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-categoria-form-modal',
-  templateUrl: './categoria-form-modal.component.html'
+    selector: 'app-categoria-form-modal',
+    templateUrl: './categoria-form-modal.component.html',
+    standalone: false
 })
 export class CategoriaFormModalComponent implements OnInit {
 

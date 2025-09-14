@@ -8,8 +8,9 @@ import { take, switchMap } from 'rxjs/operators';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
 
 @Component({
-  selector: 'app-despesa-detalhe',
-  templateUrl: './despesa-detalhe.component.html'
+    selector: 'app-despesa-detalhe',
+    templateUrl: './despesa-detalhe.component.html',
+    standalone: false
 })
 export class DespesaDetalheComponent implements OnInit {
 

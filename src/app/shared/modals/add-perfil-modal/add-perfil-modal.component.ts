@@ -6,8 +6,9 @@ import { Perfil } from 'src/app/admin/usuario/perfil';
 import { UsuarioService } from 'src/app/admin/usuario/usuario.service';
 
 @Component({
-  selector: 'app-add-perfil-modal',
-  templateUrl: './add-perfil-modal.component.html'
+    selector: 'app-add-perfil-modal',
+    templateUrl: './add-perfil-modal.component.html',
+    standalone: false
 })
 export class AddPerfilModalComponent implements OnInit {
 

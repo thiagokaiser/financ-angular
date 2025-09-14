@@ -4,9 +4,10 @@ import { LoginService } from './security/login/login.service';
 import { LoadingService } from './shared/loading.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']  
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent implements OnInit{
   title = 'FinancAngular';  

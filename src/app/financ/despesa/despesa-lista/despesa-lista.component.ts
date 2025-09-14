@@ -9,8 +9,9 @@ import { map, take, tap } from 'rxjs/operators';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 
 @Component({
-  selector: 'app-despesa-lista',
-  templateUrl: './despesa-lista.component.html'
+    selector: 'app-despesa-lista',
+    templateUrl: './despesa-lista.component.html',
+    standalone: false
 })
 export class DespesaListaComponent implements OnInit { 
   

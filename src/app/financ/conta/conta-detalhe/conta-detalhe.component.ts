@@ -8,8 +8,9 @@ import { take, switchMap } from 'rxjs/operators';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
 
 @Component({
-  selector: 'app-conta-detalhe',
-  templateUrl: './conta-detalhe.component.html'
+    selector: 'app-conta-detalhe',
+    templateUrl: './conta-detalhe.component.html',
+    standalone: false
 })
 export class ContaDetalheComponent implements OnInit {
 

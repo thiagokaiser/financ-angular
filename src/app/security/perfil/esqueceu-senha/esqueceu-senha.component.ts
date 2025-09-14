@@ -7,9 +7,10 @@ import { LoginService } from '../../login/login.service';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-esqueceu-senha',
-  templateUrl: './esqueceu-senha.component.html',
-  styleUrls: ['./esqueceu-senha.component.css']
+    selector: 'app-esqueceu-senha',
+    templateUrl: './esqueceu-senha.component.html',
+    styleUrls: ['./esqueceu-senha.component.css'],
+    standalone: false
 })
 export class EsqueceuSenhaComponent implements OnInit {
 

@@ -16,8 +16,9 @@ import { ContaFormModalComponent } from 'src/app/shared/modals/conta-form-modal/
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 
 @Component({
-  selector: 'app-despesa-form',
-  templateUrl: './despesa-form.component.html'
+    selector: 'app-despesa-form',
+    templateUrl: './despesa-form.component.html',
+    standalone: false
 })
 export class DespesaFormComponent implements OnInit {
 

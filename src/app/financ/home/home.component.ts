@@ -9,8 +9,9 @@ import { ListDespesa } from '../despesa/despesa';
 import { DespesaService } from '../despesa/despesa.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html'
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    standalone: false
 })
 export class HomeComponent implements OnInit {  
 

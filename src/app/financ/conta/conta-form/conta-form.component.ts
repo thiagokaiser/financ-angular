@@ -6,8 +6,9 @@ import { NotificationService } from 'src/app/shared/messages/notification.servic
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-conta-form',
-  templateUrl: './conta-form.component.html'
+    selector: 'app-conta-form',
+    templateUrl: './conta-form.component.html',
+    standalone: false
 })
 export class ContaFormComponent implements OnInit {
 

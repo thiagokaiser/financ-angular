@@ -4,8 +4,9 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-month-filter',
-  templateUrl: './month-filter.component.html'
+    selector: 'app-month-filter',
+    templateUrl: './month-filter.component.html',
+    standalone: false
 })
 export class MonthFilterComponent implements OnInit {
 

@@ -6,9 +6,10 @@ import { NotificationService } from 'src/app/shared/messages/notification.servic
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-registrar',
-  templateUrl: './registrar.component.html',
-  styleUrls: ['./registrar.component.css']
+    selector: 'app-registrar',
+    templateUrl: './registrar.component.html',
+    styleUrls: ['./registrar.component.css'],
+    standalone: false
 })
 export class RegistrarComponent implements OnInit {
 

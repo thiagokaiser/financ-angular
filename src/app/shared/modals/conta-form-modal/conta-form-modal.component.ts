@@ -5,8 +5,9 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-conta-form-modal',
-  templateUrl: './conta-form-modal.component.html'
+    selector: 'app-conta-form-modal',
+    templateUrl: './conta-form-modal.component.html',
+    standalone: false
 })
 export class ContaFormModalComponent implements OnInit {
 

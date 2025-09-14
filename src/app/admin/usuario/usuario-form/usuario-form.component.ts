@@ -6,8 +6,9 @@ import { NotificationService } from 'src/app/shared/messages/notification.servic
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-usuario-form',
-  templateUrl: './usuario-form.component.html'
+    selector: 'app-usuario-form',
+    templateUrl: './usuario-form.component.html',
+    standalone: false
 })
 export class UsuarioFormComponent implements OnInit {
 

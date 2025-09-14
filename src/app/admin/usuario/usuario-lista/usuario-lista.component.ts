@@ -8,8 +8,9 @@ import { ListUsuario } from '../usuario';
 import { UsuarioService } from '../usuario.service';
 
 @Component({
-  selector: 'app-usuario-lista',
-  templateUrl: './usuario-lista.component.html'
+    selector: 'app-usuario-lista',
+    templateUrl: './usuario-lista.component.html',
+    standalone: false
 })
 export class UsuarioListaComponent implements OnInit { 
   
