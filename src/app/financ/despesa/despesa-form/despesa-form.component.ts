@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { DespesaService } from '../despesa.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
@@ -21,7 +21,7 @@ import { AlertModalService } from 'src/app/shared/alert-modal.service';
 })
 export class DespesaFormComponent implements OnInit {
 
-  form: FormGroup;
+  form: UntypedFormGroup;
   submitted = false;
   idRegistro: number;
   erros = null;
@@ -32,7 +32,7 @@ export class DespesaFormComponent implements OnInit {
   msgSuccess: string;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private service: DespesaService,
     private categService: CategoriaService,
     private contaService: ContaService,

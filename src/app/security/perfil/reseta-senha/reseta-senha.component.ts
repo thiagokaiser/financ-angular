@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
 import { PerfilService } from '../perfil.service';
@@ -12,14 +12,14 @@ import { LoginService } from '../../login/login.service';
 })
 export class ResetaSenhaComponent implements OnInit {
 
-  form: FormGroup
+  form: UntypedFormGroup
   submitted = false
   erros = null
   hasError = false
   token = "";
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private service: PerfilService,
     private loginService: LoginService,
     private ns: NotificationService,
@@ -37,7 +37,7 @@ export class ResetaSenhaComponent implements OnInit {
     }, {validator: this.checkPasswords });
   }
 
-  checkPasswords(group: FormGroup) {
+  checkPasswords(group: UntypedFormGroup) {
     let pass = group.controls.newPassword.value;
     let confirmPass = group.controls.confirmNewPassword.value;    
     return pass === confirmPass ? null : { notSame: true }     

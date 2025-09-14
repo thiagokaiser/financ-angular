@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 
@@ -9,13 +9,13 @@ import { Subject } from 'rxjs';
 })
 export class DateFilterComponent implements OnInit {
 
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   confirmResult: Subject<any>;
 
   constructor(
     public bsModalRef: BsModalRef,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     ) { }
 
   ngOnInit() {    

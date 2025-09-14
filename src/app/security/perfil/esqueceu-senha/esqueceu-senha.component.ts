@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
 import { PerfilService } from '../perfil.service';
@@ -13,7 +13,7 @@ import { Location } from '@angular/common';
 })
 export class EsqueceuSenhaComponent implements OnInit {
 
-  form: FormGroup
+  form: UntypedFormGroup
   submitted = false
   erros = null
   hasError = false
@@ -21,7 +21,7 @@ export class EsqueceuSenhaComponent implements OnInit {
   emailReadyonly = false
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private service: PerfilService,
     private loginService: LoginService,
     private ns: NotificationService,

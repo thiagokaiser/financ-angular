@@ -1,5 +1,5 @@
 import { Component, OnInit, ErrorHandler } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { CategoriaService } from '../../../financ/categoria/categoria.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
 })
 export class CategoriaFormModalComponent implements OnInit {
 
-  form: FormGroup;
+  form: UntypedFormGroup;
   submitted = false;
   idRegistro: number;
   erros = null;
@@ -18,7 +18,7 @@ export class CategoriaFormModalComponent implements OnInit {
   confirmResult: Subject<any>;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     public bsModalRef: BsModalRef,
     private service: CategoriaService
   ) { }

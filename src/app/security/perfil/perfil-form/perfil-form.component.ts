@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
 import { PerfilService } from '../perfil.service';
@@ -16,13 +16,13 @@ import { switchMap } from 'rxjs/operators';
 })
 export class PerfilFormComponent implements OnInit {
 
-  form: FormGroup;
+  form: UntypedFormGroup;
   submitted = false;  
   hasError = false;
   erros = null;  
 
   constructor(
-    private fb: FormBuilder,      
+    private fb: UntypedFormBuilder,      
     private route: ActivatedRoute,  
     private router: Router,
     private ns: NotificationService,

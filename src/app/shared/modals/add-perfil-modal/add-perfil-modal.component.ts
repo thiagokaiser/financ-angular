@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { Perfil } from 'src/app/admin/usuario/perfil';
@@ -11,7 +11,7 @@ import { UsuarioService } from 'src/app/admin/usuario/usuario.service';
 })
 export class AddPerfilModalComponent implements OnInit {
 
-  form: FormGroup;
+  form: UntypedFormGroup;
   submitted = false;
   idRegistro: number;
   erros = null;
@@ -20,7 +20,7 @@ export class AddPerfilModalComponent implements OnInit {
   perfis = [];
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private service: UsuarioService,
     public bsModalRef: BsModalRef,
   ) { }

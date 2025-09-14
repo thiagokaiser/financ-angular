@@ -16,20 +16,16 @@ import { ContaFormModalComponent } from './modals/conta-form-modal/conta-form-mo
 import { AddPerfilModalComponent } from './modals/add-perfil-modal/add-perfil-modal.component';
 
 @NgModule({
-  declarations: [    
-  ConfirmModalComponent, InputContainerComponent, SnackbarComponent, DateFilterComponent, MonthFilterComponent,
-  NotFoundComponent, CategoriaFormModalComponent, ContaFormModalComponent, AddPerfilModalComponent
-],
-  imports: [
-    CommonModule, ReactiveFormsModule
-  ],
-  exports:[
-    ConfirmModalComponent, InputContainerComponent, SnackbarComponent
-  ],
-  entryComponents:[
-    ConfirmModalComponent, DateFilterComponent, MonthFilterComponent, CategoriaFormModalComponent,
-    ContaFormModalComponent, AddPerfilModalComponent
-  ]  
+    declarations: [
+        ConfirmModalComponent, InputContainerComponent, SnackbarComponent, DateFilterComponent, MonthFilterComponent,
+        NotFoundComponent, CategoriaFormModalComponent, ContaFormModalComponent, AddPerfilModalComponent
+    ],
+    imports: [
+        CommonModule, ReactiveFormsModule
+    ],
+    exports: [
+        ConfirmModalComponent, InputContainerComponent, SnackbarComponent
+    ]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders<SharedModule>{
