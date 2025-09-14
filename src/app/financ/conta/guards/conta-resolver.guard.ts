@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, Resolve } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { ContaService } from '../conta.service';
 import { Conta } from '../conta';
@@ -7,7 +7,7 @@ import { Conta } from '../conta';
 @Injectable({
   providedIn: 'root'
 })
-export class ContaResolverGuard implements Resolve<Conta> {
+export class ContaResolverGuard  {
 
   constructor(
     private service: ContaService
