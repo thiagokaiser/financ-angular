@@ -18,6 +18,8 @@ export class PerfilImagemComponent implements OnInit {
   user$: Observable<User>
   imageChangedEvent: any = '';  
   croppedImage = this.loginService.user.imagemPerfil;
+  croppedImageBlob: Blob | null = null;
+  imageLoadedFlag = false;
 
   constructor(
     private loginService: LoginService,
@@ -30,23 +32,25 @@ export class PerfilImagemComponent implements OnInit {
     this.carregaPerfil();    
   }    
 
-  onSubmit(){
-    if(this.croppedImage == this.loginService.user.imagemPerfil){
-      this.ns.notify('Imagem nao alterada')
-      this.router.navigate(['security/perfil/'])        
-    }else{
-      let file = base64ToFile(this.croppedImage)
-      const formData = new FormData();
-      formData.append('file', file);
+  onSubmit() {
+    if (!this.croppedImageBlob) {
+      this.ns.notify('Imagem nao alterada');
+      this.router.navigate(['security/perfil/']);
+    } else {
+      const formData = new FormData();      
+      formData.append('file', this.croppedImageBlob, 'perfil.png');
 
       this.perfilService.uploadImagem(formData).subscribe(
-        success => {          
-          this.ns.notify('Imagem atualizada com sucesso.')
-          this.loginService.updateImagePath(success.imagemPerfil)
-          this.router.navigate(['security/perfil/'])        
+        success => {
+          this.ns.notify('Imagem atualizada com sucesso.');
+          this.loginService.updateImagePath(success.imagemPerfil);
+          this.router.navigate(['security/perfil/']);
+        },
+        error => {
+          this.ns.notify('Erro ao atualizar a imagem.');
         }
-      )  
-    }    
+      );
+    }
   }
 
   onCancel(){
@@ -63,15 +67,17 @@ export class PerfilImagemComponent implements OnInit {
   }  
 
   fileChangeEvent(event: any): void {
+    this.imageLoadedFlag = true;
     this.imageChangedEvent = event;      
   }
 
   imageCropped(event: ImageCroppedEvent) {
-    this.croppedImage = event.base64;
+    if (event.blob) {
+      this.croppedImageBlob = event.blob;
+    }
   }
 
   imageLoaded() {
-    // show cropper
   }
 
   cropperReady() {

@@ -30,24 +30,25 @@
               </div>
             </div>
           </div>
-        } @else {
-          Carregando perfil...
-        }
+      } @else {
+        Carregando perfil...
+      }
+    </div>
+  </div>
+  <div class="row" *ngIf="imageLoadedFlag">
+    <div class="col-md-12">
+      <div class="pull-left">
+        <image-cropper id="image-cropper"
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="1 / 1"
+          format="png"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"
+        ></image-cropper>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="pull-left">
-          <image-cropper id="image-cropper"
-            [imageChangedEvent]="imageChangedEvent"
-            [maintainAspectRatio]="true"
-            [aspectRatio]="1 / 1"
-            format="png"
-            (imageCropped)="imageCropped($event)"
-            (imageLoaded)="imageLoaded()"
-            (cropperReady)="cropperReady()"
-            (loadImageFailed)="loadImageFailed()"
-          ></image-cropper></div>
-        </div></div>
-
-      </section><!-- /.content -->
+  </div>
+</section><!-- /.content -->
