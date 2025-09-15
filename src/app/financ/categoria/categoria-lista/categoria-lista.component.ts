@@ -8,12 +8,13 @@ import { PaginationInstance } from 'ngx-pagination';
 import { tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-categoria-lista',
-  templateUrl: './categoria-lista.component.html'
+    selector: 'app-categoria-lista',
+    templateUrl: './categoria-lista.component.html',
+    standalone: false
 })
 export class CategoriaListaComponent implements OnInit { 
   
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   categorias$: Observable<ListCategoria>;  
   searchtext: string = "";  

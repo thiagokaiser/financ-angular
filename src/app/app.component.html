@@ -1,18 +1,19 @@
-<ng-container *ngIf="loading">
+@if (loading) {
   <div class="loader">
-    <mat-spinner></mat-spinner>    
+    <mat-spinner></mat-spinner>
   </div>
-</ng-container>
-<div class="wrapper" *ngIf="isLoggedIn(); else inicio">
-  <app-header></app-header>
-  <app-menu></app-menu>
-  <app-body></app-body>
-  <app-snackbar></app-snackbar>
-  <app-footer></app-footer>
-</div>  
-<ng-template #inicio>
+}
+@if (isLoggedIn()) {
+  <div class="wrapper">
+    <app-header></app-header>
+    <app-menu></app-menu>
+    <app-body></app-body>
+    <app-snackbar></app-snackbar>
+    <app-footer></app-footer>
+  </div>
+} @else {
   <div class="background">
     <router-outlet></router-outlet>
   </div>
   <app-snackbar></app-snackbar>
-</ng-template>
+}

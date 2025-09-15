@@ -5,16 +5,17 @@ import { DespesaService } from '../despesa.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSort, Sort } from '@angular/material/sort';
 import { PaginationInstance } from 'ngx-pagination';
-import { map, take, tap } from 'rxjs/operators';
+import { take, tap, filter } from 'rxjs/operators';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 
 @Component({
-  selector: 'app-despesa-lista',
-  templateUrl: './despesa-lista.component.html'
+    selector: 'app-despesa-lista',
+    templateUrl: './despesa-lista.component.html',
+    standalone: false
 })
 export class DespesaListaComponent implements OnInit { 
   
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   despesas$: Observable<ListDespesa>;  
   searchtext: string = "";  
@@ -110,18 +111,17 @@ export class DespesaListaComponent implements OnInit {
     this.getTotals(params);    
   } 
 
-  onDateFilter() {    
-    const result$ = this.alertService.modalDateFilter(this.dtInicial, this.dtFinal)    
-    result$.asObservable().pipe(
-      take(1),
-      map(result => this.result = result)
-    ).subscribe(
-      success => {
-        this.dtInicial = this.result.dtInicial;
-        this.dtFinal = this.result.dtFinal;
+  onDateFilter() {
+    this.alertService.modalDateFilter(this.dtInicial, this.dtFinal)
+      .pipe(
+        take(1),
+        filter(result => !!result)
+      )
+      .subscribe(result => {
+        this.dtInicial = result.dtInicial;
+        this.dtFinal = result.dtFinal;
         this.onRefresh();
-      }
-    );    
+    });    
   } 
 
   onPrev(){

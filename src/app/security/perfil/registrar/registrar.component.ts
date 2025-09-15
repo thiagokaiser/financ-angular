@@ -1,24 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { PerfilService } from '../perfil.service';
 import { LoginService } from '../../login/login.service';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-registrar',
-  templateUrl: './registrar.component.html',
-  styleUrls: ['./registrar.component.css']
+    selector: 'app-registrar',
+    templateUrl: './registrar.component.html',
+    styleUrls: ['./registrar.component.css'],
+    standalone: false
 })
 export class RegistrarComponent implements OnInit {
 
-  form: FormGroup
+  form: UntypedFormGroup
   submitted = false
   erros = null
   hasError = false
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private service: PerfilService,
     private loginService: LoginService,
     private ns: NotificationService,
@@ -36,7 +37,7 @@ export class RegistrarComponent implements OnInit {
     }, {validator: this.checkPasswords });
   }
 
-  checkPasswords(group: FormGroup) {
+  checkPasswords(group: UntypedFormGroup) {
     let pass = group.controls.senha.value;
     let confirmPass = group.controls.confirmPassword.value;    
     return pass === confirmPass ? null : { notSame: true }     

@@ -2,9 +2,10 @@ import { Component, OnInit, ContentChild, AfterContentInit, Input } from '@angul
 import { FormControlName } from '@angular/forms';
 
 @Component({
-  selector: 'app-input-container',
-  templateUrl: './input-container.component.html',
-  styleUrls: ['./input-container.component.css']
+    selector: 'app-input-container',
+    templateUrl: './input-container.component.html',
+    styleUrls: ['./input-container.component.css'],
+    standalone: false
 })
 
 export class InputContainerComponent implements OnInit, AfterContentInit {
@@ -14,7 +15,7 @@ export class InputContainerComponent implements OnInit, AfterContentInit {
 
   input: any;
 
-  @ContentChild(FormControlName, { static: false }) control: FormControlName;
+  @ContentChild(FormControlName) control: FormControlName;
 
   constructor() { }
 

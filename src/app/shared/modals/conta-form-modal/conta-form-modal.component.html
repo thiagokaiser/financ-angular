@@ -3,28 +3,43 @@
   <h1>
     Conta
     <small>{{ formLabel }}</small>
-  </h1>      
+  </h1>
 </section>
+
 <!-- Main content -->
 <section class="content">
-  <!-- Small boxes (Stat box) -->
-  <div class="box box-primary">            
-    <div class="box-body">       
-      <div *ngIf="submitted">
-        <table>
-          <tr *ngFor="let erro of erros ">
-            <td><span class="text-red"><i class="fa fa-remove"></i> {{ erro.fieldName }} - {{ erro.message }}</span></td>
-          </tr>
-        </table>
-      </div>      
-      <form [formGroup]="form" class="form-size-limited">    
-        <app-input-container errorMessage="Campo Obrigatorio" label="Descricao">     
-          <input type="text" class="form-control" id="nome" placeholder="Descricao" formControlName="descricao"/>
-        </app-input-container>                       
-        <p></p>
-        <div>
-          <button type="submit" class="btn btn-default" (click)="onConfirm()"><i class="fa fa-check" aria-hidden="true"></i> Salvar</button>{{' '}}
-          <button type="button" class="btn btn-default" (click)="onClose()"><i class="fa fa-times" aria-hidden="true"></i> Cancelar</button>
+  <div class="box box-primary" style="max-width:600px; margin:auto;">
+    <div class="box-body">
+      <form [formGroup]="form" class="form-size-limited" (ngSubmit)="onConfirm()">
+        <div class="form-group">
+          <label for="descricao">Descrição</label>
+          <input type="text"
+                 id="descricao"
+                 class="form-control"
+                 placeholder="Descrição"
+                 formControlName="descricao">
+          <div class="text-red" *ngIf="form.get('descricao').touched && form.get('descricao').invalid">
+            <span *ngIf="form.get('descricao').hasError('required')">Campo obrigatório</span>
+            <span *ngIf="form.get('descricao').hasError('minlength')">Mínimo de 3 caracteres</span>
+            <span *ngIf="form.get('descricao').hasError('maxlength')">Máximo de 60 caracteres</span>
+          </div>
+        </div>
+
+        <div *ngIf="erros && erros.length" style="margin-top: 10px;">
+          <table>
+            <tr *ngFor="let erro of erros; trackBy: trackByFn">
+              <td><span class="text-red"><i class="fa fa-remove"></i> {{ erro.fieldName }} - {{ erro.message }}</span></td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="margin-top:15px; text-align:right;">
+          <button type="submit" class="btn btn-primary" style="margin-right:5px;">
+            <i class="fa fa-check" aria-hidden="true"></i> Salvar
+          </button>
+          <button type="button" class="btn btn-default" (click)="onClose()">
+            <i class="fa fa-times" aria-hidden="true"></i> Cancelar
+          </button>
         </div>
       </form>
     </div>

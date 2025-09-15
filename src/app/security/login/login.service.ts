@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { User } from '../user';
 import { tap, filter } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
-import * as jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 @Injectable()
 export class LoginService{
@@ -38,7 +38,7 @@ export class LoginService{
     }
 
     saveUserName(){                
-        var tokenDecoded = jwt_decode(this.user.accessToken);        
+        var tokenDecoded = jwtDecode(this.user.accessToken);        
         this.user.id = tokenDecoded['id']
         this.user.email = tokenDecoded['email'];        
         this.loadUserProfile();        

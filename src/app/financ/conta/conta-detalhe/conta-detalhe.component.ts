@@ -8,8 +8,9 @@ import { take, switchMap } from 'rxjs/operators';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
 
 @Component({
-  selector: 'app-conta-detalhe',
-  templateUrl: './conta-detalhe.component.html'
+    selector: 'app-conta-detalhe',
+    templateUrl: './conta-detalhe.component.html',
+    standalone: false
 })
 export class ContaDetalheComponent implements OnInit {
 
@@ -46,7 +47,7 @@ export class ContaDetalheComponent implements OnInit {
 
   onDelete(conta: Conta) {
     const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja eliminar o conta?');
-    result$.asObservable().pipe(
+    result$.pipe(
       take(1),
       switchMap(result => result ? this.service.remove(conta.id) : EMPTY)
     ).subscribe(

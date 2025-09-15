@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { DespesaService } from '../despesa.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
@@ -9,19 +9,17 @@ import { Categoria } from '../../categoria/categoria';
 import { Conta } from '../../conta/conta';
 import { CategoriaService } from '../../categoria/categoria.service';
 import { ContaService } from '../../conta/conta.service';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { CategoriaFormModalComponent } from '../../../shared/modals/categoria-form-modal/categoria-form-modal.component';
 import { take } from 'rxjs/operators';
-import { ContaFormModalComponent } from 'src/app/shared/modals/conta-form-modal/conta-form-modal.component';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 
 @Component({
-  selector: 'app-despesa-form',
-  templateUrl: './despesa-form.component.html'
+    selector: 'app-despesa-form',
+    templateUrl: './despesa-form.component.html',
+    standalone: false
 })
 export class DespesaFormComponent implements OnInit {
 
-  form: FormGroup;
+  form: UntypedFormGroup;
   submitted = false;
   idRegistro: number;
   erros = null;
@@ -32,7 +30,7 @@ export class DespesaFormComponent implements OnInit {
   msgSuccess: string;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private service: DespesaService,
     private categService: CategoriaService,
     private contaService: ContaService,
@@ -167,7 +165,7 @@ export class DespesaFormComponent implements OnInit {
 
   onNewCateg(){
     const result$ = this.alertService.modalNewCateg()
-    result$.asObservable().pipe(take(1)).subscribe(
+    result$.pipe(take(1)).subscribe(
       success => {
         this.categorias$ = this.categService.list();
       }
@@ -176,7 +174,7 @@ export class DespesaFormComponent implements OnInit {
 
   onNewConta(){
     const result2$ = this.alertService.modalNewConta()
-    result2$.asObservable().pipe(take(1)).subscribe(
+    result2$.pipe(take(1)).subscribe(
       success => {
         this.contas$ = this.contaService.list();
       }

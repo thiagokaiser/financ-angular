@@ -7,9 +7,10 @@ import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
 
 @Component({
-  selector: 'app-perfil-detalhe',
-  templateUrl: './perfil-detalhe.component.html',
-  styleUrls: ['./perfil-detalhe.component.css']
+    selector: 'app-perfil-detalhe',
+    templateUrl: './perfil-detalhe.component.html',
+    styleUrls: ['./perfil-detalhe.component.css'],
+    standalone: false
 })
 export class PerfilDetalheComponent implements OnInit {
     

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, Resolve } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { DespesaService } from '../despesa.service';
 import { Despesa } from '../despesa';
@@ -8,7 +8,7 @@ import { CategoriaDetalheComponent } from '../../categoria/categoria-detalhe/cat
 @Injectable({
   providedIn: 'root'
 })
-export class DespesaResolverGuard implements Resolve<Despesa> {
+export class DespesaResolverGuard  {
 
   constructor(
     private service: DespesaService

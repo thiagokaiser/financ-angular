@@ -1,167 +1,175 @@
 <section class="content-header">
-    <h1>
-        Home
-        <small>Financ</small>
-    </h1>      
+  <h1>
+    Home
+    <small>Financ</small>
+  </h1>
 </section>
 <!-- Main content -->
 <section class="content">
-    <div class="box box-info">
-        <div class="box-header with-border">
-            <h3 class="box-title">Informações Gerais</h3>            
-        </div>        
-        <div class="box-body">
-            <div class="row" id="info-gerais">                
-                <div class="col-md-5 col-sm-6 col-xs-12">
-                    <div class="info-box bg-yellow pointer" (click)="onDateFilter()">
-                        <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
-                        <div class="info-box-content">
-                            <u>Filtro:</u><br>
-                            De: <span class="box-date-content">{{ dtInicial  | date:'dd/MM/yyyy' : '+0000' }}</span><br>
-                            Até: <span class="box-date-content">{{ dtFinal  | date:'dd/MM/yyyy' : '+0000' }}</span><br>                            
-                        </div>                        
-                    </div>                    
-                </div>
-                <div class="col-md-7 col-sm-6 col-xs-12">
-                    <div class="info-box bg-aqua">
-                        <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
-                        <div class="info-box-content">
-                            Pago: <b>{{ totalPago | number : '1.2-2'}}</b><br>
-                            Pendente: <b>{{ totalPendente | number : '1.2-2' }}</b>
-                            <div class="progress">
-                                <div class="progress-bar" [ngStyle]="{width: + totalPagoPercent + '%'}"></div>
-                            </div>
-                            <span class="progress-description">
-                                Total: <b>{{ total | number : '1.2-2' }}</b>
-                            </span>
-                        </div>                        
-                    </div>                    
-                </div>
-            </div>
-        </div>
+  <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">Informações Gerais</h3>
     </div>
-    <div class="row">        
-        <div class="col-md-8">            
-            <div class="row">
-                <div class="col-md-12">                    
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Despesas por Categoria</h3>                            
-                        </div>
-                        <div class="box-body">
-                            <div id="chart-categ">
-                                <canvas id="pieChart"></canvas>
-                            </div>                            
-                        </div>
-                    </div>
-                </div>
+    <div class="box-body">
+      <div class="row" id="info-gerais">
+        <div class="col-md-5 col-sm-6 col-xs-12">
+          <div class="info-box bg-yellow pointer" (click)="onDateFilter()">
+            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+            <div class="info-box-content">
+              <u>Filtro:</u><br>
+              De: <span class="box-date-content">{{ dtInicial  | date:'dd/MM/yyyy' : '+0000' }}</span><br>
+              Até: <span class="box-date-content">{{ dtFinal  | date:'dd/MM/yyyy' : '+0000' }}</span><br>
             </div>
-            <div class="row">
-                <div class="col-md-12">                    
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Pagamentos entre {{ dtInicialBarChart  | date:'MM/yyyy' : '+0000' }} e {{ dtFinalBarChart  | date:'MM/yyyy' : '+0000' }}</h3>                            
-                            <div class="box-tools pull-right">
-                                <button class="btn btn-box-tool" (click)="onMonthFilter()">Filtro</button>                                
-                            </div>
-                        </div>
-                        <div class="box-body">                            
-                            <div class="table-responsive">
-                                <div id="chart-mes">
-                                    <div class="table">
-                                        <canvas id="barChart" height="230"></canvas>
-                                    </div>                         
-                                </div>
-                            </div>
-                        </div>
-                    </div>        
-                </div>
-            </div>            
+          </div>
         </div>
-        <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Despesas Pendentes</h3>                            
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <div class="table-responsive">
-                                <table class="table no-margin table-condensed table-hover table-pointer">
-                                    <thead>
-                                        <tr>
-                                            <th>Despesa</th>
-                                            <th>Valor</th>
-                                            <th>Vencimento</th>                                    
-                                        </tr>
-                                    </thead>
-                                    <tbody *ngIf="despesasPendentes$ | async as despesasPendentes">
-                                        <tr *ngFor="let despesa of despesasPendentes.content | paginate: configPendente" (click)="onDetalheDespesa(despesa.id)">                                          
-                                          <td>{{ despesa.descricao }}</td>            
-                                          <td>{{ despesa.valor | number : '1.2-2'}}</td>                                          
-                                          <td>{{ despesa.dtVencimento | date:'dd/MM/yyyy' : '+0000' }}</td>            
-                                        </tr>
-                                      </tbody>
-                                </table>
-                            </div>    
-                            <div class="row">
-                                <pagination-controls 
-                                    [id]="configPendente.id"
-                                    (pageChange)="onPageChangePendente($event)">
-                                </pagination-controls>
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer clearfix">            
-                            <a (click)="onTodasDespesas()" class="btn btn-sm btn-default btn-flat pull-right">Ver Todas</a>
-                        </div>
-                        <!-- /.box-footer -->
-                    </div>
-                </div>
+        <div class="col-md-7 col-sm-6 col-xs-12">
+          <div class="info-box bg-aqua">
+            <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
+            <div class="info-box-content">
+              Pago: <b>{{ totalPago | number : '1.2-2'}}</b><br>
+              Pendente: <b>{{ totalPendente | number : '1.2-2' }}</b>
+              <div class="progress">
+                <div class="progress-bar" [ngStyle]="{width: + totalPagoPercent + '%'}"></div>
+              </div>
+              <span class="progress-description">
+                Total: <b>{{ total | number : '1.2-2' }}</b>
+              </span>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Despesas Pagas</h3>                            
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <div class="table-responsive">
-                                <table class="table no-margin table-condensed table-hover table-pointer">
-                                    <thead>
-                                        <tr>
-                                            <th>Despesa</th>
-                                            <th>Valor</th>
-                                            <th>Vencimento</th>                                    
-                                        </tr>
-                                    </thead>
-                                    <tbody *ngIf="despesasPagas$ | async as despesasPagas">
-                                        <tr *ngFor="let despesa of despesasPagas.content | paginate: configPago" (click)="onDetalheDespesa(despesa.id)">                                          
-                                          <td>{{ despesa.descricao }}</td>            
-                                          <td>{{ despesa.valor | number : '1.2-2'}}</td>    
-                                          <td>{{ despesa.dtVencimento | date:'dd/MM/yyyy' : '+0000' }}</td>                                         
-                                        </tr>
-                                      </tbody>
-                                </table>
-                            </div>    
-                            <div class="row">
-                                <pagination-controls 
-                                    [id]="configPago.id"
-                                    (pageChange)="onPageChangePago($event)">
-                                </pagination-controls>
-                            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Despesas por Categoria</h3>
+            </div>
+            <div class="box-body">
+              <div id="chart-categ">
+                <canvas id="pieChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Pagamentos entre {{ dtInicialBarChart  | date:'MM/yyyy' : '+0000' }} e {{ dtFinalBarChart  | date:'MM/yyyy' : '+0000' }}</h3>
+              <div class="box-tools pull-right">
+                <button class="btn btn-box-tool" (click)="onMonthFilter()">Filtro</button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="table-responsive">
+                <div id="chart-mes">
+                  <div class="table">
+                    <canvas id="barChart" height="230"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Despesas Pendentes</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin table-condensed table-hover table-pointer">
+                  <thead>
+                    <tr>
+                      <th>Despesa</th>
+                      <th>Valor</th>
+                      <th>Vencimento</th>
+                    </tr>
+                  </thead>
+                  @if (despesasPendentes$ | async; as despesasPendentes) {
+                    <tbody>
+                      @for (despesa of despesasPendentes.content | paginate: configPendente; track despesa) {
+                        <tr (click)="onDetalheDespesa(despesa.id)">
+                          <td>{{ despesa.descricao }}</td>
+                          <td>{{ despesa.valor | number : '1.2-2'}}</td>
+                          <td>{{ despesa.dtVencimento | date:'dd/MM/yyyy' : '+0000' }}</td>
+                        </tr>
+                      }
+                    </tbody>
+                  }
+                </table>
+              </div>
+              <div class="row">
+                <pagination-controls
+                  [id]="configPendente.id"
+                  (pageChange)="onPageChangePendente($event)">
+                </pagination-controls>
+              </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              <a (click)="onTodasDespesas()" class="btn btn-sm btn-default btn-flat pull-right">Ver Todas</a>
+            </div>
+            <!-- /.box-footer -->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Despesas Pagas</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin table-condensed table-hover table-pointer">
+                  <thead>
+                    <tr>
+                      <th>Despesa</th>
+                      <th>Valor</th>
+                      <th>Vencimento</th>
+                    </tr>
+                  </thead>
+                  @if (despesasPagas$ | async; as despesasPagas) {
+                    <tbody>
+                      @for (despesa of despesasPagas.content | paginate: configPago; track despesa) {
+                        <tr (click)="onDetalheDespesa(despesa.id)">
+                          <td>{{ despesa.descricao }}</td>
+                          <td>{{ despesa.valor | number : '1.2-2'}}</td>
+                          <td>{{ despesa.dtVencimento | date:'dd/MM/yyyy' : '+0000' }}</td>
+                        </tr>
+                      }
+                    </tbody>
+                  }
+                </table>
+              </div>
+              <div class="row">
+                <pagination-controls
+                  [id]="configPago.id"
+                  (pageChange)="onPageChangePago($event)">
+                </pagination-controls>
+              </div>
 
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer clearfix">            
-                            <a (click)="onTodasDespesas()" class="btn btn-sm btn-default btn-flat pull-right">Ver Todas</a>
-                        </div>
-                        <!-- /.box-footer -->
-                    </div>
-                </div>
             </div>
-        </div>    
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              <a (click)="onTodasDespesas()" class="btn btn-sm btn-default btn-flat pull-right">Ver Todas</a>
+            </div>
+            <!-- /.box-footer -->
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>

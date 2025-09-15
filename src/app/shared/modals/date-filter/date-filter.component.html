@@ -1,34 +1,43 @@
-<div class="modal-content">
-  <div class="modal-header">    
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onClose()">
+<div class="modal-content" style="max-width:500px; margin:auto;">
+  <div class="modal-header" style="display:flex; justify-content:space-between; align-items:center;">
+    <h3 class="modal-title">Selecione um período:</h3>
+    <button type="button" class="close" (click)="onClose()">
       <span aria-hidden="true">&times;</span>
     </button>
-    <h3 class="modal-title">Selecione um periodo:</h3>
   </div>
+
   <div class="modal-body">
-    <form [formGroup]="form">    
+    <form [formGroup]="form" (ngSubmit)="onConfirm()">
+      <div class="form-group">
+        <label for="dtInicial">Data Inicial</label>
+        <input type="date"
+               id="dtInicial"
+               class="form-control"
+               formControlName="dtInicial">
+        <div class="text-red" *ngIf="form.get('dtInicial').touched && form.get('dtInicial').invalid">
+          <span *ngIf="form.get('dtInicial').hasError('required')">Campo obrigatório</span>
+        </div>
+      </div>
 
-      <app-input-container errorMessage="Campo Obrigatorio" label="Data Inicial">            
-        <input type="date" class="form-control" id="dtInicial" formControlName="dtInicial"/>
-      </app-input-container>      
+      <div class="form-group">
+        <label for="dtFinal">Data Final</label>
+        <input type="date"
+               id="dtFinal"
+               class="form-control"
+               formControlName="dtFinal">
+        <div class="text-red" *ngIf="form.get('dtFinal').touched && form.get('dtFinal').invalid">
+          <span *ngIf="form.get('dtFinal').hasError('required')">Campo obrigatório</span>
+        </div>
+      </div>
 
-      <app-input-container errorMessage="Campo Obrigatorio" label="Data Final">            
-        <input type="date" class="form-control" id="dtFinal" formControlName="dtFinal"/>
-      </app-input-container>                
-      
-    </form>    
-  </div>
-  <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-secondary"
-      data-dismiss="modal"
-      (click)="onClose()"
-    >
-      Cancelar
-    </button>
-    <button type="button" class="btn btn-primary" (click)="onConfirm()">
-      Confirmar
-    </button>
+      <div style="margin-top:15px; text-align:right;">
+        <button type="button" class="btn btn-secondary" (click)="onClose()" style="margin-right:5px;">
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary">
+          Confirmar
+        </button>
+      </div>
+    </form>
   </div>
 </div>

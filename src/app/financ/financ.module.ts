@@ -17,27 +17,24 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
-  declarations: [
-    HomeComponent, 
-    CategoriaDetalheComponent,CategoriaFormComponent, CategoriaListaComponent,
-    ContaDetalheComponent, ContaFormComponent, ContaListaComponent,
-    DespesaDetalheComponent, DespesaFormComponent, DespesaListaComponent
-  ],
-  imports: [
-    CommonModule,
-    FinancRoutingModule,    
-    SharedModule,
-    ReactiveFormsModule,
-    FormsModule,
-    NgxPaginationModule,
-    MatSortModule
-  ],
-  exports:[
-    HomeComponent
-  ],
-  entryComponents:[
-    
-  ],
-  providers: []  
+    declarations: [
+        HomeComponent,
+        CategoriaDetalheComponent, CategoriaFormComponent, CategoriaListaComponent,
+        ContaDetalheComponent, ContaFormComponent, ContaListaComponent,
+        DespesaDetalheComponent, DespesaFormComponent, DespesaListaComponent
+    ],
+    imports: [
+        CommonModule,
+        FinancRoutingModule,
+        SharedModule,
+        ReactiveFormsModule,
+        FormsModule,
+        NgxPaginationModule,
+        MatSortModule
+    ],
+    exports: [
+        HomeComponent
+    ],
+    providers: []
 })
 export class FinancModule { }

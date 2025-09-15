@@ -1,24 +1,25 @@
 import { Component, OnInit, ErrorHandler } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { CategoriaService } from '../categoria.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-categoria-form',
-  templateUrl: './categoria-form.component.html'
+    selector: 'app-categoria-form',
+    templateUrl: './categoria-form.component.html',
+    standalone: false
 })
 export class CategoriaFormComponent implements OnInit {
 
-  form: FormGroup;
+  form: UntypedFormGroup;
   submitted = false;
   idRegistro: number;
   erros = null;
   formLabel: string;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private service: CategoriaService,        
     private route: ActivatedRoute,
     private router: Router,

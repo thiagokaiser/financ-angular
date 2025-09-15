@@ -4,13 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY } from 'rxjs';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { UsuarioService } from '../usuario.service';
-import { take, switchMap } from 'rxjs/operators';
+import { take, switchMap, filter } from 'rxjs/operators';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
-import { Perfil } from '../perfil';
 
 @Component({
-  selector: 'app-usuario-detalhe',
-  templateUrl: './usuario-detalhe.component.html'
+    selector: 'app-usuario-detalhe',
+    templateUrl: './usuario-detalhe.component.html',
+    standalone: false
 })
 export class UsuarioDetalheComponent implements OnInit {
 
@@ -44,7 +44,7 @@ export class UsuarioDetalheComponent implements OnInit {
 
   onDelete(usuario: Usuario) {
     const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja eliminar o usuario?');
-    result$.asObservable().pipe(
+    result$.pipe(
       take(1),
       switchMap(result => result ? this.service.remove(usuario.id) : EMPTY)
     ).subscribe(
@@ -57,7 +57,7 @@ export class UsuarioDetalheComponent implements OnInit {
 
   onDeleteData(usuario: Usuario) {
     const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja eliminar os dados do usuario?');
-    result$.asObservable().pipe(
+    result$.pipe(
       take(1),
       switchMap(result => result ? this.service.removeData(usuario.id) : EMPTY)
     ).subscribe(
@@ -70,7 +70,7 @@ export class UsuarioDetalheComponent implements OnInit {
 
   onDeletePerfil(usuarioId, perfil) {
     const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja eliminar o perfil ' + perfil + ' ?');
-    result$.asObservable().pipe(
+    result$.pipe(
       take(1),
       switchMap(result => result ? this.service.removePerfil(usuarioId, perfil) : EMPTY)
     ).subscribe(
@@ -81,14 +81,16 @@ export class UsuarioDetalheComponent implements OnInit {
     );
   }
 
-  onAddPerfil(usuarioId){
-    const result2$ = this.alertService.modalAddPerfil(usuarioId)
-    result2$.asObservable().pipe(take(1)).subscribe(
-      success => {
-        this.ns.notify('Perfil adicionado com sucesso.')
-        this.reloadUsuario(usuarioId)
-      }
-    );
+  onAddPerfil(usuarioId: number) {
+    this.alertService.modalAddPerfil(usuarioId)
+      .pipe(
+        take(1),
+        filter(result => !!result)
+      )
+      .subscribe(result => {
+        this.ns.notify('Perfil adicionado com sucesso.');
+        this.reloadUsuario(usuarioId);
+    });
   }
 
   reloadUsuario(usuarioId){

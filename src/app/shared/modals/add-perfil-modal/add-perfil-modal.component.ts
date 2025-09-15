@@ -1,74 +1,74 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { BsModalRef } from 'ngx-bootstrap/modal';
-import { Subject } from 'rxjs';
-import { Perfil } from 'src/app/admin/usuario/perfil';
+import { Component, OnInit, Inject } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { UsuarioService } from 'src/app/admin/usuario/usuario.service';
+import { CommonModule } from '@angular/common';
+import { Perfil } from 'src/app/admin/usuario/perfil';
+
+export interface AddPerfilData {
+  usuarioId: number;
+}
 
 @Component({
   selector: 'app-add-perfil-modal',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule
+  ],
   templateUrl: './add-perfil-modal.component.html'
 })
 export class AddPerfilModalComponent implements OnInit {
 
-  form: FormGroup;
+  form: UntypedFormGroup;
   submitted = false;
-  idRegistro: number;
-  erros = null;
-  formLabel: string;
-  confirmResult: Subject<any>;
-  perfis = [];
+  erros: any = null;
+  formLabel = 'Novo';
+  perfis: string[] = [];
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private service: UsuarioService,
-    public bsModalRef: BsModalRef,
-  ) { }
+    public dialogRef: MatDialogRef<AddPerfilModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: AddPerfilData
+  ) {}
 
   ngOnInit() {
-    this.confirmResult = new Subject();
-    this.formLabel = 'Novo'
-
     this.form = this.fb.group({
-      usuarioId: [null],
+      usuarioId: [this.data.usuarioId],
       perfil: [null, [Validators.required]]
     });
-
-    for (var perfil in Perfil) {
-      this.perfis.push(perfil)
+    for (const perfil in Perfil) {
+      this.perfis.push(perfil);
     }
   }
 
-  onClose(){
-    this.bsModalRef.hide();
+  onClose() {
+    this.dialogRef.close(undefined);
   }
 
-  onConfirm(){
+  onConfirm() {
     if (this.form.valid) {
       this.submitted = true;
-      if (this.form.valid) {
-        this.service.addPerfil(this.form.value.usuarioId, this.form.value.perfil).subscribe(
-          success => {
-            this.onConfirmAndClose(this.form.value);
-          },
-          error => {
-            this.erros = error.error.errors;
-            throw error
-          }
-        );
-      }
-      else{
-        this.form.markAllAsTouched();
-      }
-    }
-    else{
+      this.service.addPerfil(this.form.value.usuarioId, this.form.value.perfil)
+        .subscribe({
+          next: () => this.dialogRef.close(this.form.value),
+          error: error => this.erros = error.error?.errors
+        });
+    } else {
       this.form.markAllAsTouched();
     }
   }
 
-  private onConfirmAndClose(result: any){
-    this.confirmResult.next(result);
-    this.bsModalRef.hide();
+  trackByFn(index: number, item: any) {
+    return index;
   }
-
 }

@@ -8,8 +8,9 @@ import { take, switchMap } from 'rxjs/operators';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
 
 @Component({
-  selector: 'app-categoria-detalhe',
-  templateUrl: './categoria-detalhe.component.html'
+    selector: 'app-categoria-detalhe',
+    templateUrl: './categoria-detalhe.component.html',
+    standalone: false
 })
 export class CategoriaDetalheComponent implements OnInit {
 
@@ -46,7 +47,7 @@ export class CategoriaDetalheComponent implements OnInit {
 
   onDelete(categoria: Categoria) {
     const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja eliminar o categoria?');
-    result$.asObservable().pipe(
+    result$.pipe(
       take(1),
       switchMap(result => result ? this.service.remove(categoria.id) : EMPTY)
     ).subscribe(

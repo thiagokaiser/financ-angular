@@ -1,97 +1,95 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <h1>
-        Despesa
-        <small>Detalhe</small>
-    </h1>      
+  <h1>
+    Despesa
+    <small>Detalhe</small>
+  </h1>
 </section>
 <!-- Main content -->
 <section class="content">
-    <!-- Small boxes (Stat box) -->
-    <div class="box box-primary">            
-        <div class="box-body">                               
-            <div class="btn-group btn-group-sm" role="group">
-                <button class="btn btn-default" (click)="onNew()"><i class="fa fa-file-o" aria-hidden="true"></i> Novo</button>    
-                
-                <ng-template [ngIf]="despesa.numParcelas == 1" [ngIfElse]="elseParcelado">
-                    <button class="btn btn-default" (click)="onEdit(despesa.id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button>                
-                    <button class="btn btn-default" (click)="onDelete(despesa)"><i class="fa fa-trash-o" aria-hidden="true"></i> Remover</button>
-                </ng-template>
-                <button class="btn btn-default" (click)="onCancel()"><i class="fa fa-undo" aria-hidden="true"></i> Voltar</button>
+  <!-- Small boxes (Stat box) -->
+  <div class="box box-primary">
+    <div class="box-body">
+      <div class="btn-group btn-group-sm" role="group">
+        <button class="btn btn-default" (click)="onNew()"><i class="fa fa-file-o" aria-hidden="true"></i> Novo</button>
 
-                <ng-template #elseParcelado>
-                    <div class="btn-group btn-group-sm" role="group">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Editar
-                        <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a (click)="onEdit(despesa.id)">Somente esta parcela</a></li>                            
-                            <li><a (click)="onEditUnpaid(despesa.id)">Todas parcelas não pagas</a></li>                    
-                            <li><a (click)="onEditAll(despesa.id)">Todas parcelas</a></li>                    
-                        </ul>
-                    </div>                                
-                    <div class="btn-group btn-group-sm" role="group">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <i class="fa fa-trash-o" aria-hidden="true"></i> Remover
-                        <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a (click)="onDelete(despesa)">Somente esta parcela</a></li>
-                            <li><a (click)="onDeleteAll(despesa)">Todas parcelas não pagas</a></li>                    
-                        </ul>
-                    </div>                
-                </ng-template>  
-            </div>
-            <p></p>
-            <table class="table table-detalhe">
-                <tbody>                    
-                    <tr>
-                        <th>Descrição</th>
-                        <td>{{ despesa.descricao }}</td>                        
-                    </tr>                    
-                    <tr>
-                        <th>Valor</th>
-                        <td>{{ despesa.valor | number : '1.2-2'}}</td>
-                    </tr>
-                    <tr>
-                        <th>Vencimento</th>
-                        <td>{{ despesa.dtVencimento | date:'dd/MM/yyyy' : '+0000'}}</td>                        
-                    </tr>                    
-                    <tr>
-                        <th>Categoria</th>
-                        <td><i class="fa fa-circle" [ngStyle]="{'color': despesa.categoria.cor}"></i> {{ despesa.categoria.descricao }}</td>
-                    </tr>
-                    <tr>
-                        <th>Conta</th>
-                        <td>{{ despesa.conta?.descricao }}</td>
-                    </tr>                    
-                    <tr>
-                        <th>Parcela Atual</th>
-                        <td>{{ despesa.parcelaAtual }}</td>
-                    </tr>
-                    <tr>
-                        <th>Num. Parcelas</th>
-                        <td>{{ despesa.numParcelas }}</td>
-                    </tr>
-                    <tr>
-                        <th>Data Pagamento</th>
-                        <td>{{ despesa.dtPagamento | date:'dd/MM/yyyy' : '+0000'}}</td>                        
-                    </tr>                                     
-                    <tr>
-                        <th>Pago</th>
-                        <td>
-                            <ng-template [ngIf]="despesa.pago" [ngIfElse]="elseBlockPago">
-                                <i class="fa fa-check pago"></i>
-                            </ng-template>
-                            <ng-template #elseBlockPago>
-                                <i class="fa fa-times pago"></i>
-                            </ng-template>               
-                        </td>   
-                    </tr>                       
-                </tbody>
-            </table>            
-        </div>
-    </div>    
-    <router-outlet></router-outlet>    
+        @if (despesa.numParcelas == 1) {
+          <button class="btn btn-default" (click)="onEdit(despesa.id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button>
+          <button class="btn btn-default" (click)="onDelete(despesa)"><i class="fa fa-trash-o" aria-hidden="true"></i> Remover</button>
+        } @else {
+          <div class="btn-group btn-group-sm" role="group">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Editar
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a (click)="onEdit(despesa.id)">Somente esta parcela</a></li>
+              <li><a (click)="onEditUnpaid(despesa.id)">Todas parcelas não pagas</a></li>
+              <li><a (click)="onEditAll(despesa.id)">Todas parcelas</a></li>
+            </ul>
+          </div>
+          <div class="btn-group btn-group-sm" role="group">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <i class="fa fa-trash-o" aria-hidden="true"></i> Remover
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a (click)="onDelete(despesa)">Somente esta parcela</a></li>
+              <li><a (click)="onDeleteAll(despesa)">Todas parcelas não pagas</a></li>
+            </ul>
+          </div>
+        }
+        <button class="btn btn-default" (click)="onCancel()"><i class="fa fa-undo" aria-hidden="true"></i> Voltar</button>
+
+      </div>
+      <p></p>
+      <table class="table table-detalhe">
+        <tbody>
+          <tr>
+            <th>Descrição</th>
+            <td>{{ despesa.descricao }}</td>
+          </tr>
+          <tr>
+            <th>Valor</th>
+            <td>{{ despesa.valor | number : '1.2-2'}}</td>
+          </tr>
+          <tr>
+            <th>Vencimento</th>
+            <td>{{ despesa.dtVencimento | date:'dd/MM/yyyy' : '+0000'}}</td>
+          </tr>
+          <tr>
+            <th>Categoria</th>
+            <td><i class="fa fa-circle" [ngStyle]="{'color': despesa.categoria.cor}"></i> {{ despesa.categoria.descricao }}</td>
+          </tr>
+          <tr>
+            <th>Conta</th>
+            <td>{{ despesa.conta?.descricao }}</td>
+          </tr>
+          <tr>
+            <th>Parcela Atual</th>
+            <td>{{ despesa.parcelaAtual }}</td>
+          </tr>
+          <tr>
+            <th>Num. Parcelas</th>
+            <td>{{ despesa.numParcelas }}</td>
+          </tr>
+          <tr>
+            <th>Data Pagamento</th>
+            <td>{{ despesa.dtPagamento | date:'dd/MM/yyyy' : '+0000'}}</td>
+          </tr>
+          <tr>
+            <th>Pago</th>
+            <td>
+              @if (despesa.pago) {
+                <i class="fa fa-check pago"></i>
+              } @else {
+                <i class="fa fa-times pago"></i>
+              }
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
 </section>

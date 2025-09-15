@@ -1,24 +1,25 @@
 import { Component, OnInit, ErrorHandler } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ContaService } from '../conta.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/messages/notification.service';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-conta-form',
-  templateUrl: './conta-form.component.html'
+    selector: 'app-conta-form',
+    templateUrl: './conta-form.component.html',
+    standalone: false
 })
 export class ContaFormComponent implements OnInit {
 
-  form: FormGroup;
+  form: UntypedFormGroup;
   submitted = false;
   idRegistro: number;
   erros = null;
   formLabel: string;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private service: ContaService,        
     private route: ActivatedRoute,
     private router: Router,

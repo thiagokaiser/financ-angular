@@ -8,12 +8,13 @@ import { PaginationInstance } from 'ngx-pagination';
 import { tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-conta-lista',
-  templateUrl: './conta-lista.component.html'
+    selector: 'app-conta-lista',
+    templateUrl: './conta-lista.component.html',
+    standalone: false
 })
 export class ContaListaComponent implements OnInit { 
   
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   contas$: Observable<ListConta>;  
   searchtext: string = "";  

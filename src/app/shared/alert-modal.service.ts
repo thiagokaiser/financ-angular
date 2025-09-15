@@ -1,11 +1,12 @@
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Injectable } from '@angular/core';
-import { ConfirmModalComponent } from './modals/confirm-modal/confirm-modal.component';
-import { MonthFilterComponent } from './modals/month-filter/month-filter.component';
-import { DateFilterComponent } from './modals/date-filter/date-filter.component';
+import { ConfirmModalComponent, ConfirmDialogData } from './modals/confirm-modal/confirm-modal.component';
+import { MonthFilterComponent, MonthFilterData } from './modals/month-filter/month-filter.component';
+import { DateFilterComponent, DateFilterData } from './modals/date-filter/date-filter.component';
 import { CategoriaFormModalComponent } from './modals/categoria-form-modal/categoria-form-modal.component';
 import { ContaFormModalComponent } from './modals/conta-form-modal/conta-form-modal.component';
 import { AddPerfilModalComponent } from './modals/add-perfil-modal/add-perfil-modal.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 
 enum AlertTypes {
   DANGER = 'danger',
@@ -17,50 +18,50 @@ enum AlertTypes {
 })
 export class AlertModalService {
 
-  constructor(private modalService: BsModalService) { }
+  constructor(private dialog: MatDialog) { }
   
-  showConfirm(title: string, msg: string, okTxt?: string, cancelTxt?: string){
-    const modalRef: BsModalRef = this.modalService.show(ConfirmModalComponent);
-    modalRef.content.title = title;
-    modalRef.content.msg = msg;    
-
-    if (okTxt){
-      modalRef.content.okTxt = okTxt;
-    }
-    if (cancelTxt){
-      modalRef.content.cancelTxt = cancelTxt;
-    }
-    return (<ConfirmModalComponent>modalRef.content).confirmResult;
+  showConfirm(title: string, msg: string, okTxt?: string, cancelTxt?: string): Observable<boolean> {
+    const dialogRef = this.dialog.open<ConfirmModalComponent, ConfirmDialogData, boolean>(ConfirmModalComponent, {
+      data: {
+        title,
+        msg,
+        okTxt,
+        cancelTxt
+      }
+    });
+    return dialogRef.afterClosed();
   }
 
-  modalMonthFilter(dtInicial: string, dtFinal: string){
-    const modalRef: BsModalRef = this.modalService.show(MonthFilterComponent);    
-    modalRef.content.form.controls['dtInicial'].setValue(dtInicial);
-    modalRef.content.form.controls['dtFinal'].setValue(dtFinal);    
-    return (<MonthFilterComponent>modalRef.content).confirmResult;
-  }  
+  modalMonthFilter(dtInicial?: string, dtFinal?: string): Observable<{ dtInicial: string; dtFinal: string }> {
+    const dialogRef = this.dialog.open<MonthFilterComponent, MonthFilterData, { dtInicial: string; dtFinal: string }>(MonthFilterComponent, {
+      data: { dtInicial, dtFinal }
+    });
 
-  modalDateFilter(dtInicial: string, dtFinal: string){
-    const modalRef: BsModalRef = this.modalService.show(DateFilterComponent);    
-    modalRef.content.form.controls['dtInicial'].setValue(dtInicial);
-    modalRef.content.form.controls['dtFinal'].setValue(dtFinal);    
-    return (<DateFilterComponent>modalRef.content).confirmResult;
+    return dialogRef.afterClosed();
   }
 
-  modalNewCateg(){
-    const modalRef: BsModalRef = this.modalService.show(CategoriaFormModalComponent);
-    return (<CategoriaFormModalComponent>modalRef.content).confirmResult;
+  modalDateFilter(dtInicial?: string, dtFinal?: string): Observable<{ dtInicial: string; dtFinal: string }> {
+    const dialogRef = this.dialog.open<DateFilterComponent, DateFilterData, { dtInicial: string; dtFinal: string }>(DateFilterComponent, {      
+      data: { dtInicial, dtFinal }
+    });
+    return dialogRef.afterClosed();
+  }
+
+  modalNewCateg() {
+    const dialogRef = this.dialog.open(CategoriaFormModalComponent);
+    return dialogRef.afterClosed();
   }
 
   modalNewConta(){
-    const modalRef: BsModalRef = this.modalService.show(ContaFormModalComponent);
-    return (<ContaFormModalComponent>modalRef.content).confirmResult;
+    const dialogRef = this.dialog.open(ContaFormModalComponent);
+    return dialogRef.afterClosed();
   }
 
-  modalAddPerfil(usuarioId){
-    const modalRef: BsModalRef = this.modalService.show(AddPerfilModalComponent);
-    modalRef.content.form.controls['usuarioId'].setValue(usuarioId);    
-    return (<AddPerfilModalComponent>modalRef.content).confirmResult;
+  modalAddPerfil(usuarioId: number) {
+    const dialogRef = this.dialog.open(AddPerfilModalComponent, {
+      data: { usuarioId }
+    });
+    return dialogRef.afterClosed();
   }
 
 }

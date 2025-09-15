@@ -3,14 +3,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Chart } from 'chart.js';
 import { PaginationInstance } from 'ngx-pagination';
 import { Observable } from 'rxjs';
-import { take, map, tap } from 'rxjs/operators';
+import { take, tap, filter } from 'rxjs/operators';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { ListDespesa } from '../despesa/despesa';
 import { DespesaService } from '../despesa/despesa.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html'
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    standalone: false
 })
 export class HomeComponent implements OnInit {  
 
@@ -118,32 +119,30 @@ export class HomeComponent implements OnInit {
     this.refreshTablePendente();
   }
 
-  onDateFilter() {    
-    const result$ = this.alertService.modalDateFilter(this.dtInicial, this.dtFinal)
-    result$.asObservable().pipe(
-      take(1),
-      map(result => this.result = result)
-    ).subscribe(
-      success => {
-        this.dtInicial = this.result.dtInicial;
-        this.dtFinal = this.result.dtFinal;
+  onDateFilter() {
+    this.alertService.modalDateFilter(this.dtInicial, this.dtFinal)
+      .pipe(
+        take(1),
+        filter(result => !!result)
+      )
+      .subscribe(result => {
+        this.dtInicial = result.dtInicial;
+        this.dtFinal = result.dtFinal;
         this.onRefresh();
-      }
-    );    
-  } 
+    });
+  }
 
-  onMonthFilter() {    
-    const result$ = this.alertService.modalMonthFilter(this.dtInicialBarChart, this.dtFinalBarChart)    
-    result$.asObservable().pipe(
-      take(1),
-      map(result => this.result = result)
-    ).subscribe(
-      success => {        
-        this.dtInicialBarChart = this.result.dtInicial;
-        this.dtFinalBarChart = this.result.dtFinal;
+  onMonthFilter() {
+    this.alertService.modalMonthFilter(this.dtInicialBarChart, this.dtFinalBarChart)      
+      .pipe(
+        take(1),
+        filter(result => !!result)
+      )
+      .subscribe(result => {
+        this.dtInicialBarChart = result.dtInicial;
+        this.dtFinalBarChart = result.dtFinal;
         this.updateBarChart();
-      }
-    );    
+    });
   }
 
   updateDates(){    
