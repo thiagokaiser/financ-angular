@@ -47,7 +47,7 @@ export class CategoriaDetalheComponent implements OnInit {
 
   onDelete(categoria: Categoria) {
     const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja eliminar o categoria?');
-    result$.asObservable().pipe(
+    result$.pipe(
       take(1),
       switchMap(result => result ? this.service.remove(categoria.id) : EMPTY)
     ).subscribe(

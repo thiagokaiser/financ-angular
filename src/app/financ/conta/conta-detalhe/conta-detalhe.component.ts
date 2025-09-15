@@ -47,7 +47,7 @@ export class ContaDetalheComponent implements OnInit {
 
   onDelete(conta: Conta) {
     const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja eliminar o conta?');
-    result$.asObservable().pipe(
+    result$.pipe(
       take(1),
       switchMap(result => result ? this.service.remove(conta.id) : EMPTY)
     ).subscribe(

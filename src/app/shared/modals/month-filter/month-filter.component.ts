@@ -1,46 +1,61 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { BsModalRef } from 'ngx-bootstrap/modal';
-import { Subject } from 'rxjs';
+import { Component, OnInit, Inject } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+
+export interface MonthFilterData {
+  dtInicial?: string;
+  dtFinal?: string;
+}
 
 @Component({
-    selector: 'app-month-filter',
-    templateUrl: './month-filter.component.html',
-    standalone: false
+  selector: 'app-month-filter',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
+  ],
+  templateUrl: './month-filter.component.html'
 })
 export class MonthFilterComponent implements OnInit {
 
   form: UntypedFormGroup;
-
-  confirmResult: Subject<any>;
+  submitted = false;
 
   constructor(
-    public bsModalRef: BsModalRef,
     private fb: UntypedFormBuilder,
-    ) { }
+    public dialogRef: MatDialogRef<MonthFilterComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: MonthFilterData
+  ) {}
 
-  ngOnInit() {    
-    this.confirmResult = new Subject();
-    this.form = this.fb.group({      
-      dtInicial: ['', [Validators.required]], 
-      dtFinal: ['', [Validators.required]]      
-    });    
+  ngOnInit() {
+    this.form = this.fb.group({
+      dtInicial: [this.data?.dtInicial || '', [Validators.required]],
+      dtFinal: [this.data?.dtFinal || '', [Validators.required]]
+    });
   }
 
-  onClose(){    
-    this.bsModalRef.hide();
+  onClose() {
+    this.dialogRef.close();
   }
-  onConfirm(){    
-    if (this.form.valid) {      
-      this.onConfirmAndClose(this.form.value);    
+
+  onConfirm() {
+    if (this.form.valid) {
+      this.submitted = true;
+      this.dialogRef.close(this.form.value);
+    } else {
+      this.form.markAllAsTouched();
     }
-    else{
-      this.form.markAllAsTouched();      
-    }    
   }
 
-  private onConfirmAndClose(result: any){        
-    this.confirmResult.next(result);
-    this.bsModalRef.hide();
+  trackByFn(index: number, item: any): any {
+    return index;
   }
 }

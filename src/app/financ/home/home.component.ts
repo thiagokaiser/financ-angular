@@ -71,32 +71,30 @@ export class HomeComponent implements OnInit {
       type: 'bar',
       data: {
         labels: [],
-        datasets: [{
+        datasets: [{              
           data: [],
-          backgroundColor: 'rgba(60, 141, 188, 0.5)',
+          backgroundColor: 'rgba(60, 141, 188, 0.5)',          
           borderColor: 'rgba(60, 141, 188, 1)',
-          borderWidth: 1,
-          maxBarThickness: 100
+          borderWidth: 1          
         }]
       },
       options: {
-        plugins: {
-          legend: {
-            display: false
-          }
+        legend:{
+          display: false
         },
         scales: {
-          y: {
-            beginAtZero: true,
-            suggestedMin: 0
-          },
-          x: {
-          }
+          yAxes: [{
+            ticks: {
+                suggestedMin: 0,                
+            }
+          }],
+          xAxes: [{
+            maxBarThickness: 100
+          }]
         },
-        maintainAspectRatio: false
-      }
+        maintainAspectRatio: false        
+      }           
     });
-
 
     this.onRefresh();
   }  
@@ -123,7 +121,7 @@ export class HomeComponent implements OnInit {
 
   onDateFilter() {    
     const result$ = this.alertService.modalDateFilter(this.dtInicial, this.dtFinal)
-    result$.asObservable().pipe(
+    result$.pipe(
       take(1),
       map(result => this.result = result)
     ).subscribe(
@@ -137,7 +135,7 @@ export class HomeComponent implements OnInit {
 
   onMonthFilter() {    
     const result$ = this.alertService.modalMonthFilter(this.dtInicialBarChart, this.dtFinalBarChart)    
-    result$.asObservable().pipe(
+    result$.pipe(
       take(1),
       map(result => this.result = result)
     ).subscribe(

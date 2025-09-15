@@ -1,24 +1,25 @@
-<div class="modal-content">
-  <div class="modal-header">    
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onClose()">
+<div class="modal-content" style="max-width:400px; margin:auto;">
+  <div class="modal-header" style="display:flex; justify-content:space-between; align-items:center;">
+    <h3 class="modal-title">{{ data.title }}</h3>
+    <button type="button" class="close" (click)="onClose()">
       <span aria-hidden="true">&times;</span>
     </button>
-    <h3 class="modal-title">{{ title }}</h3>
   </div>
+
   <div class="modal-body">
-    <h4>{{ msg }}</h4>
+    <h4>{{ data.msg }}</h4>
   </div>
-  <div class="modal-footer">
+
+  <div class="modal-footer" style="display:flex; justify-content:flex-end; gap:10px;">
     <button
       type="button"
       class="btn btn-secondary"
-      data-dismiss="modal"
       (click)="onClose()"
     >
-      {{ cancelTxt }}
+      {{ data.cancelTxt || 'Cancelar' }}
     </button>
     <button type="button" class="btn btn-primary" (click)="onConfirm()">
-      {{ okTxt }}
+      {{ data.okTxt || 'Sim' }}
     </button>
   </div>
 </div>

@@ -56,7 +56,7 @@ export class DespesaDetalheComponent implements OnInit {
 
   onDelete(despesa: Despesa) {
     const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja eliminar a despesa "' + despesa.descricao + '" ?');
-    result$.asObservable().pipe(
+    result$.pipe(
       take(1),
       switchMap(result => result ? this.service.remove(despesa.id) : EMPTY)
     ).subscribe(
@@ -69,7 +69,7 @@ export class DespesaDetalheComponent implements OnInit {
 
   onDeleteAll(despesa: Despesa){
     const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja eliminar todas as parcelas não pagas da despesa "' + despesa.descricao + '" ?');
-    result$.asObservable().pipe(
+    result$.pipe(
       take(1),
       switchMap(result => result ? this.service.removeByIdParcela(despesa.idParcela) : EMPTY)
     ).subscribe(

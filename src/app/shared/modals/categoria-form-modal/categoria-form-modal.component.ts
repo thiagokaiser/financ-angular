@@ -1,69 +1,65 @@
-import { Component, OnInit, ErrorHandler } from '@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Inject } from '@angular/core';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { CategoriaService } from '../../../financ/categoria/categoria.service';
-import { BsModalRef } from 'ngx-bootstrap/modal';
-import { Subject } from 'rxjs';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-    selector: 'app-categoria-form-modal',
-    templateUrl: './categoria-form-modal.component.html',
-    standalone: false
+  selector: 'app-categoria-form-modal',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
+  ],
+  templateUrl: './categoria-form-modal.component.html'
 })
 export class CategoriaFormModalComponent implements OnInit {
-
   form: UntypedFormGroup;
   submitted = false;
-  idRegistro: number;
-  erros = null;
+  erros: any = null;
   formLabel: string;
-  confirmResult: Subject<any>;
 
   constructor(
     private fb: UntypedFormBuilder,
-    public bsModalRef: BsModalRef,
-    private service: CategoriaService
-  ) { }
+    private service: CategoriaService,
+    public dialogRef: MatDialogRef<CategoriaFormModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   ngOnInit() {
-    this.confirmResult = new Subject();
-    this.formLabel = 'Novo'
-
+    this.formLabel = this.data?.id ? 'Editar' : 'Novo';
     this.form = this.fb.group({
-      id: [null],
-      descricao: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
-      cor: ['', [Validators.required]]
+      id: [this.data?.id || null],
+      descricao: [this.data?.descricao || '', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
+      cor: [this.data?.cor || '', [Validators.required]]
     });
   }
 
-  onClose(){
-    this.bsModalRef.hide();
+  onClose() {
+    this.dialogRef.close();
   }
 
-  onConfirm(){
+  onConfirm() {
     if (this.form.valid) {
       this.submitted = true;
-      if (this.form.valid) {
-        this.service.save(this.form.value).subscribe(
-          success => {
-            this.onConfirmAndClose(this.form.value);
-          },
-          error => {
-            this.erros = error.error.errors;
-            throw error
-          }
-        );
-      }
-      else{
-        this.form.markAllAsTouched();
-      }
-    }
-    else{
+      this.service.save(this.form.value).subscribe(
+        success => this.dialogRef.close(this.form.value),
+        error => this.erros = error.error?.errors
+      );
+    } else {
       this.form.markAllAsTouched();
     }
   }
 
-  private onConfirmAndClose(result: any){
-    this.confirmResult.next(result);
-    this.bsModalRef.hide();
+  trackByFn(index: number, item: any): any {
+    return index;
   }
+
 }

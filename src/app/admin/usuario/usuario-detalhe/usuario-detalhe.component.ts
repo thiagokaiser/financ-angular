@@ -45,7 +45,7 @@ export class UsuarioDetalheComponent implements OnInit {
 
   onDelete(usuario: Usuario) {
     const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja eliminar o usuario?');
-    result$.asObservable().pipe(
+    result$.pipe(
       take(1),
       switchMap(result => result ? this.service.remove(usuario.id) : EMPTY)
     ).subscribe(
@@ -58,7 +58,7 @@ export class UsuarioDetalheComponent implements OnInit {
 
   onDeleteData(usuario: Usuario) {
     const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja eliminar os dados do usuario?');
-    result$.asObservable().pipe(
+    result$.pipe(
       take(1),
       switchMap(result => result ? this.service.removeData(usuario.id) : EMPTY)
     ).subscribe(
@@ -71,7 +71,7 @@ export class UsuarioDetalheComponent implements OnInit {
 
   onDeletePerfil(usuarioId, perfil) {
     const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja eliminar o perfil ' + perfil + ' ?');
-    result$.asObservable().pipe(
+    result$.pipe(
       take(1),
       switchMap(result => result ? this.service.removePerfil(usuarioId, perfil) : EMPTY)
     ).subscribe(
@@ -84,7 +84,7 @@ export class UsuarioDetalheComponent implements OnInit {
 
   onAddPerfil(usuarioId){
     const result2$ = this.alertService.modalAddPerfil(usuarioId)
-    result2$.asObservable().pipe(take(1)).subscribe(
+    result2$.pipe(take(1)).subscribe(
       success => {
         this.ns.notify('Perfil adicionado com sucesso.')
         this.reloadUsuario(usuarioId)

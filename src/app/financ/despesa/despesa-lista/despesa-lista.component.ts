@@ -113,7 +113,7 @@ export class DespesaListaComponent implements OnInit {
 
   onDateFilter() {    
     const result$ = this.alertService.modalDateFilter(this.dtInicial, this.dtFinal)    
-    result$.asObservable().pipe(
+    result$.pipe(
       take(1),
       map(result => this.result = result)
     ).subscribe(
