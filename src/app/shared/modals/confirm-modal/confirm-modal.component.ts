@@ -28,7 +28,7 @@ export class ConfirmModalComponent {
   ) {}
 
   onClose() {
-    this.dialogRef.close(false);
+    this.dialogRef.close(undefined);
   }
 
   onConfirm() {

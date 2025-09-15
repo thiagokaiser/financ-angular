@@ -43,7 +43,7 @@ export class MonthFilterComponent implements OnInit {
   }
 
   onClose() {
-    this.dialogRef.close();
+    this.dialogRef.close(undefined);
   }
 
   onConfirm() {

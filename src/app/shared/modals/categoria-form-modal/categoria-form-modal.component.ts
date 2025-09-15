@@ -43,16 +43,16 @@ export class CategoriaFormModalComponent implements OnInit {
   }
 
   onClose() {
-    this.dialogRef.close();
+    this.dialogRef.close(undefined);
   }
 
   onConfirm() {
     if (this.form.valid) {
       this.submitted = true;
-      this.service.save(this.form.value).subscribe(
-        success => this.dialogRef.close(this.form.value),
-        error => this.erros = error.error?.errors
-      );
+      this.service.save(this.form.value).subscribe({
+        next: () => this.dialogRef.close(this.form.value),
+        error: error => this.erros = error.error?.errors
+      });
     } else {
       this.form.markAllAsTouched();
     }
@@ -61,5 +61,4 @@ export class CategoriaFormModalComponent implements OnInit {
   trackByFn(index: number, item: any): any {
     return index;
   }
-
 }

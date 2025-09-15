@@ -36,7 +36,6 @@ export class ContaFormModalComponent implements OnInit {
 
   ngOnInit() {
     this.formLabel = this.data?.id ? 'Editar' : 'Novo';
-
     this.form = this.fb.group({
       id: [this.data?.id || null],
       descricao: [this.data?.descricao || '', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]]
@@ -44,16 +43,16 @@ export class ContaFormModalComponent implements OnInit {
   }
 
   onClose() {
-    this.dialogRef.close();
+    this.dialogRef.close(undefined);
   }
 
   onConfirm() {
     if (this.form.valid) {
       this.submitted = true;
-      this.service.save(this.form.value).subscribe(
-        success => this.dialogRef.close(this.form.value),
-        error => this.erros = error.error?.errors
-      );
+      this.service.save(this.form.value).subscribe({
+        next: () => this.dialogRef.close(this.form.value),
+        error: error => this.erros = error.error?.errors
+      });
     } else {
       this.form.markAllAsTouched();
     }
