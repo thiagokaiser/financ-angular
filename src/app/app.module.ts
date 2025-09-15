@@ -22,7 +22,7 @@ registerLocaleData(localePt);
     bootstrap: [AppComponent], imports: [BrowserModule,
         MatProgressSpinnerModule,
         AppRoutingModule,
-        DashboardModule,
+        DashboardModule,        
         SharedModule.forRoot()], providers: [
         LoginService,
         loggedInGuard,
