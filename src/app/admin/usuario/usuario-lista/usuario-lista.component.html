@@ -26,45 +26,47 @@
         </div>
       </div>
       <p></p>
-      <table class="table table-hover table-pointer"
-        matSort (matSortChange)="sortData($event)"
-        matSortDisableClear="true"
-        matSortActive="id" matSortDirection="asc">
-        <thead>
-          <tr>
-            <th mat-sort-header="id">#</th>
-            <th mat-sort-header="email">Email</th>
-            <th mat-sort-header="nome">Nome</th>
-            <th mat-sort-header="sobrenome">Sobrenome</th>
-            <th mat-sort-header="dtNascimento">Dt Nascimento</th>
-            <th mat-sort-header="cidade">Cidade</th>
-            <th mat-sort-header="estado">Estado</th>
-            <th mat-sort-header="imagemPerfil">Imagem Perfil</th>
-            <th mat-sort-header="descricao">Descrição</th>
-            <th mat-sort-header="perfil">Perfil</th>
-            <th mat-sort-header="lastLogin">Last Login</th>
-          </tr>
-        </thead>
-        @if (usuarios$ | async; as usuarios) {
-          <tbody>
-            @for (usuario of usuarios.content | paginate: config; track usuario) {
-              <tr (click)="onDetalhe(usuario.id)">
-                <td>{{ usuario.id }}</td>
-                <td>{{ usuario.email }}</td>
-                <td>{{ usuario.nome }}</td>
-                <td>{{ usuario.sobrenome }}</td>
-                <td>{{ usuario.dtNascimento | date: 'dd/MM/yyyy' : '+0000'}}</td>
-                <td>{{ usuario.cidade }}</td>
-                <td>{{ usuario.estado }}</td>
-                <td>{{ usuario.imagemPerfil }}</td>
-                <td>{{ usuario.descricao }}</td>
-                <td>{{ usuario.perfis }}</td>
-                <td>{{ usuario.lastLogin | date: 'dd/MM/yyyy HH:mm'}}</td>
-              </tr>
-            }
-          </tbody>
-        }
-      </table>
+      <div class="table-responsive">
+        <table class="table table-hover table-pointer"
+          matSort (matSortChange)="sortData($event)"
+          matSortDisableClear="true"
+          matSortActive="id" matSortDirection="asc">
+          <thead>
+            <tr>
+              <th mat-sort-header="id">#</th>
+              <th mat-sort-header="email">Email</th>
+              <th mat-sort-header="nome">Nome</th>
+              <th mat-sort-header="sobrenome">Sobrenome</th>
+              <th mat-sort-header="dtNascimento">Dt Nascimento</th>
+              <th mat-sort-header="cidade">Cidade</th>
+              <th mat-sort-header="estado">Estado</th>
+              <th mat-sort-header="imagemPerfil">Imagem Perfil</th>
+              <th mat-sort-header="descricao">Descrição</th>
+              <th mat-sort-header="perfil">Perfil</th>
+              <th mat-sort-header="lastLogin">Last Login</th>
+            </tr>
+          </thead>
+          @if (usuarios$ | async; as usuarios) {
+            <tbody>
+              @for (usuario of usuarios.content | paginate: config; track usuario) {
+                <tr (click)="onDetalhe(usuario.id)">
+                  <td>{{ usuario.id }}</td>
+                  <td>{{ usuario.email }}</td>
+                  <td>{{ usuario.nome }}</td>
+                  <td>{{ usuario.sobrenome }}</td>
+                  <td>{{ usuario.dtNascimento | date: 'dd/MM/yyyy' : '+0000'}}</td>
+                  <td>{{ usuario.cidade }}</td>
+                  <td>{{ usuario.estado }}</td>
+                  <td>{{ usuario.imagemPerfil }}</td>
+                  <td>{{ usuario.descricao }}</td>
+                  <td>{{ usuario.perfis }}</td>
+                  <td>{{ usuario.lastLogin | date: 'dd/MM/yyyy HH:mm'}}</td>
+                </tr>
+              }
+            </tbody>
+          }
+        </table>
+      </div>
       <div class="row">
         <div class="col-md-6">
           <pagination-controls

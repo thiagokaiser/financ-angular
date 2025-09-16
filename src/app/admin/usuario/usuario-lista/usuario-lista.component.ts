@@ -64,7 +64,13 @@ export class UsuarioListaComponent implements OnInit {
   }  
 
   onRefresh(){    
-    let params = {linesPerPage : this.config.itemsPerPage, page: this.config.currentPage - 1, orderBy: this.orderby, direction : this.direction.toUpperCase(), search: this.searchtext};
+    let params = {
+      linesPerPage : this.config.itemsPerPage, 
+      page: this.config.currentPage - 1, 
+      orderBy: this.orderby, 
+      direction : this.direction.toUpperCase(), 
+      search: this.searchtext
+    };
     
     this.usuarios$ = this.service.listPage(params).pipe(
       tap(x => {
