@@ -23,7 +23,7 @@ export class ContaListaComponent implements OnInit {
 
   public config: PaginationInstance = {
       id: 'advanced',
-      itemsPerPage: 10,
+      itemsPerPage: 20,
       currentPage: 1,
       totalItems: 100
   };
