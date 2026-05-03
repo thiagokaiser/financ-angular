@@ -87,6 +87,27 @@
               }
             </td>
           </tr>
+          <tr>
+            <th>Comprovante</th>
+            <td>
+              @if (despesa.comprovanteUrl) {
+                <a [href]="despesa.comprovanteUrl" target="_blank" rel="noopener" class="btn btn-xs btn-default">
+                  <i class="fa fa-file-o" aria-hidden="true"></i> Visualizar
+                </a>
+                <button type="button" class="btn btn-xs btn-danger" style="margin-left: 4px;" (click)="onRemoveComprovante()">
+                  <i class="fa fa-trash-o" aria-hidden="true"></i> Remover
+                </button>
+              }
+              <label class="btn btn-xs btn-default" style="margin-left: 4px; margin-bottom: 0; cursor: pointer;">
+                @if (uploading) {
+                  <i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Enviando...
+                } @else {
+                  <i class="fa fa-upload" aria-hidden="true"></i> {{ despesa.comprovanteUrl ? 'Substituir' : 'Anexar' }}
+                }
+                <input type="file" accept=".pdf,image/jpeg,image/png" style="display: none;" [disabled]="uploading" (change)="onUploadComprovante($event)">
+              </label>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

@@ -29,9 +29,10 @@ export class DespesaResolverGuard  {
       dtVencimento: new Date(), 
       pago: false,
       dtPagamento: null,
-      numParcelas: 0, 
+      numParcelas: 0,
       parcelaAtual: 0,
-      idParcela: 0
+      idParcela: 0,
+      comprovanteUrl: null
     });
   }  
 }

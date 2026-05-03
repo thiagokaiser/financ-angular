@@ -12,9 +12,10 @@ export interface Despesa{
     dtVencimento: Date,     
     pago: Boolean,
     dtPagamento: Date,
-    numParcelas: number, 
+    numParcelas: number,
     parcelaAtual: number,
-    idParcela: number
+    idParcela: number,
+    comprovanteUrl: string | null
 }
 
 export interface ListDespesa{

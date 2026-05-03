@@ -14,15 +14,16 @@ import { NotificationService } from 'src/app/shared/messages/notification.servic
 })
 export class DespesaDetalheComponent implements OnInit {
 
-  despesa: Despesa;   
+  despesa: Despesa;
+  uploading = false;
 
-  constructor(    
+  constructor(
     private route: ActivatedRoute,
     private router: Router,
     private alertService: AlertModalService,
     private service: DespesaService,
-    private ns: NotificationService) {                
-      route.params.subscribe(val => {        
+    private ns: NotificationService) {
+      route.params.subscribe(val => {
         this.onRefresh();
       });
     }
@@ -78,7 +79,40 @@ export class DespesaDetalheComponent implements OnInit {
         this.router.navigate(['/financ/despesa'])
       }
     );
-
   }
-    
+
+  onRemoveComprovante() {
+    const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja remover o comprovante desta despesa?');
+    result$.pipe(
+      take(1),
+      switchMap(result => result ? this.service.removeComprovante(this.despesa.id) : EMPTY)
+    ).subscribe({
+      next: () => {
+        this.despesa.comprovanteUrl = null;
+        this.ns.notify('Comprovante removido com sucesso.');
+      }
+    });
+  }
+
+  onUploadComprovante(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (!input.files?.length) { return; }
+    const file = input.files[0];
+    this.uploading = true;
+    this.service.uploadComprovante(this.despesa.id, file).subscribe({
+      next: (response) => {
+        const location = response.headers.get('Location');
+        this.despesa.comprovanteUrl = location;
+        this.ns.notify('Comprovante enviado com sucesso.');
+        this.uploading = false;
+        input.value = '';
+      },
+      error: () => {
+        this.ns.notify('Erro ao enviar comprovante. Verifique o tipo e tamanho do arquivo.');
+        this.uploading = false;
+        input.value = '';
+      }
+    });
+  }
+
 }

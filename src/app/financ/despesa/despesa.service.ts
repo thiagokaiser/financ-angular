@@ -41,4 +41,14 @@ export class DespesaService extends CrudService<Despesa>{
   updateUnpaid(despesa: Despesa) {
     return this.http.put(`${environment.API}despesas/unpaid/${despesa.idParcela}`, despesa).pipe(take(1));
   }
+
+  uploadComprovante(id: number, file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(`${environment.API}despesas/${id}/comprovante`, formData, { observe: 'response' }).pipe(take(1));
+  }
+
+  removeComprovante(id: number) {
+    return this.http.delete(`${environment.API}despesas/${id}/comprovante`).pipe(take(1));
+  }
 }
