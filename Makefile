@@ -1,5 +1,5 @@
 IMAGE=tgkaiser/financ-angular
-VERSION=1.5.0
+VERSION=1.6.2
 
 build:
 	docker buildx build --platform linux/amd64 -t $(IMAGE):$(VERSION) .

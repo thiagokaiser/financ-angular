@@ -19,13 +19,13 @@
           <ul class="menu">
             @for (n of notificacoes; track n.id) {
               <li [class.nao-lida]="!n.lido" (click)="marcarComoLida(n)">
-                <a>
+                <div class="notif-item">
                   <i class="fa fa-bell-o" [class.text-yellow]="!n.lido"></i>
                   <span [innerHTML]="descricaoHtml(n.descricao)"></span>
                   <button class="btn-remover" title="Remover" (click)="remover(n, $event)">
                     <i class="fa fa-times"></i>
                   </button>
-                </a>
+                </div>
               </li>
             }
             @if (notificacoes.length === 0) {

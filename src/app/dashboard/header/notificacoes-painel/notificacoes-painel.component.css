@@ -7,27 +7,34 @@
   background-color: #f4f4f4;
 }
 
-.notifications-menu .menu > li.nao-lida > a {
+.notifications-menu .menu > li.nao-lida > .notif-item {
   font-weight: 600;
   background-color: #fffde7;
 }
 
-.notifications-menu .menu > li.nao-lida:hover > a {
+.notifications-menu .menu > li.nao-lida:hover > .notif-item {
   background-color: #fff9c4;
 }
 
-.notifications-menu .menu > li > a {
+.notifications-menu .menu > li > .notif-item {
   display: flex;
   align-items: flex-start;
   gap: 8px;
   white-space: normal;
   padding: 10px 15px;
   line-height: 1.4;
+  overflow: hidden;
 }
 
-.notifications-menu .menu > li > a > i {
+.notifications-menu .menu > li > .notif-item > i {
   margin-top: 2px;
   flex-shrink: 0;
+}
+
+.notifications-menu .menu > li > .notif-item > span {
+  min-width: 0;
+  word-break: break-word;
+  flex: 1;
 }
 
 .btn-remover {
