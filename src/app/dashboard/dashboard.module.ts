@@ -6,6 +6,7 @@ import { MenuComponent } from './menu/menu.component';
 import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { UserDetailComponent } from './header/user-detail/user-detail.component';
+import { NotificacoesPainelComponent } from './header/notificacoes-painel/notificacoes-painel.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { UserDetailComponent } from './header/user-detail/user-detail.component'
     HeaderComponent,
     MenuComponent,
     FooterComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    NotificacoesPainelComponent
   ],
   imports: [
     CommonModule,

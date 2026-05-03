@@ -1,0 +1,50 @@
+.notifications-menu .menu > li {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.notifications-menu .menu > li:hover {
+  background-color: #f4f4f4;
+}
+
+.notifications-menu .menu > li.nao-lida > a {
+  font-weight: 600;
+  background-color: #fffde7;
+}
+
+.notifications-menu .menu > li.nao-lida:hover > a {
+  background-color: #fff9c4;
+}
+
+.notifications-menu .menu > li > a {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  white-space: normal;
+  padding: 10px 15px;
+  line-height: 1.4;
+}
+
+.notifications-menu .menu > li > a > i {
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.btn-remover {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #aaa;
+  padding: 0 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.btn-remover:hover {
+  color: #e74c3c;
+}
+
+.text-yellow {
+  color: #f39c12;
+}

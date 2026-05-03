@@ -1,0 +1,39 @@
+<div class="navbar-custom-menu">
+  <ul class="nav navbar-nav">
+    <li class="dropdown notifications-menu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" (click)="carregarNotificacoes()">
+        <i class="fa fa-bell-o"></i>
+        @if (countNaoLidas > 0) {
+          <span class="label label-warning">{{ countNaoLidas }}</span>
+        }
+      </a>
+      <ul class="dropdown-menu">
+        <li class="header">
+          @if (countNaoLidas > 0) {
+            Você tem {{ countNaoLidas }} notificação(ões) não lida(s)
+          } @else {
+            Nenhuma notificação nova
+          }
+        </li>
+        <li>
+          <ul class="menu">
+            @for (n of notificacoes; track n.id) {
+              <li [class.nao-lida]="!n.lido" (click)="marcarComoLida(n)">
+                <a>
+                  <i class="fa fa-bell-o" [class.text-yellow]="!n.lido"></i>
+                  {{ n.descricao }}
+                  <button class="btn-remover" title="Remover" (click)="remover(n, $event)">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </a>
+              </li>
+            }
+            @if (notificacoes.length === 0) {
+              <li><a><i class="fa fa-info-circle"></i> Sem notificações</a></li>
+            }
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
