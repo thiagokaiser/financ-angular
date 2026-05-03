@@ -7,6 +7,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { PaginationInstance } from 'ngx-pagination';
 import { take, tap, filter } from 'rxjs/operators';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
+import { NotificationService } from 'src/app/shared/messages/notification.service';
 
 @Component({
     selector: 'app-despesa-lista',
@@ -27,6 +28,7 @@ export class DespesaListaComponent implements OnInit {
   total = 0.0;
   totalPago = 0.0;
   totalPendente = 0.0;
+  exportandoCsv = false;
 
   public config: PaginationInstance = {
       id: 'advanced',
@@ -39,7 +41,8 @@ export class DespesaListaComponent implements OnInit {
     private service: DespesaService,
     private router: Router,
     private route: ActivatedRoute,
-    private alertService: AlertModalService    
+    private alertService: AlertModalService,
+    private ns: NotificationService
   ) { }
     
   ngOnInit() {
@@ -148,7 +151,27 @@ export class DespesaListaComponent implements OnInit {
     this.onRefresh()
   }
 
-  getTotals(params){    
+  onExportarCsv() {
+    this.alertService.modalDateFilter()
+      .pipe(
+        take(1),
+        filter(result => !!result)
+      )
+      .subscribe(result => {
+        this.exportandoCsv = true;
+        this.service.exportarCsv(result.dtInicial, result.dtFinal).subscribe({
+          next: () => {
+            this.exportandoCsv = false;
+            this.ns.notify('Relatório sendo gerado. Você receberá uma notificação quando estiver pronto.');
+          },
+          error: () => {
+            this.exportandoCsv = false;
+          }
+        });
+      });
+  }
+
+  getTotals(params){
     this.service.getTotals(params).subscribe(
       success => {
         this.total = success['total'],

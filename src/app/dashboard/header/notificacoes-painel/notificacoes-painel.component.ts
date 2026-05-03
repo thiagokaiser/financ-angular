@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NotificacoesService } from 'src/app/shared/notificacoes/notificacoes.service';
 import { Notificacao } from 'src/app/shared/notificacoes/notificacao.model';
 
@@ -14,7 +15,10 @@ export class NotificacoesPainelComponent implements OnInit, OnDestroy {
   countNaoLidas = 0;
   private pollingInterval: any;
 
-  constructor(private notificacoesService: NotificacoesService) {}
+  constructor(
+    private notificacoesService: NotificacoesService,
+    private sanitizer: DomSanitizer
+  ) {}
 
   ngOnInit() {
     this.atualizarContagem();
@@ -54,5 +58,13 @@ export class NotificacoesPainelComponent implements OnInit, OnDestroy {
         this.countNaoLidas = Math.max(0, this.countNaoLidas - 1);
       }
     });
+  }
+
+  descricaoHtml(descricao: string): SafeHtml {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const html = descricao.replace(urlRegex, url =>
+      `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`
+    );
+    return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 }

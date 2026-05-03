@@ -14,7 +14,14 @@
         <div class="col-sm-4">
           <div class="btn-group btn-group-sm" role="group">
             <button type="button" class="btn btn-default" [routerLink]="['novo']"><i class="fa fa-file-o" aria-hidden="true"></i> Novo</button>{{' '}}
-            <button type="button" class="btn btn-default" (click)="onRefresh()"><i class="fa fa-refresh" aria-hidden="true"></i> Atualizar</button>
+            <button type="button" class="btn btn-default" (click)="onRefresh()"><i class="fa fa-refresh" aria-hidden="true"></i> Atualizar</button>{{' '}}
+            <button type="button" class="btn btn-default" (click)="onExportarCsv()" [disabled]="exportandoCsv">
+              @if (exportandoCsv) {
+                <i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Exportando...
+              } @else {
+                <i class="fa fa-download" aria-hidden="true"></i> Exportar CSV
+              }
+            </button>
           </div>
         </div>
         <div class="col-sm-4">

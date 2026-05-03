@@ -51,4 +51,11 @@ export class DespesaService extends CrudService<Despesa>{
   removeComprovante(id: number) {
     return this.http.delete(`${environment.API}despesas/${id}/comprovante`).pipe(take(1));
   }
+
+  exportarCsv(dtInicial: string, dtFinal: string) {
+    return this.http.get(`${environment.API}despesas/exportar-csv`, {
+      params: { dtInicial, dtFinal },
+      observe: 'response'
+    }).pipe(take(1));
+  }
 }

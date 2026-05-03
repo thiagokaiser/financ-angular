@@ -21,7 +21,7 @@
               <li [class.nao-lida]="!n.lido" (click)="marcarComoLida(n)">
                 <a>
                   <i class="fa fa-bell-o" [class.text-yellow]="!n.lido"></i>
-                  {{ n.descricao }}
+                  <span [innerHTML]="descricaoHtml(n.descricao)"></span>
                   <button class="btn-remover" title="Remover" (click)="remover(n, $event)">
                     <i class="fa fa-times"></i>
                   </button>

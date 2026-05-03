@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { LoginService } from './login/login.service';
 import { finalize } from 'rxjs/operators';
 import { LoadingService } from '../shared/loading.service';
+import { SKIP_LOADING } from '../shared/skip-loading.token';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor{
@@ -15,22 +16,28 @@ export class AuthInterceptor implements HttpInterceptor{
         private loadingService: LoadingService
         ){}
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{   
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
         let requestAux = request.clone();
-        this.totalRequests++;
-        this.loadingService.setLoading(true);
-        
+        const skipLoading = request.context.get(SKIP_LOADING);
+
+        if (!skipLoading) {
+            this.totalRequests++;
+            this.loadingService.setLoading(true);
+        }
+
         if(this.loginService.isLoggedIn()){
             requestAux = request.clone({setHeaders:{
                 'Authorization': `Bearer ${this.loginService.user.accessToken}`
-            }})            
-        }       
+            }})
+        }
 
         return next.handle(requestAux).pipe(
             finalize(() => {
-                this.totalRequests--;
-                if (this.totalRequests === 0) {                    
-                    this.loadingService.setLoading(false);
+                if (!skipLoading) {
+                    this.totalRequests--;
+                    if (this.totalRequests === 0) {
+                        this.loadingService.setLoading(false);
+                    }
                 }
             })
         );
